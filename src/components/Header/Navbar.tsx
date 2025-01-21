@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
                 </Link>
             ))}
         </div>
-        <button className='px-3 py-2 border border-primary/60 rounded-xl'>
+        <button className='px-3 py-2 border border-primary/60 rounded-xl lg:hidden'>
             <LucideChartNoAxesGantt />
         </button>
     </div>
