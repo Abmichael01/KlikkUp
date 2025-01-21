@@ -8,7 +8,7 @@ const reasons = [
   "Receive Airdrop",
 ];
 
-const RegisterNow = () => {
+const RegisterNow: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row gap-10 py-20 border-y">
       <div className="text-center flex items-center justify-center w-full md:w-1/2 fancy-font text-3xl md:text-5xl">
