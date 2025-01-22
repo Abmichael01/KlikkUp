@@ -20,6 +20,10 @@ const formSchema = z.object({
     message: "Username must be at least 2 characters.",
   }),
   email: z.string().min(2, { message: "Email is required" }),
+  coupon: z
+    .string()
+    .min(8, { message: "Invalid Coupon code" })
+    .max(8, { message: "Invalid coupon code" }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters." }),
@@ -27,7 +31,7 @@ const formSchema = z.object({
 });
 
 type FormField = {
-  name: "username" | "email" | "password" | "confirmPassword";
+  name: "username" | "email" | "password" | "confirmPassword" | "coupon";
   label: string;
   placeholder: string;
   type: string;
@@ -47,6 +51,13 @@ const formFields: FormField[] = [
     label: "Email",
     type: "email",
     placeholder: "Enter your email",
+    required: true,
+  },
+  {
+    name: "coupon",
+    label: "Coupon Code",
+    type: "text",
+    placeholder: "Enter your purchased coupon code",
     required: true,
   },
   {
@@ -81,7 +92,10 @@ const Register: React.FC = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full flex flex-col">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-full flex flex-col"
+      >
         <h2 className="text-2xl fancy-font text-center">
           Register to Start Earning
         </h2>
@@ -92,7 +106,12 @@ const Register: React.FC = () => {
             name={formField.name}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{formField.label}</FormLabel>
+                <div className="flex items-center justify-between">
+                  <FormLabel>{formField.label}</FormLabel>
+                  {formField.name === "coupon" && (
+                    <Link className="text-xs text-white px-3 bg-primary py-1 rounded-md" to="#">Get Coupon</Link>
+                  )}
+                </div>
                 <FormControl>
                   <Input
                     placeholder={formField.placeholder}
@@ -106,9 +125,14 @@ const Register: React.FC = () => {
             )}
           />
         ))}
-        <Button type="submit" className="self-center px-10">Login</Button>
+        <Button type="submit" className="self-center px-10">
+          Login
+        </Button>
         <p className="text-center">
-          Already have an account? <Link to="/auth/login" className="font-semibold">Login</Link>
+          Already have an account?{" "}
+          <Link to="/auth/login" className="font-semibold">
+            Login
+          </Link>
         </p>
       </form>
     </Form>
