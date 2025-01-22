@@ -5,13 +5,13 @@ import { LucideChartNoAxesGantt } from 'lucide-react'
 
 const links = [
     {
-        name: "Sign in",
-        link: "#",
+        name: "Login",
+        link: "/auth/login",
         className: "bg-primary"
     },
     {
-        name: "Sign up",
-        link: "#",
+        name: "Register",
+        link: "/auth/register",
         className: "bg-foreground"
     },
 ]

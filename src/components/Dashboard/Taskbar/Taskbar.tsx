@@ -19,29 +19,26 @@ const navs = [
   { icon: <Waypoints />, name: "Roadmap", path: "/roadmap" },
 ];
 
-const Sidebar: React.FC = () => {
+const Taskbar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="w-[75px] hover:w-[200px] border-r h-[100vh] flex-col gap-6 items-center justify-center px-2 sticky top-0 left-0 group transition-all duration-500 hidden md:flex">
+    <div className="w-full fixed border-t py-5 bg-white gap-6 items-center justify-between px-2 bottom-0 left-0 flex md:hidden">
       {navs.map((nav, index) => (
         <Link
-          to={nav.path}
+            to={nav.path}
           key={index}
           className={cn(
-            "flex items-center gap-2 w-full py-3 px-4 rounded-lg hover:bg-gray-200 cursor-pointer overflow-hidden",
+            "flex items-center gap-2 w-fit py-3 px-3 hover:text-primary/70 rounded-lg cursor-pointer overflow-hidden",
             location.pathname === nav.path &&
-              "bg-primary text-white hover:bg-primary/90"
+              "text-primary"
           )}
         >
           <div>{nav.icon}</div>
-          <p className="opacity-0 group-hover:opacity-100 transition-all">
-            {nav.name}
-          </p>
         </Link>
       ))}
     </div>
   );
 };
 
-export default Sidebar;
+export default Taskbar;

@@ -1,14 +1,10 @@
 import React from "react";
 import Logo from "@/components/Logo/Logo";
-import { SidebarClose } from "lucide-react";
 
 const Navbar: React.FC = () => {
   return (
     <div className="px-5 py-5 border-b flex items-center justify-between sticky top-0 right-0 bg-white z-30">
       <div className="flex items-center gap-2">
-        <button className="border-none">
-          <SidebarClose />
-        </button>
         <Logo />
       </div>
       <div className="flex gap-2 items-center ">
