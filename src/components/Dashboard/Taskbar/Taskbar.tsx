@@ -23,7 +23,7 @@ const Taskbar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="w-full fixed border-t py-5 bg-white gap-6 items-center justify-between px-2 bottom-0 left-0 flex md:hidden">
+    <div className="w-full fixed border-t py-5 bg-white gap-6 items-center justify-between px-6 bottom-0 left-0 flex md:hidden">
       {navs.map((nav, index) => (
         <Link
             to={nav.path}
