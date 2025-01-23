@@ -87,10 +87,10 @@ const Tasks: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex justify-between items-center gap-3 p-5 border-primay border bg-primary/10 shadow-lg rounded-xl">
-        <div className="flex flex-col gap-4 fancy-font">
-            <h2 className="text-4xl font-semibold">Complete the tasks, earn the points</h2>
-            <h2 className="text-2xl text-primary font-semibold">Only qualified actions will unclock the new world</h2>
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-3 p-5 border-primay border bg-primary/10 shadow-lg rounded-xl">
+        <div className="flex flex-col gap-4 fancy-font text-center md:text-start">
+            <h2 className="text-2xl md:text-4xl font-semibold">Complete the tasks, earn the points</h2>
+            <h2 className="text-xl md:text-2xl text-primary font-semibold">Only qualified actions will unclock the new world</h2>
         </div>
         <img src={thumbsUp}  alt="thumbs up" className="w-[200px]" />
       </div>

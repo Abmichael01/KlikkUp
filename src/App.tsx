@@ -11,6 +11,7 @@ import Invite from "./pages/Dashboard/Invite";
 import Tasks from "./pages/Dashboard/Tasks";
 import Stories from "./pages/Dashboard/Stories";
 import Airdrop from "./pages/Dashboard/Airdrop";
+import Roadmap from "./pages/Dashboard/Roadmap";
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           <Route  path="/tasks" element={<Tasks />} />
           <Route  path="/stories" element={<Stories />} />
           <Route  path="/airdrop" element={<Airdrop />} />
+          <Route  path="/roadmap" element={<Roadmap />} />
 
         </Route>
         <Route path="/auth" element={<Authlayout />}>

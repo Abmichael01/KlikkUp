@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
     <div>
       <div className="flex flex-col gap-10">
         <div className="max-w-full h-fit rounded-2xl border shadow-xl p-6 flex justify-between items-center relative overflow-hidden">
-          <CircleWave className="top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] absolute scale-[0.5] md:scale-100" />
+          <CircleWave className="top-1/2 left-1/2 translate-x-[-50%] rotate-180 translate-y-[-50%] absolute scale-[0.5] md:scale-100" />
           <div className="flex flex-col gap-3 md:flex-row justify-between items-center w-full">
             <h2 className="text-3xl sm:text-4xl md:text-5xl fancy-font text-wrap text-center md:text-start">
               <TypewriterComp array={waysToEarn} />
