@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import {
-  File,
+    BookOpen,
   Gift,
   HomeIcon,
   ListCheck,
@@ -14,7 +14,7 @@ const navs = [
   { icon: <HomeIcon />, name: "Dashboard", path: "/dashboard" },
   { icon: <UserPlus />, name: "Invite", path: "/invite" },
   { icon: <ListCheck />, name: "Tasks", path: "/tasks?tab=new-tasks" },
-  { icon: <File />, name: "Stories", path: "/stories?tab=new-stories" },
+  { icon: <BookOpen />, name: "Stories", path: "/stories?tab=new-stories" },
   { icon: <Gift />, name: "Airdrop", path: "/airdrop" },
   { icon: <Waypoints />, name: "Roadmap", path: "/roadmap" },
 ];
