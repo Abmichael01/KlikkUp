@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import {
-  File,
+  BookOpen,
   Gift,
   HomeIcon,
   ListCheck,
@@ -13,8 +13,8 @@ import { Link, useLocation } from "react-router"; // React Router's useLocation
 const navs = [
   { icon: <HomeIcon />, name: "Dashboard", path: "/dashboard" },
   { icon: <UserPlus />, name: "Invite", path: "/invite" },
-  { icon: <ListCheck />, name: "Tasks", path: "/tasks" },
-  { icon: <File />, name: "Stories", path: "/stories" },
+  { icon: <ListCheck />, name: "Tasks", path: "/tasks?tab=new-tasks" },
+  { icon: <BookOpen />, name: "Stories", path: "/stories?tab=new-stories" },
   { icon: <Gift />, name: "Airdrop", path: "/airdrop" },
   { icon: <Waypoints />, name: "Roadmap", path: "/roadmap" },
 ];
@@ -30,7 +30,7 @@ const Sidebar: React.FC = () => {
           key={index}
           className={cn(
             "flex items-center gap-2 w-full py-3 px-4 rounded-lg hover:bg-gray-200 cursor-pointer overflow-hidden",
-            location.pathname === nav.path &&
+            nav.path.includes(location.pathname) &&
               "bg-primary text-white hover:bg-primary/90"
           )}
         >

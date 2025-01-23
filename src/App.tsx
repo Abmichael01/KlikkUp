@@ -8,6 +8,8 @@ import Authlayout from "./layouts/Authlayout";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Invite from "./pages/Dashboard/Invite";
+import Tasks from "./pages/Dashboard/Tasks";
+import Stories from "./pages/Dashboard/Stories";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const App: React.FC = () => {
         <Route element={<DashboardLayout />}>
           <Route  path="/dashboard" element={<Dashboard />} />
           <Route  path="/invite" element={<Invite />} />
+          <Route  path="/tasks" element={<Tasks />} />
+          <Route  path="/stories" element={<Stories />} />
         </Route>
         <Route path="/auth" element={<Authlayout />}>
           <Route path="login" element={<Login />} />
