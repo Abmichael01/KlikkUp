@@ -21,13 +21,13 @@ const leaderboard = [
   { username: "Sophia Green", invites: 40 },
   { username: "Michael Wilson", invites: 45 },
   { username: "Emily Thompson", invites: 50 },
-  { username: "David Johnson", invites: 55 }, // Add more users as needed.
+  { username: "David Johnson", invites: 55 },
 ];
 
 const Invite: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 ">
-      <div className="border shadow-lg rounded-xl p-5 flex flex-col sm:flex-row gap-5 justify-between">
+      <div className="border shadow-lg rounded-xl p-5 py-14 bg-primary/10 flex flex-col sm:flex-row gap-5 justify-between">
         <h2 className="text-xl sm:text-2xl font-semibold">Your Referral Statistics</h2>
         <div className="text-xl font-medium">
           <h2>Numbeer of mutations:</h2>
