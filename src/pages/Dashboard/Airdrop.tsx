@@ -8,7 +8,7 @@ const Airdrop: React.FC = () => {
     <div className="flex flex-col gap-10">
       <div className="bg-primary/50 px-10 py-14 border shadow-lg rounded-xl flex flex-col md:flex-row justify-between items-center gap-10 relative overflow-hidden">
         <CircleWave className="rotate-180" />
-        <h2 className=" fancy-font text-4xl text-center md:text-start md:text-5xl leading-tight">
+        <h2 className=" fancy-font  text-center md:text-start text-5xl leading-tight">
           The NEXT <span className="text-white">AIRDROP</span> IS ON THE 21ST OF
           MAY, 2025
         </h2>
