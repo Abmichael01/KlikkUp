@@ -124,4 +124,13 @@
   .fancy-font {
     font-family: 'Exo 2', serif;
   }
+
+  .auth-gradient {
+    transform-origin: top;
+  }
+
+  .button-hover-effect{
+    transition: all 0.5s linear;
+  }
 }
+

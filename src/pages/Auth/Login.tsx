@@ -3,17 +3,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
+import { Eye, LockIcon, User } from "lucide-react";
+import GlidingButton from "@/components/ui/GlidingButton";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -30,6 +29,7 @@ type FormField = {
   placeholder: string;
   type: string;
   required: boolean;
+  icon: React.ReactNode
 };
 
 const formFields: FormField[] = [
@@ -39,6 +39,7 @@ const formFields: FormField[] = [
     type: "text",
     placeholder: "Enter your username",
     required: true,
+    icon: <User />,
   },
   {
     name: "password",
@@ -46,8 +47,8 @@ const formFields: FormField[] = [
     type: "password",
     placeholder: "Enter your password",
     required: true,
+    icon: <LockIcon />,
   },
-
 ];
 
 const Login: React.FC = () => {
@@ -66,10 +67,14 @@ const Login: React.FC = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full flex flex-col">
-        <h2 className="text-2xl fancy-font text-center">
-          Login to Continue Earning
-        </h2>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-full flex flex-col"
+      >
+        <div className="flex flex-col items-center gap-2 text-white">
+          <h2 className="text-3xl fancy-font text-center ">Welcome Back</h2>
+          <p>Login to your account</p>
+        </div>
         {formFields.map((formField, index) => (
           <FormField
             key={index}
@@ -77,25 +82,35 @@ const Login: React.FC = () => {
             name={formField.name as "username" | "password"}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{formField.label}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder={formField.placeholder}
-                    type={formField.type}
-                    {...field}
-                    className="w-full"
-                  />
+                  <div className="bg-white px-4 rounded-lg flex items-center gap-2 border border-black/80">
+                    <div className="text-primary">{formField.icon}</div>
+                    <input
+                      placeholder={formField.label}
+                      type={formField.type}
+                      {...field}
+                      className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
+                    />
+                    {formField.type === "password" && (
+                      <div className="border-l-[2px] border-primary pl-2">
+                        <Eye />
+                      </div>
+                    )}
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         ))}
-        <Button type="submit" className="self-center px-10">Login</Button>
-        <div className="text-center">
+        <GlidingButton>LOGIN</GlidingButton>
+        <div className="text-center text-white">
           <span>Don't have an account? </span>
-          <Link to="/auth/register" className="font-semibold">Register</Link>
+          <Link to="/auth/register" className="font-semibold">
+            Register
+          </Link>
         </div>
+        <Link to="#" className="text-white font-semibold text-sm text-center">Forgot Password?</Link>
       </form>
     </Form>
   );

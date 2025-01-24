@@ -3,17 +3,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
+import { Eye, LockIcon, Mail, TicketIcon, User } from "lucide-react";
+import GlidingButton from "@/components/ui/GlidingButton";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -36,6 +36,7 @@ type FormField = {
   placeholder: string;
   type: string;
   required: boolean;
+  icon: React.ReactNode;
 };
 
 const formFields: FormField[] = [
@@ -45,6 +46,7 @@ const formFields: FormField[] = [
     type: "text",
     placeholder: "Enter your username",
     required: true,
+    icon: <User />,
   },
   {
     name: "email",
@@ -52,6 +54,7 @@ const formFields: FormField[] = [
     type: "email",
     placeholder: "Enter your email",
     required: true,
+    icon: <Mail />,
   },
   {
     name: "coupon",
@@ -59,6 +62,7 @@ const formFields: FormField[] = [
     type: "text",
     placeholder: "Enter your purchased coupon code",
     required: true,
+    icon: <TicketIcon />,
   },
   {
     name: "password",
@@ -66,6 +70,7 @@ const formFields: FormField[] = [
     type: "password",
     placeholder: "Enter your password",
     required: true,
+    icon: <LockIcon />,
   },
   {
     name: "confirmPassword",
@@ -73,6 +78,7 @@ const formFields: FormField[] = [
     type: "password",
     placeholder: "Confirm your password",
     required: true,
+    icon: <LockIcon />,
   },
 ];
 
@@ -96,9 +102,10 @@ const Register: React.FC = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 w-full flex flex-col"
       >
-        <h2 className="text-2xl fancy-font text-center">
-          Register to Start Earning
-        </h2>
+        <div className="flex flex-col items-center gap-2 text-white">
+          <h2 className="text-3xl fancy-font text-center ">Register</h2>
+          <p>Create your account</p>
+        </div>
         {formFields.map((formField, index) => (
           <FormField
             key={index}
@@ -106,31 +113,33 @@ const Register: React.FC = () => {
             name={formField.name}
             render={({ field }) => (
               <FormItem>
-                <div className="flex items-center justify-between">
-                  <FormLabel>{formField.label}</FormLabel>
-                  {formField.name === "coupon" && (
-                    <Link className="text-xs text-white px-3 bg-primary py-1 rounded-md" to="#">Get Coupon</Link>
-                  )}
-                </div>
                 <FormControl>
-                  <Input
-                    placeholder={formField.placeholder}
-                    type={formField.type}
-                    {...field}
-                    className="w-full"
-                  />
+                  <div className="bg-white px-4 rounded-lg flex items-center gap-2 border border-black/80">
+                    <div className="text-primary">{formField.icon}</div>
+                    <input
+                      placeholder={formField.label}
+                      type={formField.type}
+                      {...field}
+                      className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
+                    />
+                    {formField.type === "password" && 
+                      <div className="border-l-[2px] border-primary pl-2">
+                        <Eye />
+                      </div>
+                    }
+                  </div>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-black" />
               </FormItem>
             )}
           />
         ))}
-        <Button type="submit" className="self-center px-10">
-          Login
-        </Button>
-        <p className="text-center">
+        <GlidingButton>
+          REGISTER
+        </GlidingButton>
+        <p className="text-center text-white">
           Already have an account?{" "}
-          <Link to="/auth/login" className="font-semibold">
+          <Link to="/auth/login" className="font-semibold underline">
             Login
           </Link>
         </p>

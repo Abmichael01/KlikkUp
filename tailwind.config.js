@@ -4,6 +4,11 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      transitionDuration: {
+        '75': '75ms',
+        '150': '150ms',
+        '2000': '2000ms', // Custom duration
+      },
       fontFamily: {
         sans: ["Nunito", "sans-serif"],
         exo: ["Exo 2"],
