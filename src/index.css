@@ -132,5 +132,19 @@
   .button-hover-effect{
     transition: all 0.5s linear;
   }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    display: inline-block; /* Optional: Ensure the element fits nicely */
+    animation: shake 0.5s ease-in-out; /* Adjust duration as needed */
+    animation-iteration-count: 1; /* Shake once */
+  }
 }
 

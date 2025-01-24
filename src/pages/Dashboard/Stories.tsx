@@ -88,10 +88,10 @@ const Stories: React.FC = () => {
     <div className="flex flex-col gap-10">
       <Banner>
         <div className="flex flex-col gap-4 fancy-font text-center">
-          <h2 className="text-2xl md:text-4xl font-semibold">
+          <h2 className="text-3xl sm:text-4xl font-semibold">
             Read the stories, earn the points
           </h2>
-          <h2 className="text-xl md:text-2xl text-white font-semibold">
+          <h2 className="text-xl sm:text-2xl text-white font-semibold">
             Only qualified actions will unclock the new world
           </h2>
         </div>
