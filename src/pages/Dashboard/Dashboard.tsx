@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <div className="grid grid-cols-1  md:grid-cols-2 gap-10">
-          <div className="bg-primary/40 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-bold">My referral code</h2>
             <div className="flex justify-between gap-2">
               <input
@@ -48,28 +48,28 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-primary/40 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-bold">My Points</h2>
             <div className="flex justify-between gap-2 text-3xl">
                 <h1>120, 000 <span className="text-sm font-semibold">Klikks</span></h1>
             </div>
           </div>
 
-          <div className="bg-primary/40 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-semibold">Tasks Completed</h2>
             <div className="flex justify-between gap-2 text-3xl">
                 <h1>120 <span className="text-sm font-semibold">tasks</span></h1>
             </div>
           </div>
 
-          <div className="bg-primary/40 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-semibold">Days of active farming</h2>
             <div className="flex justify-between gap-2 text-3xl">
                 <h1> 56 Days <span className="text-sm font-semibold">Streaks</span></h1>
             </div>
           </div>
 
-          <div className="bg-primary/40 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-semibold">Invites</h2>
             <div className="flex justify-between gap-2 text-3xl">
                 <h1> 11 <span className="text-sm font-semibold">Invites</span></h1>

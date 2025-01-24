@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import { BookOpen } from "lucide-react";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import thumbsUp from "@/assets/images/doubleThumbsUp.png"
-
+import Banner from "@/components/Dashboard/Banner";
 
 const tasks = [
   {
@@ -87,13 +86,16 @@ const Stories: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex flex-col-reverse md:flex-row  justify-between items-center gap-3 p-5 border-primay border bg-primary/10 shadow-lg rounded-xl">
-        <div className="flex flex-col gap-4 fancy-font text-center md:text-start">
-            <h2 className="text-2xl md:text-4xl font-semibold">Read the stories, earn the points</h2>
-            <h2 className="text-xl md:text-2xl text-primary font-semibold">Only qualified actions will unclock the new world</h2>
+      <Banner>
+        <div className="flex flex-col gap-4 fancy-font text-center">
+          <h2 className="text-2xl md:text-4xl font-semibold">
+            Read the stories, earn the points
+          </h2>
+          <h2 className="text-xl md:text-2xl text-white font-semibold">
+            Only qualified actions will unclock the new world
+          </h2>
         </div>
-        <img src={thumbsUp}  alt="thumbs up" className="w-[200px]" />
-      </div>
+      </Banner>
 
       <div className="flex gap-3">
         {tabs.map((tab) => (
@@ -111,19 +113,22 @@ const Stories: React.FC = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {tasks.map((task) => (
-          <div key={task.id} className="flex flex-col rounded-xl border overflow-hidden">
+          <div
+            key={task.id}
+            className="flex flex-col rounded-xl border overflow-hidden"
+          >
             <div className="flex items-center justify-center py-12 border-b bg-gradient-to-b from-black via-gray-700 to-black text-white">
-                <BookOpen className="w-20 h-20" />
+              <BookOpen className="w-20 h-20" />
             </div>
             <div className="p-3 flex flex-col gap-2">
               <h3 className="font-semibold">{task.title}</h3>
               <p>{task.description}</p>
               <div className="flex-shrink-0">
-                <p>{task.points} <span className="text-xs">Klikks</span></p>
+                <p>
+                  {task.points} <span className="text-xs">Klikks</span>
+                </p>
               </div>
-              <Button variant={"outline"}>
-                Read
-              </Button>
+              <Button variant={"outline"}>Read</Button>
             </div>
           </div>
         ))}

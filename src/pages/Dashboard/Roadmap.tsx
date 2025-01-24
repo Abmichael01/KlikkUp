@@ -1,8 +1,7 @@
 import React from "react";
-import devious from "@/assets/images/devious.png";
-import CircleWave from "@/components/CircleWave";
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Banner from "@/components/Dashboard/Banner";
 
 const roadmaps = [
   { title: "Launch of The KlikkUp points farming", completed: true },
@@ -30,19 +29,17 @@ const roadmaps = [
 const Roadmap: React.FC = () => {
   return (
     <div className="flex flex-col gap-14">
-      <div className="bg-primary/50 px-10 py-10 border shadow-lg rounded-xl flex flex-col md:flex-row justify-between items-center gap-10 relative overflow-hidden flex-shrink">
-        <CircleWave className="rotate-180" />
-        <div className="flex flex-col gap-2">
+      <Banner>
+        <div className="flex flex-col items-center gap-2">
           <h2 className="fancy-font text-4xl max-w-full text-wrap break-words">
             THE <span className="text-white">BIGGEST PROJECT</span> IS COMING
             VERY SOON
           </h2>
           <h2 className="text-2xl font-bold text-foreground/80 fancy-font">
-            Anticipate what KlikkUp is cooking.....
+            --- Keep farming until then ---
           </h2>
         </div>
-        <img className="w-[200px]" src={devious} alt="Blushing" />
-      </div>
+      </Banner>
 
       <div className="flex flex-col gap-10">
         {roadmaps.map((roadmap, index) => (

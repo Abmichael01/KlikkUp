@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import {
     BookOpen,
   Gift,
-  HomeIcon,
+  LayoutDashboard,
   ListCheck,
   UserPlus,
   Waypoints,
@@ -11,7 +11,7 @@ import React from "react";
 import { Link, useLocation } from "react-router"; // React Router's useLocation
 
 const navs = [
-  { icon: <HomeIcon />, name: "Dashboard", path: "/dashboard" },
+  { icon: <LayoutDashboard />, name: "Dashboard", path: "/dashboard" },
   { icon: <UserPlus />, name: "Invite", path: "/invite" },
   { icon: <ListCheck />, name: "Tasks", path: "/tasks?tab=new-tasks" },
   { icon: <BookOpen />, name: "Stories", path: "/stories?tab=new-stories" },
@@ -29,12 +29,13 @@ const Taskbar: React.FC = () => {
             to={nav.path}
           key={index}
           className={cn(
-            "flex items-center gap-2 w-fit hover:text-primary/70 rounded-lg cursor-pointer overflow-hidden",
+            "flex flex-col items-center gap-2 w-fit hover:text-primary/70 rounded-lg cursor-pointer overflow-hidden",
             nav.path.includes(location.pathname) &&
               "text-primary"
           )}
         >
           <div>{nav.icon}</div>
+          <h2 className="text-[9px] sm:text-xs">{nav.name}</h2>
         </Link>
       ))}
     </div>

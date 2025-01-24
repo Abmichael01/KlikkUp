@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Banner from "@/components/Dashboard/Banner";
 
 const leaderboard = [
   { username: "John Doe", invites: 10 },
@@ -27,13 +28,13 @@ const leaderboard = [
 const Invite: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 ">
-      <div className="border shadow-lg rounded-xl p-5 py-14 bg-primary/10 flex flex-col sm:flex-row gap-5 justify-between">
-        <h2 className="text-xl sm:text-2xl font-semibold">Your Referral Statistics</h2>
-        <div className="text-xl font-medium">
+      <Banner className="flex-col">
+        <h2 className="text-xl sm:text-4xl font-semibold fancy-font">Your Referral Statistics</h2>
+        <div className="text-xl sm:text-2xl font-medium text-center">
           <h2>Numbeer of mutations:</h2>
-          <h2 className="text-4xl text-primary font-semibold mt-3">30</h2>
+          <h2 className="text-6xl text-white font-semibold mt-3">30</h2>
         </div>
-      </div>
+      </Banner>
 
       <div className="flex justify- items-center gap-5 ">
         <h2 className="text-xl sm:text-2xl font-semibold">Referral Code:</h2>
