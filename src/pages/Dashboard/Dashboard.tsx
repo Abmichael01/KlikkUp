@@ -3,7 +3,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import CircleWave from "@/components/CircleWave";
 import TypewriterComp from "@/components/Typewriter";
 import { Button } from "@/components/ui/button";
-import { CopyIcon } from "lucide-react";
+import { ClipboardListIcon, CopyIcon, Hammer, UserPlus } from "lucide-react";
 
 const waysToEarn = [
   "Welcome Back!",
@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <div className="grid grid-cols-1  md:grid-cols-2 gap-10">
-          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
+          <div className="bg-primary/70 w-full rounded-xl p-5 py-10 flex flex-col gap-3 shadow-lg">
             <h2 className="text-xl font-bold">My referral code</h2>
             <div className="flex justify-between gap-2">
               <input
@@ -48,31 +48,52 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
-            <h2 className="text-xl font-bold">My Points</h2>
-            <div className="flex justify-between gap-2 text-3xl">
-                <h1>120, 000 <span className="text-sm font-semibold">Klikks</span></h1>
+          <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-xl font-bold">My Points</h2>
+              <div className="flex justify-between gap-2 text-3xl">
+                <h1>
+                  120, 000 <span className="text-sm font-semibold">Klikks</span>
+                </h1>
+              </div>
             </div>
           </div>
 
-          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
-            <h2 className="text-xl font-semibold">Tasks Completed</h2>
-            <div className="flex justify-between gap-2 text-3xl">
-                <h1>120 <span className="text-sm font-semibold">tasks</span></h1>
+          <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg">
+            <ClipboardListIcon className="h-14 w-14 text-purple-900" />
+            <div className="flex flex-col gap-3">
+              <h2 className="text-xl font-semibold">Tasks Completed</h2>
+              <div className="flex justify-between gap-2 text-3xl">
+                <h1>
+                  120 <span className="text-sm font-semibold">tasks</span>
+                </h1>
+              </div>
             </div>
           </div>
 
-          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
-            <h2 className="text-xl font-semibold">Days of active farming</h2>
-            <div className="flex justify-between gap-2 text-3xl">
-                <h1> 56 Days <span className="text-sm font-semibold">Streaks</span></h1>
+          <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg">
+          <Hammer className="h-14 w-14 text-orange-900" />
+            <div className="flex flex-col gap-3">
+              <h2 className="text-xl font-semibold">Days of active farming</h2>
+              <div className="flex justify-between gap-2 text-3xl">
+                <h1>
+                  {" "}
+                  56 Days <span className="text-sm font-semibold">Streaks</span>
+                </h1>
+              </div>
             </div>
           </div>
 
-          <div className="bg-primary/70 w-full rounded-xl p-5 flex flex-col gap-3 shadow-lg">
-            <h2 className="text-xl font-semibold">Invites</h2>
+          <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg">
+            <UserPlus className="h-14 w-14 text-green-900" />
+            <div>
+              <h2 className="text-xl font-semibold">Invites</h2>
             <div className="flex justify-between gap-2 text-3xl">
-                <h1> 11 <span className="text-sm font-semibold">Invites</span></h1>
+              <h1>
+                {" "}
+                11 <span className="text-sm font-semibold">Invites</span>
+              </h1>
+            </div>
             </div>
           </div>
         </div>

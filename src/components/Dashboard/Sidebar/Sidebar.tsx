@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import {
   BookOpen,
+  ClipboardList,
   Gift,
   HomeIcon,
-  ListCheck,
   UserPlus,
   Waypoints,
 } from "lucide-react";
@@ -13,7 +13,7 @@ import { Link, useLocation } from "react-router"; // React Router's useLocation
 const navs = [
   { icon: <HomeIcon />, name: "Dashboard", path: "/dashboard" },
   { icon: <UserPlus />, name: "Invite", path: "/invite" },
-  { icon: <ListCheck />, name: "Tasks", path: "/tasks?tab=new-tasks" },
+  { icon: <ClipboardList />, name: "Tasks", path: "/tasks?tab=new-tasks" },
   { icon: <BookOpen />, name: "Stories", path: "/stories?tab=new-stories" },
   { icon: <Gift />, name: "Airdrop", path: "/airdrop" },
   { icon: <Waypoints />, name: "Roadmap", path: "/roadmap" },
@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="w-[75px] hover:w-[200px] border-r h-[100vh] flex-col gap-6 items-center justify-center px-2 sticky top-0 left-0 group transition-all duration-500 hidden md:flex">
+    <div className="w-[72px] hover:w-[200px] border-r h-[100vh] flex-col gap-6 items-center justify-center px-2 sticky top-0 left-0 group transition-all duration-500 hidden md:flex">
       {navs.map((nav, index) => (
         <Link
           to={nav.path}

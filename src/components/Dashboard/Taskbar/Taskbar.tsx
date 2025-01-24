@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import {
     BookOpen,
+  ClipboardListIcon,
   Gift,
   LayoutDashboard,
-  ListCheck,
   UserPlus,
   Waypoints,
 } from "lucide-react";
@@ -13,7 +13,7 @@ import { Link, useLocation } from "react-router"; // React Router's useLocation
 const navs = [
   { icon: <LayoutDashboard />, name: "Dashboard", path: "/dashboard" },
   { icon: <UserPlus />, name: "Invite", path: "/invite" },
-  { icon: <ListCheck />, name: "Tasks", path: "/tasks?tab=new-tasks" },
+  { icon: <ClipboardListIcon />, name: "Tasks", path: "/tasks?tab=new-tasks" },
   { icon: <BookOpen />, name: "Stories", path: "/stories?tab=new-stories" },
   { icon: <Gift />, name: "Airdrop", path: "/airdrop" },
   { icon: <Waypoints />, name: "Roadmap", path: "/roadmap" },

@@ -30,13 +30,13 @@ const Roadmap: React.FC = () => {
   return (
     <div className="flex flex-col gap-14">
       <Banner>
-        <div className="flex flex-col items-center gap-2">
-          <h2 className="fancy-font text-4xl max-w-full text-wrap break-words">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h2 className="fancy-font text-3xl sm:text-4xl max-w-full text-wrap break-words">
             THE <span className="text-white">BIGGEST PROJECT</span> IS COMING
             VERY SOON
           </h2>
           <h2 className="text-2xl font-bold text-foreground/80 fancy-font">
-            --- Keep farming until then ---
+            Keep farming until then
           </h2>
         </div>
       </Banner>

@@ -28,10 +28,10 @@ const leaderboard = [
 const Invite: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 ">
-      <Banner className="flex-col">
-        <h2 className="text-xl sm:text-4xl font-semibold fancy-font">Your Referral Statistics</h2>
+      <Banner className="flex-col text-center">
+        <h2 className="text-3xl sm:text-4xl font-semibold fancy-font">Your Referral Statistics</h2>
         <div className="text-xl sm:text-2xl font-medium text-center">
-          <h2>Numbeer of mutations:</h2>
+          <h2 className="text-2xl font-bold text-foreground/80 fancy-font">Numbeer of mutations:</h2>
           <h2 className="text-6xl text-white font-semibold mt-3">30</h2>
         </div>
       </Banner>
