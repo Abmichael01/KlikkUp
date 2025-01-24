@@ -11,7 +11,7 @@ const DashboardLayout: React.FC = () => {
       <Taskbar />
       <div className="flex-grow">
         <Navbar />
-        <div className="p-5 pb-40">
+        <div className="p-2 sm:p-5 pb-40">
           <Outlet />
         </div>
       </div>

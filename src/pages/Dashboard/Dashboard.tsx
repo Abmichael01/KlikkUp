@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
           <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg group">
             <ClipboardListIcon className="h-14 w-14 text-purple-900 group-hover:shake" />
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold">Tasks Completed</h2>
+              <h2 className="text-xl font-bold">Tasks Completed</h2>
               <div className="flex justify-between gap-2 text-3xl">
                 <h1>
                   120 <span className="text-sm font-semibold">tasks</span>
@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
           <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg group">
             <Hammer className="h-14 w-14 text-orange-900 group-hover:shake" />
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold">Days of active farming</h2>
+              <h2 className="text-xl font-bold">Streak</h2>
               <div className="flex justify-between gap-2 text-3xl">
                 <h1>
                   {" "}
@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
           <div className="bg-primary/70 w-full rounded-xl px-8 py-10 flex items-center justify-between gap-3 shadow-lg group">
             <UserPlus className="h-14 w-14 text-green-900 group-hover:shake" />
             <div>
-              <h2 className="text-xl font-semibold">Invites</h2>
+              <h2 className="text-xl font-bold">Invites</h2>
               <div className="flex justify-between gap-2 text-3xl">
                 <h1>
                   {" "}
