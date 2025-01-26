@@ -8,7 +8,7 @@ import React from 'react'
 
 const Home: React.FC = () => {
   return (
-    <div className='flex flex-col gap-20'>
+    <div className='flex flex-col'>
         <Hero />
         <Features />
         <HowItWorks />

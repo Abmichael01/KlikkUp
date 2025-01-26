@@ -7,7 +7,7 @@ const links = [
     {
         name: "Login",
         link: "/auth/login",
-        className: "bg-primary"
+        className: "bg-amber-500 text-black"
     },
     {
         name: "Register",
@@ -36,14 +36,14 @@ const navs = [
 
 const Navbar: React.FC = () => {
   return (
-    <div className='px-5 lg:px-10 py-5 border rounded-xl flex items-center justify-between '>
+    <div className='px-5 lg:px-10 py-5 border flex items-center justify-between '>
         <Logo />
         <div className='hidden lg:flex gap-10 items-center '>
             {navs.map((nav, index) => (
                 <Link
                 key={index}
                 to={nav.link}
-                className='text-s tym font-semibold'
+                className='text-s'
                 >
                     {nav.name}
                 </Link>
