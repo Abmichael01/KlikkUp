@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
           Start Earning for the Future. Start farming for the biggest project to
           come
         </h3>
-        <div className="flex flex-col sm:flex-row gap-5 items-center">
+        <div className="flex flex-col md:flex-row gap-5 justify-center md:justify-start items-center">
           <GlidingButton className="w-fit px-10 bg-amber-500 hover:bg-amber-400 flex gap-2 text-black shadow-lg ">
             <MousePointerClick />
             Get Started Now!
