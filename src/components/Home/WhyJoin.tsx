@@ -1,5 +1,5 @@
 import MainPadding from "@/layouts/MainPadding";
-import { Check, ChevronRightCircleIcon } from "lucide-react";
+import { ChevronRightCircleIcon } from "lucide-react";
 import React from "react";
 
 const whys = [
