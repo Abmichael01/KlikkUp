@@ -28,7 +28,7 @@ const Features: React.FC = () => {
             key={index}
             className="flex flex-col items-center gap-5 border-blue-800 border shadow-xl rounded-xl px-10 py-3 transform transition-transform hover:scale-105"
           >
-            <p className="text-center text-sm sm:text-lg font-semibold text-primary">{feature.name}</p>
+            <p className="text-center text-sm sm:text-lg font-semibold text-primary bg-white">{feature.name}</p>
           </div>
         ))}
       </div>

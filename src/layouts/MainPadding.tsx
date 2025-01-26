@@ -13,7 +13,7 @@ const MainPadding: React.FC<MainPaddingProps> = ({
 }) => {
   return (
     <div className={cn(
-        "px-20",
+        "px-3 md:px-10 lg:px-20 ",
         className,
   
     )}>
