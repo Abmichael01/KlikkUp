@@ -6,7 +6,7 @@ import { Outlet } from "react-router";
 
 const DashboardLayout: React.FC = () => {
   return (
-    <div className="flex relative">
+    <div className="flex relative bg-primary">
       <Sidebar />
       <Taskbar />
       <div className="flex-grow">
