@@ -120,6 +120,12 @@ const Navbar: React.FC = () => {
                 {nav.name}
               </p>
             ))}
+            <Link
+                to={"#"}
+                className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+              >
+               Buy Coupon
+              </Link>
             {links.map((link, index) => (
               <Link
                 key={index}

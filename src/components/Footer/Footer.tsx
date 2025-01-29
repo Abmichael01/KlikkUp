@@ -14,6 +14,7 @@ const footerLinks = {
   Support: [
     { title: "Contact", href: "/contact" },
     { title: "Buy Coupon", href: "/buy-coupon" },
+    { title: "FAQs", href: "" },
   ],
 };
 
@@ -56,19 +57,26 @@ const Footer: React.FC = () => {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.title} className="w-fit">
-                    <Link
-                      to={link.href}
-                      className="text-sm hover:text-secondary transition-colors flex items-center group"
-                    >
-                      <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      {link.title}
-                    </Link>
+                    {link.href !== "" && (
+                      <Link
+                        to={link.href}
+                        className="text-sm hover:text-secondary transition-colors flex items-center group"
+                      >
+                        <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {link.title}
+                      </Link>
+                    )}
+                    {link.href == "" && (
+                      <p
+                        className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer"
+                        onClick={() => scrollToSection("faq")}
+                      >
+                        <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {link.title}
+                      </p>
+                    )}
                   </li>
                 ))}
-                <li className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer" onClick={() => scrollToSection("faq")}>
-                  <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  FAQs
-                </li>
               </ul>
             </div>
           ))}
