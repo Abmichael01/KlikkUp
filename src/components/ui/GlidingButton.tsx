@@ -13,7 +13,7 @@ const GlidingButton: React.FC<GlidingButtonProps> = ({
   return (
     <button
       className={cn(
-        "self-center px-10 py-3 bg-black relative rounded-lg group overflow-hidden text-white",
+        "self-center px-10 py-3 bg-black relative rounded-lg group overflow-hidden text-white flex gap-2 items-center",
         className
       )}
     >

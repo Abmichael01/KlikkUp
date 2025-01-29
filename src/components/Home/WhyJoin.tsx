@@ -1,37 +1,66 @@
-import MainPadding from "@/layouts/MainPadding";
-import { ChevronRightCircleIcon } from "lucide-react";
-import React from "react";
+import MainPadding from "@/layouts/MainPadding"
+import { ChevronRightCircle, Star } from "lucide-react"
+import type React from "react"
 
 const whys = [
-  "A simple and user friendly platform",
-  "Enjoy contents while earning points",
-  "Future investment",
-  "Your time and engagement are valued",
-];
+  {
+    title: "Simple & User-Friendly",
+    description: "A platform designed with you in mind, easy to navigate and enjoy.",
+    icon: "🌟",
+  },
+  {
+    title: "Earn While You Learn",
+    description: "Enjoy content while accumulating valuable points for your engagement.",
+    icon: "💰",
+  },
+  {
+    title: "Future Investment",
+    description: "Build your portfolio with a platform that grows with you.",
+    icon: "📈",
+  },
+  {
+    title: "Your Time is Valued",
+    description: "We recognize and reward your time and engagement on our platform.",
+    icon: "⏰",
+  },
+]
 
 const WhyJoin: React.FC = () => {
   return (
-    <MainPadding className="flex flex-col items-center gap-10 py-20">
-      <h1 className="text-3xl md:text-4xl font-semibold text-center">
-        Why <span className="text-primary">Join</span> Klikk Up
-      </h1>
-      <div className="flex flex-col gap-6 w-full md:w-1/2">
-        {whys.map((why, index) => (
-          <div
-            key={index}
-            className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 w-full"
-          >
-            <div className="p-3 rounded-full text-white bg-primary flex items-center justify-center">
-              <ChevronRightCircleIcon className="w-8 h-8" />
+    <MainPadding className="py-20 bg-gradient-to-br from-background to-primary/5">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 fancy-font">
+          Why{" "}
+          <span className="text-primary relative">
+            Join
+            <Star className="absolute -top-6 -right-8 text-secondary w-8 h-8 animate-pulse" />
+          </span>{" "}
+          Klikk Up
+        </h2>
+        <div className="grid gap-8 md:grid-cols-2">
+          {whys.map((why, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            >
+              <div className="bg-primary p-4 flex items-center">
+                <div className="bg-white rounded-full p-2 mr-4">
+                  <span className="text-2xl" role="img" aria-label={why.title}>
+                    {why.icon}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-white">{why.title}</h3>
+              </div>
+              <div className="p-6">
+                <p className="text-gray-600">{why.description}</p>
+              </div>
             </div>
-            <h2 className="px-4 py-3 md:px-8 md:py-4 border w-full shadow-lg text-base md:text-lg lg:text-xl rounded-xl text-center md:text-left">
-              {why}
-            </h2>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </MainPadding>
-  );
-};
+  )
+}
 
-export default WhyJoin;
+export default WhyJoin
+

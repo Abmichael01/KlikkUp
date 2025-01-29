@@ -1,8 +1,5 @@
-/* ... */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -18,8 +15,8 @@
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 93% 47%; /* Amber color */
+    --secondary-foreground: 26 83% 14%; /* Dark text for amber background */
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -46,8 +43,8 @@
     --popover-foreground: 210 40% 98%;
     --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 45 93% 47%; /* Amber color (same as light mode) */
+    --secondary-foreground: 26 83% 14%; /* Dark text for amber background (same as light mode) */
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 217.2 32.6% 17.5%;
@@ -119,28 +116,38 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   .fancy-font {
-    font-family: 'Exo 2', serif;
+    font-family: "Exo 2", serif;
   }
 
   .auth-gradient {
     transform-origin: top;
   }
 
-  .button-hover-effect{
+  .button-hover-effect {
     transition: all 0.5s linear;
   }
 
   @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
-  
+
   .shake {
     display: inline-block; /* Optional: Ensure the element fits nicely */
     animation: shake 0.5s ease-in-out; /* Adjust duration as needed */

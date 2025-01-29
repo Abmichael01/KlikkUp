@@ -9,7 +9,7 @@ const MainLayout: React.FC = () => {
       <div className="">
         <Navbar />
       </div>
-      <main className="">
+      <main className="bg-primary">
         <Outlet />
       </main>
       <Footer />

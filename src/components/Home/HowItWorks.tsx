@@ -1,36 +1,62 @@
-import MainPadding from "@/layouts/MainPadding";
-import { Check } from "lucide-react";
-import React from "react";
+import MainPadding from "@/layouts/MainPadding"
+import { Check } from "lucide-react"
+import type React from "react"
 
 const steps = [
-  "Sign up and get a bonus of 500 points.",
-  "Complete tasks (reading, watching, engaging).",
-  "Earn points.",
-  "Convert points into tokens.",
-  "Withdraw or use tokens in the ecosystem."
-];
+  {
+    title: "Sign Up",
+    description: "Create an account and get a bonus of 500 points.",
+    icon: "🎉",
+  },
+  {
+    title: "Complete Tasks",
+    description: "Engage in reading, watching videos, and interactive content.",
+    icon: "✅",
+  },
+  {
+    title: "Earn Points",
+    description: "Accumulate points for each completed task.",
+    icon: "🏆",
+  },
+  {
+    title: "Convert to Tokens",
+    description: "Transform your earned points into valuable tokens.",
+    icon: "💱",
+  },
+  {
+    title: "Use or Withdraw",
+    description: "Spend tokens in the ecosystem or withdraw them.",
+    icon: "💰",
+  },
+]
 
 const HowItWorks: React.FC = () => {
   return (
-    <MainPadding className="flex flex-col items-center justify-center bg-primary py-20">
-      <h2 className=" text-2xl md:text-4xl text-center text-white fancy-font font-bold w-full">
-        Here is How it works
-      </h2>
-      <div className="flex flex-col gap-6  mt-6 w-fit">
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="flex gap-3 items-center "
-          >
-            <div className="rounded-full bg-white text-primary p-3">
-              <Check size={17} />
+    <MainPadding className="bg-primary py-20">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-5xl text-center text-white fancy-font font-bold mb-12">How It Works</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg p-6 shadow-lg transform transition-all duration-300 hover:scale-105"
+            >
+              <div className="flex items-center mb-4">
+                <div className="text-4xl mr-4">{step.icon}</div>
+                <h3 className="text-xl font-bold text-primary">{step.title}</h3>
+              </div>
+              <p className="text-gray-600">{step.description}</p>
+              <div className="mt-4 flex items-center text-secondary">
+                <Check size={20} className="mr-2" />
+                <span className="font-semibold">Step {index + 1}</span>
+              </div>
             </div>
-           <p className="text-lg">{step}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </MainPadding>
-  );
-};
+  )
+}
 
-export default HowItWorks;
+export default HowItWorks
+

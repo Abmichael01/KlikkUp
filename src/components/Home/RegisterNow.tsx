@@ -1,38 +1,55 @@
-import MainPadding from "@/layouts/MainPadding";
-import { Check, MousePointerClick } from "lucide-react";
-import React from "react";
+import MainPadding from "@/layouts/MainPadding"
+import { Check, MousePointerClick, ArrowRight } from "lucide-react"
+import type React from "react"
+import GlidingButton from "../ui/GlidingButton"
 
 const reasons = [
-  "Have fun klikking",
-  "Earn rewards for your time",
-  "Share and invite",
-  "Receive Airdrop",
-];
+  { text: "Have fun klikking", icon: "🎉" },
+  { text: "Earn rewards for your time", icon: "💰" },
+  { text: "Share and invite", icon: "👥" },
+  { text: "Receive Airdrop", icon: "🚀" },
+]
 
 const RegisterNow: React.FC = () => {
   return (
-    <MainPadding className="flex flex-col md:flex-row gap-10 py-20 border-y bg-gradient-to-br from-amber-500 via-transparent to-primary">
-      <div className="text-center flex items-center justify-center w-full md:w-1/2 fancy-font text-3xl md:text-5xl">
-        <div className="flex flex-col gap-2 md:gap-5 md:items-start justify-center">
-          <h1>Register Now </h1>
-          <h1 className="text-primary flex justify-center"> <MousePointerClick />On Klikk</h1>
+    <MainPadding className="bg-gradient-to-br from-primary to-primary-dark py-16">
+      <div className="flex flex-col lg:flex-row gap-12 items-center">
+        <div className="text-center flex flex-col lg:text-left w-full lg:w-1/2">
+          <h2 className="fancy-font text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+            Register Now <br />
+            <span className="relative">
+              <MousePointerClick className="inline mr-2 animate-bounce" />
+              On Klikk
+              <span className="absolute bottom-0 left-0 w-full h-2 bg-secondary opacity-75 transform -skew-x-12"></span>
+            </span>
+          </h2>
+          <p className="text-primary-foreground/80 mb-8 text-lg max-w-md mx-auto lg:mx-0">
+            Join our community today and start earning rewards for your time and engagement!
+          </p>
+          <GlidingButton className="px-8 py-3 bg-secondary self-center md:self-start hover:bg-secondary/90 text-secondary-foreground font-semibold text-lg">
+            Get Started Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </GlidingButton>
+        </div>
+        <div className="w-full lg:w-1/2">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
+            {reasons.map((reason, index) => (
+              <div key={index} className="flex items-center py-4 border-b border-white/20 last:border-b-0">
+                <div className="bg-primary rounded-full p-3 text-white mr-4 shadow-lg">
+                  <Check size={20} />
+                </div>
+                <div className="flex items-center">
+                  <span className="text-3xl mr-3">{reason.icon}</span>
+                  <h3 className="text-xl text-white font-medium">{reason.text}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-5 items-start justify-center w-full  md:w-1/2">
-        {reasons.map((reason, index) => (
-          <div
-            key={index}
-            className="flex gap-5 items-center py-4 border-b shadow-lg rounded-xl px-5 w-full bg-white"
-          >
-            <div className="bg-primary rounded-full p-3 text-white">
-              <Check size={17} />
-            </div>
-            <h2 className=" text-xl">{reason}</h2>
-          </div>
-        ))}
-      </div>
     </MainPadding>
-  );
-};
+  )
+}
 
-export default RegisterNow;
+export default RegisterNow
+
