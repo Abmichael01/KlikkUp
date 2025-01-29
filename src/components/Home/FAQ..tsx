@@ -69,7 +69,7 @@ const faqData = [
 const FAQ: React.FC = () => {
   return (
     <MainPadding className="bg-gradient-to-br from-primary to-primary-dark text-white py-16 md:py-24">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto" id="faq">
         <motion.h2
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center"
           initial={{ opacity: 0, y: -20 }}

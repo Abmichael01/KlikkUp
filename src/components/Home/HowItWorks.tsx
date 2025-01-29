@@ -33,7 +33,7 @@ const steps = [
 const HowItWorks: React.FC = () => {
   return (
     <MainPadding className="bg-primary py-20">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto" id="how-it-works">
         <h2 className="text-3xl md:text-5xl text-center text-white fancy-font font-bold mb-12">How It Works</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, index) => (

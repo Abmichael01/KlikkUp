@@ -8,7 +8,7 @@ const activities = ["Reading stories", "Watching YouTube videos", "Completing ta
 const AboutUs: React.FC = () => {
   return (
     <MainPadding className="relative bg-gradient-to-br from-primary via-primary-dark to-primary text-white py-16 md:py-24 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" id="about-us">
         <div className="absolute w-96 h-96 bg-secondary opacity-10 rounded-full -top-48 -left-48 animate-pulse"></div>
         <div className="absolute w-96 h-96 bg-secondary opacity-10 rounded-full -bottom-48 -right-48 animate-pulse delay-1000"></div>
       </div>

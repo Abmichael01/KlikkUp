@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto" id="hero">
         <h1 className="text-6xl xl:text-7xl font-bold font-exo mb-6 leading-tight">
           Turn Your <span className="text-foreground">Time</span> Into <span className="text-foreground">Rewards</span>
         </h1>

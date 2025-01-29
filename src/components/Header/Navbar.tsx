@@ -20,18 +20,19 @@ const links = [
 const navs = [
   {
     name: "Home",
-    slug: "home",
-    link: "#",
+    id: "hero",
   },
   {
     name: "About Us",
-    slug: "about",
-    link: "#",
+    id: "about-us",
   },
   {
     name: "How it works",
-    slug: "how-it-works",
-    link: "#",
+    id: "how-it-works",
+  },
+  {
+    name: "FAQs",
+    id: "faq",
   },
 ]
 
@@ -50,15 +51,34 @@ const Navbar: React.FC = () => {
     }
   }, [isSidebarOpen])
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      const offset = 80 // Adjust this value to change the offset
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
+      setIsSidebarOpen(false)
+    }
+  }
+
   return (
     <>
-      <div className="px-5 lg:px-10 py-5 border flex items-center justify-between">
+      <div className="px-5 lg:px-10 py-5 border flex items-center justify-between sticky top-0 z-[999] bg-white">
         <Logo />
         <div className="hidden lg:flex gap-10 items-center">
           {navs.map((nav, index) => (
-            <Link key={index} to={nav.link} className="text-s hover:text-primary transition-colors">
+            <p
+              key={index}
+              className="text-s hover:text-primary transition-colors cursor-pointer"
+              onClick={() => scrollToSection(nav.id)}
+            >
               {nav.name}
-            </Link>
+            </p>
           ))}
         </div>
         <div className="hidden lg:flex gap-5 items-center">
@@ -82,13 +102,13 @@ const Navbar: React.FC = () => {
 
       {/* Sidebar for small screens */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black bg-opacity-50 lg:hidden transition-opacity duration-300 z-[9999] ${
           isSidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsSidebarOpen(false)}
       />
       <div
-        className={`fixed top-0 right-0 bottom-0 w-64 bg-white z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 bottom-0 w-64 bg-white z-[9999] lg:hidden transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -104,14 +124,13 @@ const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col gap-6">
             {navs.map((nav, index) => (
-              <Link
+              <p
                 key={index}
-                to={nav.link}
-                className="text-lg font-medium hover:text-primary transition-colors"
-                onClick={() => setIsSidebarOpen(false)}
+                className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+                onClick={() => scrollToSection(nav.id)}
               >
                 {nav.name}
-              </Link>
+              </p>
             ))}
             {links.map((link, index) => (
               <Link

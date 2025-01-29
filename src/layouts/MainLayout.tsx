@@ -6,9 +6,8 @@ import { Outlet } from "react-router";
 const MainLayout: React.FC = () => {
   return (
     <div className="gap-10">
-      <div className="">
-        <Navbar />
-      </div>
+      <Navbar />
+
       <main className="bg-primary">
         <Outlet />
       </main>

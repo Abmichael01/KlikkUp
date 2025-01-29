@@ -28,7 +28,7 @@ const whys = [
 const WhyJoin: React.FC = () => {
   return (
     <MainPadding className="py-20 bg-gradient-to-br from-background to-primary/5">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto" id="why-join">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 fancy-font">
           Why{" "}
           <span className="text-primary relative">

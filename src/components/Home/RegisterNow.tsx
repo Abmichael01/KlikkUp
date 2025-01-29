@@ -13,7 +13,7 @@ const reasons = [
 const RegisterNow: React.FC = () => {
   return (
     <MainPadding className="bg-gradient-to-br from-primary to-primary-dark py-16">
-      <div className="flex flex-col lg:flex-row gap-12 items-center">
+      <div className="flex flex-col lg:flex-row gap-12 items-center" id="register-now">
         <div className="text-center flex flex-col lg:text-left w-full lg:w-1/2">
           <h2 className="fancy-font text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
             Register Now <br />
