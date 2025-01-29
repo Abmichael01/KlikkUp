@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router"
 import { GanttChartIcon as LucideChartNoAxesGantt, X } from "lucide-react"
 import Logo from "../Logo/Logo"
+import { scrollToSection } from "@/lib/scroller"
 
 const links = [
   {
@@ -51,20 +52,7 @@ const Navbar: React.FC = () => {
     }
   }, [isSidebarOpen])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 80 // Adjust this value to change the offset
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-      setIsSidebarOpen(false)
-    }
-  }
+  
 
   return (
     <>
@@ -75,7 +63,7 @@ const Navbar: React.FC = () => {
             <p
               key={index}
               className="text-s hover:text-primary transition-colors cursor-pointer"
-              onClick={() => scrollToSection(nav.id)}
+              onClick={() => {scrollToSection(nav.id); setIsSidebarOpen(false)}}
             >
               {nav.name}
             </p>
@@ -149,5 +137,5 @@ const Navbar: React.FC = () => {
   )
 }
 
-export default Navbar
+export default Navbar;
 

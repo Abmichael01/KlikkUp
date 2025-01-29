@@ -54,13 +54,6 @@ const Banner1: React.FC = () => {
               >
                 Get Started Now!
               </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent text-white py-3 px-8 rounded-full font-semibold border-2 border-white hover:bg-white hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-              >
-                Buy Coupon
-              </motion.button>
             </motion.div>
            
           </motion.div>

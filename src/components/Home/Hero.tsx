@@ -1,7 +1,7 @@
-import type React from "react"
-import { MousePointerClick, ArrowRight } from "lucide-react"
-import GlidingButton from "../ui/GlidingButton"
-import MainPadding from "@/layouts/MainPadding"
+import type React from "react";
+import { MousePointerClick, ArrowRight } from "lucide-react";
+import GlidingButton from "../ui/GlidingButton";
+import MainPadding from "@/layouts/MainPadding";
 
 const Hero: React.FC = () => {
   return (
@@ -14,12 +14,16 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto" id="hero">
+      <div
+        className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto"
+        id="hero"
+      >
         <h1 className="text-6xl xl:text-7xl font-bold font-exo mb-6 leading-tight">
-          Turn Your <span className="text-foreground">Time</span> Into <span className="text-foreground">Rewards</span>
+          Turn Your <span className="text-foreground">Time</span> Into{" "}
+          <span className="text-foreground">Rewards</span>
         </h1>
         <p className="text-xl mb-8 text-primary-foreground/80 max-w-2xl">
-          Start earning for the future. Join the biggest project to come and farm your way to success.
+          Earn Points. Convert to Tokens. Join the Future of Web3.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
@@ -33,8 +37,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
     </MainPadding>
-  )
-}
+  );
+};
 
-export default Hero
-
+export default Hero;

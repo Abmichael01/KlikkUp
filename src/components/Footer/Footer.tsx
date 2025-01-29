@@ -1,7 +1,9 @@
-import type React from "react"
-import Logo from "../Logo/Logo"
-import { Facebook, Twitter, Instagram, Linkedin, ChevronRight } from "lucide-react"
-import { Link } from "react-router"
+import type React from "react";
+import Logo from "../Logo/Logo";
+import { FaTelegram, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router";
+import { ChevronRight } from "lucide-react";
+import { scrollToSection } from "@/lib/scroller";
 
 const footerLinks = {
   QuickLinks: [
@@ -13,18 +15,12 @@ const footerLinks = {
     { title: "Contact", href: "/contact" },
     { title: "Buy Coupon", href: "/buy-coupon" },
   ],
-  Developer: [
-    { title: "Login", href: "/login" },
-    { title: "Sign Up", href: "/signup" },
-  ],
-}
+};
 
 const socialLinks = [
-  { icon: Facebook, href: "https://facebook.com" },
-  { icon: Twitter, href: "https://twitter.com" },
-  { icon: Instagram, href: "https://instagram.com" },
-  { icon: Linkedin, href: "https://linkedin.com" },
-]
+  { icon: FaTelegram, href: "https://twitter.com" },
+  { icon: FaWhatsapp, href: "https://instagram.com" },
+];
 
 const Footer: React.FC = () => {
   return (
@@ -35,7 +31,8 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <Logo />
             <p className="text-sm text-white/80 max-w-xs">
-              Turning your time into rewards. Join us in revolutionizing the way you engage with content.
+              Turning your time into rewards. Join us in revolutionizing the way
+              you engage with content.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link) => (
@@ -53,7 +50,9 @@ const Footer: React.FC = () => {
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category} className="space-y-4">
-              <h3 className="font-semibold text-lg text-secondary">{category}</h3>
+              <h3 className="font-semibold text-lg text-secondary">
+                {category}
+              </h3>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.title} className="w-fit">
@@ -66,25 +65,36 @@ const Footer: React.FC = () => {
                     </Link>
                   </li>
                 ))}
+                <li className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer" onClick={() => scrollToSection("faq")}>
+                  <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  FAQs
+                </li>
               </ul>
             </div>
           ))}
         </div>
         <div className="mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/60 flex flex-col sm:flex-row justify-between items-center">
-          <p>&copy; {new Date().getFullYear()} Klikk Up. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Klikk Up. All rights reserved.
+          </p>
           <div className="mt-4 sm:mt-0">
-            <Link to="/privacy-policy" className="hover:text-secondary transition-colors mr-4">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-secondary transition-colors mr-4"
+            >
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="hover:text-secondary transition-colors">
+            <Link
+              to="/terms-of-service"
+              className="hover:text-secondary transition-colors"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
-
+export default Footer;

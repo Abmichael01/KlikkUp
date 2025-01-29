@@ -42,7 +42,6 @@ const HowItWorks: React.FC = () => {
               className="bg-white rounded-lg p-6 shadow-lg transform transition-all duration-300 hover:scale-105"
             >
               <div className="flex items-center mb-4">
-                <div className="text-4xl mr-4">{step.icon}</div>
                 <h3 className="text-xl font-bold text-primary">{step.title}</h3>
               </div>
               <p className="text-gray-600">{step.description}</p>

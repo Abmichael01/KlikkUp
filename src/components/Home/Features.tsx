@@ -39,7 +39,7 @@ const Features: React.FC = () => {
         </div>
       </div>
       <div className="mt-3 sm:mt-5 md:mt-8 text-center flex justify-center">
-        <GlidingButton className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold text-sm md:text-base">
+        <GlidingButton className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold">
           <MousePointerClickIcon className="mr-2 h-6 w-6 sm:h-5 sm:w-5" />
           Sign up now!
         </GlidingButton>
