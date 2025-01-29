@@ -1,5 +1,5 @@
 import MainPadding from "@/layouts/MainPadding"
-import { ChevronRightCircle, Star } from "lucide-react"
+import { Star } from "lucide-react"
 import type React from "react"
 
 const whys = [
