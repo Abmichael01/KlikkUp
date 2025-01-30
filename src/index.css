@@ -62,53 +62,6 @@
   }
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes signal {
-  0% {
-    transform: scaleX(0);
-  }
-  50% {
-    transform: scaleX(1);
-  }
-  100% {
-    transform: scaleX(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 5s infinite;
-}
-
-.animate-fade-out {
-  animation: fade-out 5s infinite;
-}
-
-.animate-signal {
-  animation: signal 5s infinite;
-}
 
 @layer base {
   * {
@@ -130,28 +83,6 @@
     transition: all 0.5s linear;
   }
 
-  @keyframes shake {
-    0% {
-      transform: translateX(0);
-    }
-    25% {
-      transform: translateX(-5px);
-    }
-    50% {
-      transform: translateX(5px);
-    }
-    75% {
-      transform: translateX(-5px);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
 
-  .shake {
-    display: inline-block; /* Optional: Ensure the element fits nicely */
-    animation: shake 0.5s ease-in-out; /* Adjust duration as needed */
-    animation-iteration-count: 1; /* Shake once */
-  }
 }
 

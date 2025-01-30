@@ -12,6 +12,8 @@ import Tasks from "./pages/Dashboard/Tasks";
 import Stories from "./pages/Dashboard/Stories";
 import Airdrop from "./pages/Dashboard/Airdrop";
 import Roadmap from "./pages/Dashboard/Roadmap";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,10 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
+          {/* <Route index element={<Home />} /> */}
+          
         </Route>
         <Route element={<DashboardLayout />}>
           <Route  path="/dashboard" element={<Dashboard />} />

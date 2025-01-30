@@ -2,6 +2,7 @@ import type React from "react";
 import { MousePointerClick, ArrowRight } from "lucide-react";
 import GlidingButton from "../ui/GlidingButton";
 import MainPadding from "@/layouts/MainPadding";
+import { Link } from "react-router";
 
 const Hero: React.FC = () => {
   return (
@@ -26,14 +27,18 @@ const Hero: React.FC = () => {
           Earn Points. Convert to Tokens. Join the Future of Web3.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
-            <MousePointerClick className="mr-2" />
-            Get Started Now!
-          </GlidingButton>
-          <GlidingButton className="px-8 py-3 text-primary-foreground font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
-            Login Now
-            <ArrowRight className="ml-2" />
-          </GlidingButton>
+          <Link to="/auth/register">
+            <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
+              <MousePointerClick className="mr-2" />
+              Get Started Now!
+            </GlidingButton>
+          </Link>
+          <Link to="/auth/login">
+            <GlidingButton className="px-8 py-3 text-primary-foreground font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
+              Login Now
+              <ArrowRight className="ml-2" />
+            </GlidingButton>
+          </Link>
         </div>
       </div>
     </MainPadding>

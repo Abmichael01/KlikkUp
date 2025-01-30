@@ -1,9 +1,16 @@
-import { AlignEndVerticalIcon, BrainIcon, MousePointerClickIcon, Video } from "lucide-react"
-import type React from "react"
-import GlidingButton from "../ui/GlidingButton"
-import MainPadding from "@/layouts/MainPadding"
+import {
+  AlignEndVerticalIcon,
+  BrainIcon,
+  MousePointerClickIcon,
+  Video,
+} from "lucide-react";
+import type React from "react";
+import GlidingButton from "../ui/GlidingButton";
+import MainPadding from "@/layouts/MainPadding";
+import { Link } from "react-router";
 
-const iconsClassName = "w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-primary-foreground"
+const iconsClassName =
+  "w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-primary-foreground";
 
 const features = [
   {
@@ -18,7 +25,7 @@ const features = [
     icon: <BrainIcon className={iconsClassName} />,
     name: "Solve Riddles",
   },
-]
+];
 
 const Features: React.FC = () => {
   return (
@@ -30,7 +37,9 @@ const Features: React.FC = () => {
               key={index}
               className="flex flex-row sm:flex-col items-center gap-2 sm:gap-3 md:gap-4 bg-primary-foreground/10 rounded-lg sm:rounded-xl p-2 sm:p-4 md:p-6 backdrop-blur-sm transition-all duration-300 hover:bg-primary-foreground/20 px-3 py-3"
             >
-              <div className="p-2 sm:p-3 md:p-4 bg-primary-foreground/20 rounded-full">{feature.icon}</div>
+              <div className="p-2 sm:p-3 md:p-4 bg-primary-foreground/20 rounded-full">
+                {feature.icon}
+              </div>
               <p className="text-center text-nowrap text-sm sm:text-lg md:text-lg font-medium sm:font-semibold text-primary-foreground">
                 {feature.name}
               </p>
@@ -39,14 +48,15 @@ const Features: React.FC = () => {
         </div>
       </div>
       <div className="mt-3 sm:mt-5 md:mt-8 text-center flex justify-center">
-        <GlidingButton className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold">
-          <MousePointerClickIcon className="mr-2 h-6 w-6 sm:h-5 sm:w-5" />
-          Sign up now!
-        </GlidingButton>
+        <Link to="/auth/register">
+          <GlidingButton className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold">
+            <MousePointerClickIcon className="mr-2 h-6 w-6 sm:h-5 sm:w-5" />
+            Sign up now!
+          </GlidingButton>
+        </Link>
       </div>
     </MainPadding>
-  )
-}
+  );
+};
 
-export default Features
-
+export default Features;
