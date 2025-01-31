@@ -31,8 +31,8 @@ const RegisterNow: React.FC = () => {
             Join our community today and start earning rewards for your time and
             engagement!
           </p>
-          <Link to="/auth/register">
-            <GlidingButton className="px-8 py-3 bg-secondary self-center md:self-start hover:bg-secondary/90 text-secondary-foreground font-semibold text-lg">
+          <Link to="/auth/register" className="self-center md:self-start">
+            <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold text-lg">
               Get Started Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </GlidingButton>
