@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
         <p className="text-xl mb-8 text-primary-foreground/80 max-w-2xl">
           Earn Points. Convert to Tokens. Join the Future of Web3.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
           <Link to="/auth/register">
             <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
               <MousePointerClick className="mr-2" />
