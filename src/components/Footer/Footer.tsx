@@ -1,8 +1,8 @@
 import type React from "react";
 import Logo from "../Logo/Logo";
-import { FaTelegram, FaWhatsapp } from "react-icons/fa";
+import { FaTelegram, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Contact2Icon, Mail, Phone } from "lucide-react";
 import { scrollToSection } from "@/lib/scroller";
 
 const footerLinks = {
@@ -12,15 +12,14 @@ const footerLinks = {
     { title: "Features", href: "/features" },
   ],
   Support: [
-    { title: "Contact", href: "/contact" },
     { title: "Buy Coupon", href: "/buy-coupon" },
     { title: "FAQs", href: "" },
   ],
 };
 
 const socialLinks = [
-  { icon: FaTelegram, href: "https://twitter.com" },
-  { icon: FaWhatsapp, href: "https://instagram.com" },
+  { icon: FaTelegram, href: "https://t.me/klikkup_official_channel" },
+  { icon: FaWhatsapp, href: "https://chat.whatsapp.com/E1QiSjaXU1l0pmZ8pqP4bW" },
 ];
 
 const Footer: React.FC = () => {
@@ -35,19 +34,10 @@ const Footer: React.FC = () => {
               Turning your time into rewards. Join us in revolutionizing the way
               you engage with content.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-secondary transition-colors p-2 bg-white/10 rounded-full"
-                >
-                  <link.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
+            <p>
+              <strong>NOTE:</strong> This farming system is exclusive for
+              Nigerians only
+            </p>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category} className="space-y-4">
@@ -80,6 +70,54 @@ const Footer: React.FC = () => {
               </ul>
             </div>
           ))}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg text-secondary">Contact</h3>
+            <Link
+              className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer"
+              to="/contact"
+            >
+              <Contact2Icon className="w-4 h-4 mr-2 group-hover:opacity-100 transition-opacity" />
+              Contact Us
+            </Link>
+            <Link
+              className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer"
+              to="https://t.me/+72i90rxMY-VkODdk"
+            >
+              <FaTelegramPlane className="w-4 h-4 mr-2 group-hover:opacity-100 transition-opacity" />
+              Telegram Support
+            </Link>
+            <Link
+              className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer"
+              to="mailto:klikkuphelp@gmail.com"
+              target="_blank"
+            >
+              <Mail className="w-4 h-4 mr-2 group-hover:opacity-100 transition-opacity" />
+              klikkuphelp@gmail.com
+            </Link>
+
+            <Link
+              className="text-sm hover:text-secondary transition-colors flex items-center group cursor-pointer"
+              to="tel:+2348120770749"
+              target="_blank"
+            >
+              <Phone className="w-4 h-4 mr-2 group-hover:opacity-100 transition-opacity" />
+              +234 812 077 0749
+            </Link>
+
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-secondary transition-colors p-2 bg-white/10 rounded-full"
+                >
+                  <link.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/60 flex flex-col sm:flex-row justify-between items-center">
           <p>
