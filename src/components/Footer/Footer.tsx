@@ -22,7 +22,7 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "https://chat.whatsapp.com/E1QiSjaXU1l0pmZ8pqP4bW" },
 ];
 
-const Footer: React.FC = () => {
+const Footer: React.FC = () => { 
   return (
     <footer className="bg-black bg-opacity-80 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-primary opacity-10 blur-3xl"></div>
