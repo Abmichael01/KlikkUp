@@ -87,13 +87,13 @@ const Footer: React.FC = () => {
           </p>
           <div className="mt-4 sm:mt-0">
             <Link
-              to="/privacy-policy"
+              to="/privacy-policy?section=privacy"
               className="hover:text-secondary transition-colors mr-4"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/terms-of-service"
+              to="/privacy-policy?section=terms"
               className="hover:text-secondary transition-colors"
             >
               Terms of Service

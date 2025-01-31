@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { GanttChartIcon as LucideChartNoAxesGantt, X } from "lucide-react"
 import Logo from "../Logo/Logo"
 import { scrollToSection } from "@/lib/scroller"
@@ -39,6 +39,7 @@ const navs = [
 
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isSidebarOpen) {
@@ -52,6 +53,21 @@ const Navbar: React.FC = () => {
     }
   }, [isSidebarOpen])
 
+  const navigator = (id: string) => {
+    // Check if the current path is not the home page
+    if (window.location.pathname !== '/') {
+      // Navigate to the home page
+      navigate('/');
+    }
+  
+    // After navigating to the home page, scroll to the section with the given ID
+    setTimeout(() => {
+      navigate(`/#${id}`);
+      setIsSidebarOpen(false);
+      scrollToSection(id);
+    }, 200); // Use a minimal delay to ensure the navigation to the home page completes
+  };
+
   
 
   return (
@@ -63,7 +79,7 @@ const Navbar: React.FC = () => {
             <p
               key={index}
               className="text-s hover:text-primary transition-colors cursor-pointer"
-              onClick={() => {scrollToSection(nav.id); setIsSidebarOpen(false)}}
+              onClick={() => navigator(nav.id)}
             >
               {nav.name}
             </p>
@@ -115,7 +131,7 @@ const Navbar: React.FC = () => {
               <p
                 key={index}
                 className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
-                onClick={() => scrollToSection(nav.id)}
+                onClick={() => navigator(nav.id)}
               >
                 {nav.name}
               </p>
