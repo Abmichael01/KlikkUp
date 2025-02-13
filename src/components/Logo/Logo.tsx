@@ -7,16 +7,22 @@ import { Link } from "react-router";
 interface LogoProps {
   className?: string;
   white?: boolean;
+  icon?: boolean;
+  size?: number;
 }
 
-const Logo: React.FC<LogoProps> = ({ className, white }) => {
+const Logo: React.FC<LogoProps> = ({ className, white, icon, size }) => {
+  icon = white ? true : icon;
   return (
-    <Link to="/" className="flex items-center gap-1 text-2xl fancy-font">
+    <Link to="/" className={cn(
+      "flex items-center gap-1 text-2xl fancy-font",
+      className
+    )} >
       {white 
-      ? <img src={logo2Img} alt="logo" className="w-[28px] h-[28px]" />
-      : <img src={logoImg} alt="logo" className="w-[28px] h-[28px]" />
+      ? <img src={logo2Img} alt="logo" width={size ? size : 40} height={size ? size : 40} />
+      : <img src={logoImg} alt="logo" width={size ? size : 40} height={size ? size : 40} />
     }
-      {!white && (
+      {!icon && (
         <span className={cn("font-bold text-primary", className)}>KlikkUp</span>
       )}
     </Link>

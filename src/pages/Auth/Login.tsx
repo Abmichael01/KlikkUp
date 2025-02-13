@@ -10,15 +10,17 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Link } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { Eye, LockIcon, User } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
+import { useLogin } from "@/api/mutations";
+import { LoginData } from "@/types";
+import { useAuthStore } from "@/stores/useAuthStore"
+import { getUser } from "@/api/apiEndpoints";
 
 const formSchema = z.object({
   username: z.string().optional(),
-  password: z
-    .string()
-    .optional()
+  password: z.string().optional(),
 });
 
 type FormField = {
@@ -27,7 +29,7 @@ type FormField = {
   placeholder: string;
   type: string;
   required: boolean;
-  icon: React.ReactNode
+  icon: React.ReactNode;
 };
 
 const formFields: FormField[] = [
@@ -56,13 +58,27 @@ const Login: React.FC = () => {
       username: "",
     },
   });
+  const { mutate, isPending } = useLogin();
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    mutate(values as LoginData, {
+      onSuccess: async () => {
+        const user = await getUser();
+        console.log(user);
+        setUser(user);
+        navigate(from);
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   }
+
   return (
     <Form {...form}>
       <form
@@ -101,14 +117,16 @@ const Login: React.FC = () => {
             )}
           />
         ))}
-        <GlidingButton>LOGIN</GlidingButton>
+        <GlidingButton isLoading={isPending}>LOGIN</GlidingButton>
         <div className="text-center text-white">
           <span>Don't have an account? </span>
           <Link to="/auth/register" className="font-semibold">
             Register
           </Link>
         </div>
-        <Link to="#" className="text-white font-semibold text-sm text-center">Forgot Password?</Link>
+        <Link to="#" className="text-white font-semibold text-sm text-center">
+          Forgot Password?
+        </Link>
       </form>
     </Form>
   );

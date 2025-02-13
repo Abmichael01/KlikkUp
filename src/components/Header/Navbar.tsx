@@ -40,6 +40,7 @@ const navs = [
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const navigate = useNavigate()
+  
 
   useEffect(() => {
     if (isSidebarOpen) {

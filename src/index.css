@@ -83,6 +83,22 @@
     transition: all 0.5s linear;
   }
 
+  .editor-wrapper .ql-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .editor-wrapper .ql-toolbar {
+    flex-shrink: 0;
+  }
+  
+  .editor-wrapper .ql-editor {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 250px;
+  }
+  
+
 
 }
 
