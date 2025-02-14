@@ -15,7 +15,7 @@ export const register = async (credentials: RegisterData) => {
 
 export const login = async (credentials: LoginData) => {
   try {
-    const response = await apiClient.post("/token/", credentials);
+    const response = await apiClient.post("/login/", credentials);
     return response.data;
   } catch (error) {
     console.error("Login failed:", error);

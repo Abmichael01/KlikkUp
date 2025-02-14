@@ -29,7 +29,7 @@ function getCsrfToken() {
 // Refresh token function
 const refreshAccessToken = async () => {
   const response = await axios.post(
-    "http://localhost:8000/api/v1/token/refresh/",
+    `${import.meta.env.VITE_BASE_URL}/token/refresh/`,
     {},
     {
       withCredentials: true, // ✅ Ensure refresh request includes cookies
