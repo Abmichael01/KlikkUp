@@ -15,10 +15,9 @@ import { Eye, LockIcon, User } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useLogin } from "@/api/mutations";
 import { LoginData } from "@/types";
-import { useAuthStore } from "@/stores/useAuthStore";
-import { getUser } from "@/api/apiEndpoints";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
 import { AxiosError } from "axios";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const formSchema = z.object({
   username: z.string().optional(),
@@ -61,7 +60,7 @@ const Login: React.FC = () => {
     },
   });
   const { mutate, isPending } = useLogin();
-  const setUser = useAuthStore((state) => state.setUser);
+  const { setUser } = useAuthStore()
   const navigate = useNavigate();
   const location = useLocation();
   const toastMessage = useMessageToaster();
@@ -71,11 +70,11 @@ const Login: React.FC = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     mutate(values as LoginData, {
-      onSuccess: async () => {
-        const user = await getUser();
-        console.log(user);
-        setUser(user);
+      onSuccess: async (data) => {
+        setUser(data.user)
         navigate(from);
+        console.log(data)
+
       },
       onError: (error) => {
         const errorMessages = (error as AxiosError)?.response?.data as Record<

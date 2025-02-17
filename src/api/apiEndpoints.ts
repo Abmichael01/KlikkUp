@@ -1,10 +1,11 @@
 import { Coupon, LoginData, RegisterData, Story, Task, User } from "@/types";
 import apiClient from "./apiClient";
+import axios from  "axios"
 
 // Authentication Endpoints
 export const register = async (credentials: RegisterData) => {
   try {
-    const response = await apiClient.post("/register/", credentials);
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/register/`, credentials);
     return response.data;
   } catch (error) {
     console.error("Login failed:", error);
@@ -15,7 +16,7 @@ export const register = async (credentials: RegisterData) => {
 
 export const login = async (credentials: LoginData) => {
   try {
-    const response = await apiClient.post("/login/", credentials);
+    const response = await apiClient.post(`/login/`, credentials);
     return response.data;
   } catch (error) {
     console.error("Login failed:", error);

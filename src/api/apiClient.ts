@@ -6,25 +6,12 @@ const apiClient = axios.create({
   withCredentials: true, // ✅ Ensures cookies (access & refresh tokens) are sent
   headers: {
     "Content-Type": "application/json",
-    "X-CSRFToken": getCsrfToken(), // ✅ Include CSRF token in requests
   },
   timeout: 30000, // 30 seconds timeout for API requests
 });
 
 // Function to get CSRF token from cookies
-function getCsrfToken() {
-  const name = "csrftoken=";
-  const decodedCookies = decodeURIComponent(document.cookie).split(";");
-  console.log(decodedCookies);
-  for (let cookie of decodedCookies) {
-    cookie = cookie.trim();
-    if (cookie.startsWith(name)) {
-      console.log(cookie.substring(name.length))
-      return cookie.substring(name.length);
-    }
-  }
-  return "";
-}
+
 
 // Refresh token function
 const refreshAccessToken = async () => {
