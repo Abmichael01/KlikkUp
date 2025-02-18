@@ -45,8 +45,8 @@ const App: React.FC = () => {
 
         {/* Dashboard Layout */}
         <Route element={<ProtectedRoute allowedRoles={[1, 2, 3]} />}>
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
+          <Route  element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="invite" element={<Invite />} />
             <Route path="tasks" element={<Tasks />} />
             <Route path="stories" element={<Stories />} />

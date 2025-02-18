@@ -3,14 +3,12 @@ import { useAuthStore } from "@/stores/useAuthStore";
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true, // ✅ Ensures cookies (access & refresh tokens) are sent
+  withCredentials: true, 
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 30000, // 30 seconds timeout for API requests
+  timeout: 30000, 
 });
-
-// Function to get CSRF token from cookies
 
 
 // Refresh token function
@@ -19,10 +17,10 @@ const refreshAccessToken = async () => {
     `${import.meta.env.VITE_BASE_URL}/token/refresh/`,
     {},
     {
-      withCredentials: true, // ✅ Ensure refresh request includes cookies
+      withCredentials: true, 
     }
   );
-  return response.data; // New access token will be set in cookies
+  return response.data; 
 };
 
 // Interceptor to handle 401 errors

@@ -120,7 +120,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
       <div className=" rounded-md border overflow-hidden w-full">
-        <div className="min-w-[900px]">
+        <div className="">
           <Table className="w-full">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

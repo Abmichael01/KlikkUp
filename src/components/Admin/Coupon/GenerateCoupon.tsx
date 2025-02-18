@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useGenerateCoupon } from "@/api/mutations";
 import { useToast } from "@/hooks/use-toast";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import { useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
     amount: z.coerce.number().min(1)
@@ -30,15 +31,17 @@ const GenerateCoupon: React.FC = () => {
   });
   const { mutate, isPending } = useGenerateCoupon();
   const { toast } = useToast();
+  const queryClient = useQueryClient()
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     mutate(values.amount, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         toast({
           title: "Coupon Generation Successful",
-          description: `Generated ${data.length} coupons`,
+          description: `Generated ${values.amount} coupons`,
         })
+        queryClient.invalidateQueries({ queryKey: ["coupons"] }) // Invalidate coupons query after successful coupon generation
       },
       onError: (error) => {
         console.error("Error generating coupons:", error);
