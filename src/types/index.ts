@@ -1,9 +1,10 @@
 export type User = {
-  id: number;
+  id?: number;
   username: string;
   email: string;
-  isAdmin: boolean;
-  roles: number[];
+  is_admin?: boolean;
+  is_staff?: boolean;
+  roles?: number[];
 };
 
 export type RegisterData = {

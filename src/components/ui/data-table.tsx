@@ -29,6 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { ScrollArea, ScrollBar } from "./scroll-area";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -71,7 +72,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <>
+    <div className="w-full">
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -119,8 +120,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className=" rounded-md border overflow-hidden w-full">
-        <div className="">
+      <ScrollArea className="rounded-md border-b w-full pb-3 whitespace-nowrap">
+        <ScrollBar orientation="horizontal" />
+        <div className="border rounded-md text-nowrap">
           <Table className="w-full">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -168,7 +170,7 @@ export function DataTable<TData, TValue>({
             </TableBody>
           </Table>
         </div>
-      </div>
+      </ScrollArea>
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
@@ -188,7 +190,7 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 

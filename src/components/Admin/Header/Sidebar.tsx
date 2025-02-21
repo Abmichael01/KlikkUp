@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router"; // Note: Changed to react-rout
 
 const navs = [
   { icon: LayoutDashboard, name: "Dashboard", path: "/admin/dashboard" },
-  { icon: Users, name: "Users", path: "/" },
+  { icon: Users, name: "Users", path: "/admin/users" },
   { icon: Ticket, name: "Coupon", path: "/admin/coupon" },
   { icon: ClipboardList, name: "Tasks", path: "/admin/tasks" },
   { icon: BookOpen, name: "Stories", path: "/admin/stories" },
@@ -22,11 +22,11 @@ const Sidebar: React.FC = () => {
   return (
     <div
       className={cn(
-        "md:border-r h-[100vh] flex-col py-5 bg-white items-center gap-10 px-3 md:sticky fixed  flex-shrink-0 top-0 right-[-300px] md:left-0 transition-all duration-500 md:flex z-[999] border-l",
+        "lg:border-r h-[100vh] flex-col py-5 bg-white items-center gap-10 px-3 lg:sticky fixed flex-shrink-0 top-0 right-[-300px] lg:left-0 transition-all duration-500 flex z-[5] border-l",
         isOpen ? "w-[200px] right-0" : "w-[70px] right-[-300px]"
       )}
     >
-      <div className="flex items-center gap-3 w-full">
+      <div className="flex items-center gap-3 w-full relative z-[1]">
         <div className="flex-shrink-0">
           <Logo icon size={40} />
         </div>
@@ -65,6 +65,11 @@ const Sidebar: React.FC = () => {
           </Link>
         ))}
       </div>
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 z-[-1]">
+
+        </div>
+      )}
     </div>
   );
 };

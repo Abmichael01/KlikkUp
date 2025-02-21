@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useAuthStore } from "@/stores/useAuthStore"
 import { Navigate, useLocation, Outlet } from "react-router"
 import { useToast } from "@/hooks/use-toast"
+import PageLoading from "@/components/PageLoading"
 
 interface ProtectedRouteProps {
   allowedRoles?: number[]
@@ -29,7 +30,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles = [] }) =>
   }, [isLoading, isAuthenticated, logout, toast])
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return <PageLoading />
   }
 
   if (!isAuthenticated || !user) {

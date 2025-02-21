@@ -6,9 +6,9 @@ const AdminLayout: React.FC = () => {
   return (
       <div className="flex relative">
       <Sidebar />
-      <div className="flex-grow">
+      <div className="w-full">
         <Navbar />
-        <div className=" sm:p-6 pb-40 p-3 space-y-6  min-h-screen">
+        <div className=" sm:p-6 pb-40 p-3 space-y-6  min-h-screen w-full">
           <Outlet />
         </div>
       </div>

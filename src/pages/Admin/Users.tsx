@@ -8,29 +8,29 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ClipboardList } from "lucide-react";
-import Table from "@/components/Admin/Stories/Table";
-import AddEditStory from "@/components/Admin/Stories/AddEditStory";
+import Table from "@/components/Admin/Users/Table";
+import AddUser from "@/components/Admin/Users/AddUser";
 import { useDialog } from "@/hooks/useDialog";
 
-const StoriesManagement: React.FC = () => {
-  const { open, setOpen } = useDialog("addStory");
+const UsersManagement: React.FC = () => {
+  const { open, setOpen } = useDialog("addUser");
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <div className="flex flex-col sm:flex-row items-start gap-5 justify-between sm:items-center">
-        <h1 className="text-3xl font-semibold fancy-font">Stories Management</h1>
+        <h1 className="sm:text-3xl text-2xl  font-semibold fancy-font">Users Management</h1>
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
-            <GlidingButton className="text-sm px-5 bg-secondary">
+            <GlidingButton className="text-sm px-5 bg-pink-600">
               <ClipboardList />
-              New Story
+              New User
             </GlidingButton>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Add a New Story</DialogTitle>
+              <DialogTitle>Add a New User</DialogTitle>
             </DialogHeader>
-            <AddEditStory />
+            <AddUser />
           </DialogContent>
         </Dialog>
       </div>
@@ -39,4 +39,4 @@ const StoriesManagement: React.FC = () => {
   );
 };
 
-export default StoriesManagement;
+export default UsersManagement;

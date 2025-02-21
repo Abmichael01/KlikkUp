@@ -21,6 +21,7 @@ import Coupon from "./pages/Admin/Coupon";
 import TasksManagement from "./pages/Admin/Tasks";
 import ProtectedRoute from "./layouts/ProtectedRoutesLayout";
 import StoriesManagement from "./pages/Admin/Stories";
+import UsersManagement from "./pages/Admin/Users";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -64,6 +65,7 @@ const App: React.FC = () => {
         <Route element={<ProtectedRoute allowedRoles={[1]} />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="users" element={<UsersManagement />} />
             <Route path="coupon" element={<Coupon />} />
             <Route path="tasks" element={<TasksManagement />} />
             <Route path="stories" element={<StoriesManagement />} />

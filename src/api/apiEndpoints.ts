@@ -44,6 +44,26 @@ export const getUser = async () => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await apiClient.get("/users/");
+    return response.data as User[];
+  } catch (error) {
+    console.error("Fetching users failed:", error);
+    throw error;
+  }
+};
+
+export const updateUser = async (data: User) => {
+  try {
+    const response = await apiClient.patch(`/users/${data.id}/update/`, data);
+    return response.data as User;
+  } catch (error) {
+    console.error("Update user failed:", error);
+    throw error;
+  }
+};
+
 export const generateCoupon = async (amount: number) => {
   try {
     const response = await apiClient.post("/coupons/", {amount});

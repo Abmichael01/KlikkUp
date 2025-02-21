@@ -1,7 +1,7 @@
-import { Task } from "@/types";
-import React from "react";
-import { Edit, MoreHorizontal, Trash2Icon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import type { User } from "@/types"
+import type React from "react"
+import { Edit, MoreHorizontal, Trash2Icon } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,34 +9,28 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent, 
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import AddEditTask from "./AddEditTask";
-import { useDialog } from "@/hooks/useDialog";
-import { Alert } from "@/components/Alert";
-import { useDeleteTask } from "@/api/mutations";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { useQueryClient } from "@tanstack/react-query";
+} from "@/components/ui/dropdown-menu"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import EditUser from "./EditUser"
+// import { useDialog } from "@/hooks/useDialog"
+import { Alert } from "@/components/Alert"
+import { useDeleteUser } from "@/api/mutations"
+import { useMessageToaster } from "@/hooks/useMessageToaster"
+import { useQueryClient } from "@tanstack/react-query"
 
 interface ActionsProps {
-  task: Task;
+  user: User
 }
 
-const Actions: React.FC<ActionsProps> = ({ task }) => {
-  const { open, setOpen } = useDialog("updateTask");
-  const { mutate: deleteTask } = useDeleteTask();
-  const toastMessage = useMessageToaster();
-  const queyClient = useQueryClient();
+const Actions: React.FC<ActionsProps> = ({ user }) => {
+  // const { open, setOpen } = useDialog("editUser")
+  const { mutate: deleteUser } = useDeleteUser()
+  const toastMessage = useMessageToaster()
+  const queryClient = useQueryClient()
 
   return (
     <div>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -56,25 +50,25 @@ const Actions: React.FC<ActionsProps> = ({ task }) => {
 
             <DropdownMenuSeparator />
             <Alert
-              title="Delete Task"
-              description="Are you sure you want to delete this task?"
+              title="Delete User"
+              description="Are you sure you want to delete this user?"
               type="confirm"
               confirmText="Delete"
               onConfirm={() => {
-                deleteTask(task.id as number, {
+                deleteUser(user.id as number, {
                   onSuccess: () => {
                     toastMessage({
-                      message: "Task deleted successfully",
-                    });
-                    queyClient.invalidateQueries({ queryKey: ["tasks"] });
+                      message: "User deleted successfully",
+                    })
+                    queryClient.invalidateQueries({ queryKey: ["users"] })
                   },
                   onError: () => {
                     toastMessage({
-                      message: "An error occurred while deleting task",
+                      message: "An error occurred while deleting user",
                       type: "error",
-                    });
+                    })
                   },
-                });
+                })
               }}
               trigger={
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
@@ -87,13 +81,14 @@ const Actions: React.FC<ActionsProps> = ({ task }) => {
         </DropdownMenu>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add a New Task</DialogTitle>
+            <DialogTitle>Edit User Details</DialogTitle>
           </DialogHeader>
-          <AddEditTask data={task} update={true} />
+          <EditUser data={user} />
         </DialogContent>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default Actions;
+export default Actions
+

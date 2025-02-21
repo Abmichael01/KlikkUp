@@ -9,15 +9,13 @@ interface LogoProps {
   white?: boolean;
   icon?: boolean;
   size?: number;
+  noLink?: boolean
 }
 
-const Logo: React.FC<LogoProps> = ({ className, white, icon, size }) => {
+const Logo: React.FC<LogoProps> = ({ className, white, icon, size, noLink }) => {
   icon = white ? true : icon;
   return (
-    <Link to="/" className={cn(
-      "flex items-center gap-1 text-2xl fancy-font",
-      className
-    )} >
+    <Link to={noLink ? "#" : "/"} className={cn(className, "flex items-center gap-1 text-2xl fancy-font")}>
       {white 
       ? <img src={logo2Img} alt="logo" width={size ? size : 40} height={size ? size : 40} />
       : <img src={logoImg} alt="logo" width={size ? size : 40} height={size ? size : 40} />
