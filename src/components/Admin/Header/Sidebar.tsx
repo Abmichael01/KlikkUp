@@ -66,7 +66,7 @@ const Sidebar: React.FC = () => {
         ))}
       </div>
       {isOpen && (
-        <div className="fixed inset-0 bg-black/50 z-[-1]">
+        <div className="fixed inset-0 bg-black/50 z-[-1] hidden">
 
         </div>
       )}
