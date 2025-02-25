@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { isMobileOnly } from "react-device-detect";
 
 type SidebarStore = {
   isOpen: boolean
@@ -7,10 +6,9 @@ type SidebarStore = {
   close: () => void
 }
 
-const isOpenVal = isMobileOnly ? false : true;
 
 export const useSidebarStore = create<SidebarStore>((set) => ({
-  isOpen:  isOpenVal,
+  isOpen:  false,
   toggle: () => set((state) => ({ isOpen: !state.isOpen })),
   close: () => set({ isOpen: false }),
 }))
