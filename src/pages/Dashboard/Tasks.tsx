@@ -176,7 +176,7 @@ const Tasks: React.FC = () => {
       {/* Search and Filter */}
       <Card className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-grow">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-blue-300" />
               <Input
