@@ -6,7 +6,7 @@ import { Outlet } from "react-router";
 
 const DashboardLayout: React.FC = () => {
   return (
-    <div className="flex relative bg-primary">
+    <div className="flex relative bg-gray-100 dark:bg-gray-800">
       <Sidebar />
       <Taskbar />
       <div className="flex-grow">

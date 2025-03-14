@@ -22,7 +22,7 @@ const AuthLayout: React.FC = () => {
           <div className="absolute top-0 right-[-50px] h-[60%] w-[100px] rotate-[40deg] bg-gradient-to-b from-white/80 to-primary z-0 auth-gradient"></div>
 
           {/* Form container */}
-          <div className="relative z-10 mt-24 flex flex-col gap-5 items-center">
+          <div className="relative z-10 mt-24 flex flex-col gap-5 items-center ">
             <div className="scale-[2]">
               <Logo white={true} />
             </div>

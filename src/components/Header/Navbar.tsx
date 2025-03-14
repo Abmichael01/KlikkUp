@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className="px-5 lg:px-10 py-5 border flex items-center justify-between sticky top-0 z-[999] bg-white">
+      <div className="px-5 lg:px-10 py-5 flex items-center justify-between sticky top-0 z-[999] bg-gray-200 backdrop-blur-lg bg-opacity-60">
         <Logo />
         <div className="hidden lg:flex gap-10 items-center">
           {navs.map((nav, index) => (

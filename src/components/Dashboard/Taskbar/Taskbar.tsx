@@ -29,7 +29,7 @@ const Taskbar: React.FC = () => {
             to={nav.path}
           key={index}
           className={cn(
-            "flex flex-col items-center gap-2 w-fit hover:text-primary/70 rounded-lg cursor-pointer overflow-hidden",
+            "flex flex-col items-center gap-2 w-fit hover:text-primary/70 cursor-pointer overflow-hidden",
             nav.path.includes(location.pathname) &&
               "text-primary"
           )}
