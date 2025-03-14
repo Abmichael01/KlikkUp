@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Youtube, CheckCircle, Clock, TrendingUp, Filter, Search, Star, ChevronRight } from "lucide-react"
+import { Youtube, CheckCircle, Clock, TrendingUp, Search, Star, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
