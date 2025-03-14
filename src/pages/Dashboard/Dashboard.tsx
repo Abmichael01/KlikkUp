@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
                 className="flex-grow rounded-md border border-white/20 bg-white/10 p-2 text-white"
                 readOnly
               />
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/20">
+              <Button className="bg-secondary hover:bg-secondary/90">
                 <CopyIcon className="h-5 w-5" />
               </Button>
             </div>
