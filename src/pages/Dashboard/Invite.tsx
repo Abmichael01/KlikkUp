@@ -137,12 +137,9 @@ const Invite: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-blue-900/50 rounded-lg border border-white/10 p-4 h-full">
+            <div className="flex flex-row justify-between items-start sm:items-center gap-2 bg-blue-900/50 rounded-lg border border-white/10 p-4 h-full">
               <div>
                 <p className="text-sm text-blue-300">Referral Link</p>
-                <p className="text-sm font-mono font-bold tracking-wider text-wrap">
-                  https://urkelcodes.com/invite/{referralCode}
-                </p>
               </div>
               <Button
                 className="bg-secondary hover:bg-secondary/90 text-white float-right"
