@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="w-[61px] hover:w-[200px] border-r h-[100vh] flex-col gap-5 bg-background items-center justify-center px-2 sticky top-0 left-0 group transition-all duration-500 hidden md:flex">
+    <div className="w-[61px] hover:w-[200px] border-r h-[100vh] flex-col gap-5 bg-blue- items-center justify-center px-2 sticky top-0 left-0 group transition-all duration-500 hidden md:flex">
       {navs.map((nav, index) => (
         <Link
           to={nav.path}

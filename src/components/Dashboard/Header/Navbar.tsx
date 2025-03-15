@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
         <Logo icon />
       </div>
 
+      <div className="flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer" asChild>
           <div className="flex gap-1 items-center ">
@@ -43,6 +44,7 @@ const Navbar: React.FC = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      </div>
     </div>
   );
 };
