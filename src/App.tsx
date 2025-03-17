@@ -9,7 +9,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Invite from "./pages/Dashboard/Invite";
 import Tasks from "./pages/Dashboard/Tasks";
-import Stories from "./pages/Dashboard/Stories";
+import Stories from "./pages/Dashboard/Stories/Stories";
 import Airdrop from "./pages/Dashboard/Airdrop";
 import Roadmap from "./pages/Dashboard/Roadmap";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -22,6 +22,7 @@ import TasksManagement from "./pages/Admin/Tasks";
 import ProtectedRoute from "./layouts/ProtectedRoutesLayout";
 import StoriesManagement from "./pages/Admin/Stories";
 import UsersManagement from "./pages/Admin/Users";
+import Story from "./pages/Dashboard/Stories/Story";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -51,6 +52,7 @@ const App: React.FC = () => {
             <Route path="invite" element={<Invite />} />
             <Route path="tasks" element={<Tasks />} />
             <Route path="stories" element={<Stories />} />
+            <Route path="story/:id" element={<Story />} />
             <Route path="airdrop" element={<Airdrop />} />
             <Route path="roadmap" element={<Roadmap />} />
           </Route>

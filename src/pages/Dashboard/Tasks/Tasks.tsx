@@ -14,83 +14,83 @@ import TaskCard from "@/components/Dashboard/Tasks/TaskCard"
 const tasks = [
   {
     id: 1,
-    title: "Watch Product Tutorial",
-    description: "Learn how to use our platform effectively",
-    points: 2000,
-    difficulty: "Easy",
-    estimatedTime: "5 min",
+    title: "Complete Profile",
+    description: "Fill out your profile information",
+    points: 500,
+    dueDate: "2023-09-01",
+    category: "Profile",
     isNew: true,
   },
   {
     id: 2,
-    title: "Complete User Survey",
-    description: "Share your feedback about our services",
+    title: "Upload Documents",
+    description: "Upload necessary documents",
     points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "3 min",
+    dueDate: "2023-09-05",
+    category: "Documents",
     isNew: true,
   },
   {
     id: 3,
-    title: "Share on Social Media",
-    description: "Spread the word about our platform",
-    points: 5000,
-    difficulty: "Medium",
-    estimatedTime: "10 min",
+    title: "Attend Orientation",
+    description: "Participate in the orientation session",
+    points: 1500,
+    dueDate: "2023-09-10",
+    category: "Orientation",
     isNew: false,
   },
   {
     id: 4,
-    title: "Refer a Friend",
-    description: "Invite someone to join our platform",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "2 min",
+    title: "Complete Survey",
+    description: "Provide feedback through the survey",
+    points: 700,
+    dueDate: "2023-09-15",
+    category: "Survey",
     isNew: true,
   },
   {
     id: 5,
-    title: "Complete Profile",
-    description: "Fill out all your profile information",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "5 min",
+    title: "Join Community",
+    description: "Join the community forum",
+    points: 800,
+    dueDate: "2023-09-20",
+    category: "Community",
     isNew: false,
   },
   {
     id: 6,
-    title: "Join Discord Community",
-    description: "Connect with other users on Discord",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "3 min",
+    title: "Read Guidelines",
+    description: "Read the community guidelines",
+    points: 300,
+    dueDate: "2023-09-25",
+    category: "Guidelines",
     isNew: false,
   },
   {
     id: 7,
-    title: "Follow on Twitter",
-    description: "Stay updated with our latest news",
+    title: "Weekly Check-in",
+    description: "Check-in with your mentor",
     points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "1 min",
+    dueDate: "2023-09-30",
+    category: "Check-in",
     isNew: true,
   },
   {
     id: 8,
-    title: "Subscribe to Newsletter",
-    description: "Get weekly updates via email",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "2 min",
+    title: "Complete Training",
+    description: "Finish the training modules",
+    points: 2000,
+    dueDate: "2023-10-05",
+    category: "Training",
     isNew: false,
   },
   {
     id: 9,
-    title: "Watch Feature Showcase",
-    description: "Learn about our newest features",
-    points: 1000,
-    difficulty: "Medium",
-    estimatedTime: "8 min",
+    title: "Submit Assignment",
+    description: "Submit your first assignment",
+    points: 2500,
+    dueDate: "2023-10-10",
+    category: "Assignment",
     isNew: true,
   },
 ]
@@ -101,8 +101,8 @@ const tabs = [
     slug: "new-tasks",
   },
   {
-    label: "Completed tasks",
-    slug: "completed-tasks",
+    label: "Old tasks",
+    slug: "old-tasks",
   },
 ]
 
@@ -197,7 +197,7 @@ const Tasks: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h3 className="font-medium">Looking for more tasks?</h3>
-              <p className="text-sm text-blue-300">Check back regularly for new opportunities to earn points</p>
+              <p className="text-sm text-blue-300">Check back regularly for new tasks to complete and earn points</p>
             </div>
             <Button className="bg-secondary hover:bg-secondary/90 text-white">
               View All Tasks <ChevronRight className="ml-2 h-4 w-4" />
@@ -210,4 +210,3 @@ const Tasks: React.FC = () => {
 }
 
 export default Tasks
-

@@ -3,12 +3,13 @@
 import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { BookOpen, CheckCircle, Clock, TrendingUp, Search, ChevronRight, BookMarked } from "lucide-react"
+import { Search, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { motion } from "framer-motion"
+import StatsCards from "@/components/Dashboard/Stories/StatsCards"
+import StoryCard from "@/components/Dashboard/Stories/StoryCard"
 
 const stories = [
   {
@@ -119,59 +120,7 @@ const Stories: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-none bg-blue-950 text-white shadow-md">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-blue-300">Available Stories</p>
-                <p className="mt-1 text-3xl font-semibold">9</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
-                <BookOpen className="h-6 w-6 text-secondary" />
-              </div>
-            </div>
-            <div className="mt-4 text-xs text-blue-300">
-              <span className="text-green-400">4 new</span> stories this week
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-none bg-blue-950 text-white shadow-md">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-blue-300">Stories Read</p>
-                <p className="mt-1 text-3xl font-semibold">16</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
-                <CheckCircle className="h-6 w-6 text-secondary" />
-              </div>
-            </div>
-            <div className="mt-4 text-xs text-blue-300">
-              <span className="text-green-400">+3</span> from last month
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-none bg-blue-950 text-white shadow-md">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-blue-300">Points Earned</p>
-                <p className="mt-1 text-3xl font-semibold">16,000</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
-                <TrendingUp className="h-6 w-6 text-secondary" />
-              </div>
-            </div>
-            <div className="mt-4 text-xs text-blue-300">
-              <span className="text-green-400">↑ 8%</span> from last month
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatsCards />
 
       {/* Search and Filter */}
       <Card className="border-none bg-blue-950 text-white shadow-md">
@@ -217,41 +166,7 @@ const Stories: React.FC = () => {
               transition={{ duration: 0.3 }}
               className="group"
             >
-              <Card className="h-full border-none bg-blue-900 text-white shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <div className="flex items-center justify-center py-12 bg-gradient-to-b from-blue-950 via-gray-900 to-blue-950 text-white relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.2)_0,transparent_70%)]"></div>
-                  <BookOpen className="w-16 h-16 text-secondary relative z-10" />
-                  {story.isNew && <Badge className="absolute top-3 right-3 bg-secondary text-white">New</Badge>}
-                </div>
-                <CardContent className="p-5 flex flex-col gap-3">
-                  <div>
-                    <h3 className="font-semibold text-lg">{story.title}</h3>
-                    <p className="text-sm text-blue-300 mt-1">{story.description}</p>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-1">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5 text-blue-300" />
-                      <span className="text-xs text-blue-300">{story.readTime}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <BookMarked className="h-3.5 w-3.5 text-blue-300" />
-                      <span className="text-xs text-blue-300">{story.category}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-blue-800">
-                    <div className="flex items-center gap-1">
-                      <TrendingUp className="h-4 w-4 text-secondary" />
-                      <span className="font-bold">{story.points}</span>
-                      <span className="text-xs text-blue-300">Klikks</span>
-                    </div>
-                    <Button size="sm" className="bg-secondary hover:bg-secondary/90 rounded-full">
-                      Read
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <StoryCard story={story} />
             </motion.div>
           ))}
         </div>
