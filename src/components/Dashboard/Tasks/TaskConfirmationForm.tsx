@@ -105,7 +105,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         <DrawerTitle className="text-center text-lg font-bold">
           Task Confirmation
         </DrawerTitle>
-        <DrawerDescription className="text-center text-sm text-muted-foreground">
+        <DrawerDescription className="text-center text-sm text-foreground/80">
           {timerStatus === "idle"
             ? "Watch the video and click 'Start Task'"
             : timerStatus === "running"
@@ -139,7 +139,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
                 value={progressPercentage}
                 className="h-3 bg-blue-900/40 rounded-full"
               />
-              <p className="mt-2 text-center text-xs text-muted-foreground">
+              <p className="mt-2 text-center text-xs text-foreground/80">
                 {timerStatus === "running" && "Timer in progress..."}
                 {timerStatus === "completed" &&
                   "You can now enter the confirmation code."}
@@ -151,7 +151,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
                 placeholder="Enter 6-digit code"
                 value={confirmationCode}
                 onChange={(e) => setConfirmationCode(e.target.value)}
-                className="text-center text-lg font-mono tracking-widest bg-transparent border rounded-xl placeholder:text-gray-400"
+                className="text-center text-lg font-mono tracking-widest bg-transparent border rounded-xl placeholder:text-foregroung/70"
                 maxLength={6}
                 disabled={mutation.isPending || mutation.isSuccess}
               />
