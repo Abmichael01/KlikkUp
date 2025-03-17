@@ -65,7 +65,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Reset and cleanup on mount
   useEffect(() => {
-    setTimeRemaining(300);
+    setTimeRemaining(10);
     setTimerStatus("idle");
     setConfirmationCode("");
     mutation.reset();
