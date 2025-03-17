@@ -17,8 +17,8 @@ const tasks = [
     title: "Complete Profile",
     description: "Fill out your profile information",
     points: 500,
-    dueDate: "2023-09-01",
-    category: "Profile",
+    difficulty: "Easy",
+    estimatedTime: "5 mins",
     isNew: true,
   },
   {
@@ -26,8 +26,8 @@ const tasks = [
     title: "Upload Documents",
     description: "Upload necessary documents",
     points: 1000,
-    dueDate: "2023-09-05",
-    category: "Documents",
+    difficulty: "Medium",
+    estimatedTime: "10 mins",
     isNew: true,
   },
   {
@@ -35,8 +35,8 @@ const tasks = [
     title: "Attend Orientation",
     description: "Participate in the orientation session",
     points: 1500,
-    dueDate: "2023-09-10",
-    category: "Orientation",
+    difficulty: "Medium",
+    estimatedTime: "30 mins",
     isNew: false,
   },
   {
@@ -44,8 +44,8 @@ const tasks = [
     title: "Complete Survey",
     description: "Provide feedback through the survey",
     points: 700,
-    dueDate: "2023-09-15",
-    category: "Survey",
+    difficulty: "Easy",
+    estimatedTime: "7 mins",
     isNew: true,
   },
   {
@@ -53,8 +53,8 @@ const tasks = [
     title: "Join Community",
     description: "Join the community forum",
     points: 800,
-    dueDate: "2023-09-20",
-    category: "Community",
+    difficulty: "Easy",
+    estimatedTime: "3 mins",
     isNew: false,
   },
   {
@@ -62,8 +62,8 @@ const tasks = [
     title: "Read Guidelines",
     description: "Read the community guidelines",
     points: 300,
-    dueDate: "2023-09-25",
-    category: "Guidelines",
+    difficulty: "Easy",
+    estimatedTime: "8 mins",
     isNew: false,
   },
   {
@@ -71,8 +71,8 @@ const tasks = [
     title: "Weekly Check-in",
     description: "Check-in with your mentor",
     points: 1000,
-    dueDate: "2023-09-30",
-    category: "Check-in",
+    difficulty: "Medium",
+    estimatedTime: "15 mins",
     isNew: true,
   },
   {
@@ -80,8 +80,8 @@ const tasks = [
     title: "Complete Training",
     description: "Finish the training modules",
     points: 2000,
-    dueDate: "2023-10-05",
-    category: "Training",
+    difficulty: "Hard",
+    estimatedTime: "1 hr",
     isNew: false,
   },
   {
@@ -89,11 +89,13 @@ const tasks = [
     title: "Submit Assignment",
     description: "Submit your first assignment",
     points: 2500,
-    dueDate: "2023-10-10",
-    category: "Assignment",
+    difficulty: "Hard",
+    estimatedTime: "2 hrs",
     isNew: true,
   },
-]
+];
+
+
 
 const tabs = [
   {
