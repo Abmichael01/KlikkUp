@@ -37,7 +37,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
   onClose,
 }) => {
   const [confirmationCode, setConfirmationCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(300); // 5 minutes default
+  const [timeRemaining, setTimeRemaining] = useState(10); // 5 minutes default
   const [timerStatus, setTimerStatus] = useState<
     "idle" | "running" | "completed"
   >("idle");
@@ -74,11 +74,12 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [ mutation, task, onClose]);
+  }, [task, onClose]); // Remove mutation from dependencies
 
   // Timer logic
   const startTask = () => {
     setTimerStatus("running");
+    if (timerRef.current) clearInterval(timerRef.current); // Clear any existing timer
     timerRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
@@ -96,7 +97,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       seconds % 60
     ).padStart(2, "0")}`;
 
-  const progressPercentage = 100 - (timeRemaining / 300) * 100;
+  const progressPercentage = 100 - (timeRemaining / 10) * 100;
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
