@@ -1,15 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { X, Bell, ExternalLink } from "lucide-react";
+import { Bell } from "lucide-react";
 import { useAnnouncementStore } from "@/stores/announcementStore";
 import { Announcement } from "@/types";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+
 
 const announcements: Announcement[] = [
   {
@@ -34,7 +30,6 @@ const announcements: Announcement[] = [
 const AnnouncementDialog: React.FC = () => {
   const { isOpen, setIsOpen } = useAnnouncementStore();
   const [dontShow, setDontShow] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const lastDismissed = localStorage.getItem("announcement-dismissed");
@@ -43,13 +38,6 @@ const AnnouncementDialog: React.FC = () => {
       setIsOpen(false);
     }
   }, [setIsOpen]);
-
-  const handleClose = () => {
-    if (dontShow) {
-      localStorage.setItem("announcement-dismissed", new Date().toDateString());
-    }
-    setIsOpen(false);
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
