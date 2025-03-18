@@ -5,9 +5,8 @@ import { useEffect, useState } from "react"
 import { Bell, X } from "lucide-react"
 import { useAnnouncementStore } from "@/stores/announcementStore"
 import type { Announcement } from "@/types"
-import { Dialog, DialogContent, DialogHeader, DialogClose } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 const announcements: Announcement[] = [
