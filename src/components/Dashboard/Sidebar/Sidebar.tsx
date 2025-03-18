@@ -34,6 +34,7 @@ const Sidebar: React.FC = () => {
               "bg-primary/20 text-blue-700 hover:bg-primary/20"
           )}
         >
+        
           <div>
           <nav.icon className="size-5"  />
           </div>
