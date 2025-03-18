@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useEffect, useState } from "react"
-import { Bell, X } from "lucide-react"
+import { Bell } from "lucide-react"
 import { useAnnouncementStore } from "@/stores/announcementStore"
 import type { Announcement } from "@/types"
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
