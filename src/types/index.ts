@@ -47,3 +47,10 @@ export type Story = {
   body: string;
   reward: number;
 }
+
+export type Announcement = {
+  id: number;
+  title: string;
+  message: string;
+  link?: string; // Optional link for the announcement
+};

@@ -1,3 +1,4 @@
+import AnnouncementDialog from "@/components/Dashboard/AnnouncementDialog";
 import Navbar from "@/components/Dashboard/Header/Navbar";
 import Sidebar from "@/components/Dashboard/Sidebar/Sidebar";
 import Taskbar from "@/components/Dashboard/Taskbar/Taskbar";
@@ -16,7 +17,7 @@ const DashboardLayout: React.FC = () => {
         </div>
         <div className="h-24 w-full"></div>
       </div>
-      
+      <AnnouncementDialog />
     </div>
   );
 };
