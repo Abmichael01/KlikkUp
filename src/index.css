@@ -97,6 +97,21 @@
     overflow-y: auto;
     height: 250px;
   }
+
+  @keyframes rightToLeft {
+    0% {
+      transform: translateX(100%); /* Start off-screen right */
+    }
+    100% {
+      transform: translateX(-100%); /* Move off-screen left */
+    }
+  }
+  
+  .animate-right-to-left {
+    animation: rightToLeft 5s linear infinite;
+  }
+
+  
   
 
 

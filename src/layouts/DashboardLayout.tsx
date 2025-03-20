@@ -1,7 +1,7 @@
 import AnnouncementDialog from "@/components/Dashboard/AnnouncementDialog";
-import Navbar from "@/components/Dashboard/Header/Navbar";
-import Sidebar from "@/components/Dashboard/Sidebar/Sidebar";
-import Taskbar from "@/components/Dashboard/Taskbar/Taskbar";
+import Navbar from "@/components/Dashboard/Layouts/Navbar";
+import Sidebar from "@/components/Dashboard/Layouts/Sidebar";
+import Taskbar from "@/components/Dashboard/Layouts/Taskbar";
 import React from "react";
 import { Outlet } from "react-router";
 

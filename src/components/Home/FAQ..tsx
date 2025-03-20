@@ -34,7 +34,7 @@ const faqData = [
   {
     question: "IS THERE ANY FEE TO JOIN KLIKK UP?",
     answer:
-      "Yes, joining Klikk Up requires a $3 management fee. This fee grants access to all Klikk Up features and a one-time access to all future projects, including earning models, and the network's community activities. This fee is also to create value for our projects which you will surely get back during the structured airdrops.",
+      "Yes, joining Klikk Up requires a 3OOO Naira management fee. This fee grants access to all Klikk Up features and a one-time access to all future projects, including earning models, and the network's community activities. This fee is also to create value for our projects which you will surely get back during the structured airdrops.",
   },
   {
     question: "HOW DO I STAY UPDATED ON KLIKK UP AND CONNECT WITH THE COMMUNITY?",
@@ -63,6 +63,18 @@ const faqData = [
   {
     question: "IS THERE A LIMIT TO HOW MANY POINTS I CAN FARM?",
     answer: "Yes, to prevent abuse.",
+  },
+  {
+    question: "HOW DO I EARN N100K MONTHLY?",
+    answer: "Note, this monthly N100k is only for users that already have community to refer. To be eligibility for this you need to refer minimum of 50 users monthly. This bonus is available for limited time.",
+  },
+  {
+    question: "WHAT IS AIRTIME AIRDROP?",
+    answer: "Is a promotion and giveaway of mobile phone airtime, to boost your  usage and engagement.",
+  },
+  {
+    question: "WHAT IS SEASONAL NAIRA AIRDROP?",
+    answer: "It is the distribution of free Naira (the currency of Nigeria). The airdrop is used to raise awareness, promote our project.",
   },
 ]
 
