@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { addStory, addTask, deleteStory, deleteTask, generateCoupon, login, logout, register, updateStory, updateTask, updateUser } from "@/api/apiEndpoints";
+import { addStory, addTask, deleteStory, deleteTask, deleteUser, generateCoupon, login, logout, register, updateStory, updateTask, updateUser } from "@/api/apiEndpoints";
 import { LoginData, RegisterData, Story, Task, User } from "@/types";
 
 
@@ -81,7 +81,7 @@ export const useUpdateUser = () => {
 export const useDeleteUser = () => {
   // Implement deleteTask mutation
   return useMutation({
-    mutationFn: (id: number) =>  deleteStory(id),
+    mutationFn: (id: number) =>  deleteUser(id),
   });
 }
 

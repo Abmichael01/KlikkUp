@@ -11,22 +11,24 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Link, useNavigate } from "react-router";
-import { Eye, LockIcon, Mail, TicketIcon, User } from "lucide-react";
+import { Eye, LockIcon, Mail, TicketIcon, User, Users } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useRegister } from "@/api/mutations";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
 import { AxiosError } from "axios";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const formSchema = z
   .object({
-    username: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    username: z.string().min(3, {
+      message: "Username must be at least 3 characters.",
     }),
     email: z.string().min(2, { message: "Email is required" }),
     coupon: z
       .string()
       .min(6, { message: "Invalid Coupon code" })
       .max(6, { message: "Invalid coupon code" }),
+    ref_code: z.string().min(2, { message: "Referral code is required" }),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters." }),
@@ -40,7 +42,13 @@ const formSchema = z
   });
 
 type FormField = {
-  name: "username" | "email" | "password" | "re_password" | "coupon";
+  name:
+    | "username"
+    | "email"
+    | "password"
+    | "re_password"
+    | "coupon"
+    | "ref_code";
   label: string;
   placeholder: string;
   type: string;
@@ -74,6 +82,14 @@ const formFields: FormField[] = [
     icon: <TicketIcon />,
   },
   {
+    name: "ref_code",
+    label: "Referral Code",
+    type: "text",
+    placeholder: "Referral Code",
+    required: true,
+    icon: <Users />,
+  },
+  {
     name: "password",
     label: "Password",
     type: "password",
@@ -92,12 +108,15 @@ const formFields: FormField[] = [
 ];
 
 const Register: React.FC = () => {
+  const [errorMessages, setErrorMessages] =
+    React.useState<Record<string, string[]>>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
       email: "",
       coupon: "",
+      ref_code: "",
       password: "",
       re_password: "",
     },
@@ -114,21 +133,34 @@ const Register: React.FC = () => {
       onSuccess: () => {
         toastMessage({
           message: "Your accont was successfully created, Login to continue",
-          type: "success"
-        })
+          type: "success",
+        });
         navigate("/auth/login");
       },
       onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<string, string[]>;
+        const errorMessages = (error as AxiosError)?.response?.data as Record<
+          string,
+          string[]
+        >;
+        setErrorMessages(errorMessages);
         for (const key in errorMessages) {
           toastMessage({
             message: errorMessages[key].join(", "),
-            type: "error"
-          })
+            type: "error",
+          });
         }
       },
     });
   }
+
+  const fieldLabels: Record<string, string> = {
+    username: "Username",
+    password: "Password",
+    email: "Email",
+    ref_code: "Referral Code",
+    coupon: "Coupon Code",
+    non_field_errors: "Error",
+  };
 
   return (
     <Form {...form}>
@@ -140,6 +172,21 @@ const Register: React.FC = () => {
           <h2 className="text-3xl fancy-font text-center ">Register</h2>
           <p>Create your account</p>
         </div>
+
+        <div className="space-y-5">
+          {errorMessages &&
+            Object.keys(errorMessages).length > 0 &&
+            Object.entries(errorMessages).map(([field, messages]) =>
+              messages.map((message: string, index: number) => (
+                <Alert key={`${field}-${index}`} className="text-destructive-foreground bg-destructive border-destructive">
+                  <AlertDescription>
+                    {`${fieldLabels[field] || field}: ${message}`}
+                  </AlertDescription>
+                </Alert>
+              ))
+            )}
+        </div>
+
         {formFields.map((formField, index) => (
           <FormField
             key={index}
@@ -163,7 +210,7 @@ const Register: React.FC = () => {
                     )}
                   </div>
                 </FormControl>
-                <FormMessage className=" px-4 py-1 bg-white/70 rounded-full" />
+                <FormMessage className=" px-4 py-1 bg-destructive/80 text-destructive-foreground rounded-full" />
               </FormItem>
             )}
           />

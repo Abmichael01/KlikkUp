@@ -11,6 +11,7 @@ export type RegisterData = {
   username: string;
   email: string;
   coupon: string;
+  ref_code: string;
   password: string;
   re_password: string;
 }

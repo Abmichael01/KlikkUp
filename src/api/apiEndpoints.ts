@@ -64,6 +64,16 @@ export const updateUser = async (data: User) => {
   }
 };
 
+export const deleteUser = async (id: number) => {
+  try {
+    const response = await apiClient.delete(`/users/${id}/delete/`);
+    return response.data;
+  } catch (error) {
+    console.error("Delete user failed:", error);
+    throw error;
+  }
+};
+
 export const generateCoupon = async (amount: number) => {
   try {
     const response = await apiClient.post("/coupons/", {amount});
