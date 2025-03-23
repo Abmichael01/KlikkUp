@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { useRegister } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { Mail, UserIcon, TicketIcon, LockIcon } from "lucide-react";
+import { Mail, UserIcon, TicketIcon, LockIcon, Users } from "lucide-react";
 import { User } from "@/types";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
 import { AxiosError } from "axios";
@@ -31,6 +31,7 @@ const formSchema = z.object({
     .string()
     .min(6, { message: "Invalid Coupon code" })
     .max(6, { message: "Invalid coupon code" }),
+  ref_code: z.string().min(2, { message: "Referral code is required" }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters." }),
@@ -42,7 +43,7 @@ const formSchema = z.object({
 });
 
 type FormField = {
-  name: "username" | "email" | "password" | "re_password" | "coupon";
+  name: "username" | "email" | "password" | "re_password" | "coupon" | "ref_code";
   label: string;
   placeholder: string;
   type: string;
@@ -76,6 +77,14 @@ const formFields: FormField[] = [
     icon: <TicketIcon />,
   },
   {
+    name: "ref_code",
+    label: "Referral Code",
+    type: "text",
+    placeholder: "Enter your purchased coupon code",
+    required: true,
+    icon: <Users />,
+  },
+  {
     name: "password",
     label: "Password",
     type: "password",
@@ -104,7 +113,7 @@ const AddUser: React.FC<AddEditTaskProps> = ({ data, update }) => {
     defaultValues: {
       username: update ? data?.username : "",
       email: update ? data?.email : "",
-
+      ref_code: "",
       is_admin: update ? data?.is_admin : false,
       is_staff: update ? data?.is_staff : false,
     }, 
