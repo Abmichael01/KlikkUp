@@ -8,7 +8,7 @@ const reasons = [
   { text: "Have fun klikking", icon: "🎉" },
   { text: "Earn rewards for your time", icon: "💰" },
   { text: "Share and invite", icon: "👥" },
-  { text: "Receive Airdrop", icon: "🚀" },
+  { text: "Receive Giveaways and Bonuses", icon: "🚀" },
 ];
 
 const RegisterNow: React.FC = () => {

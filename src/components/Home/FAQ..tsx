@@ -7,21 +7,21 @@ const faqData = [
   {
     question: "WHAT IS KLIKK UP?",
     answer:
-      "Klikk up is a prerequisite to a telegram based crypto platform which will be disclosed soon. It is designed to revolutionize the way users interact with content by allowing them to earn points through simple activities. These points will later be converted into tokens, giving you real value for your participation! We aim to create a decentralized and transparent ecosystem where users are fairly rewarded for their online engagement. The future project will be built on Web3 technology, ensuring security, transparency, and seamless token integration.",
+      "KlikkUp is a task-reward platform and your gateway to an exciting gaming world. We designed KlikkUp to offer a fun, engaging way to earn rewards while preparing for the launch of our upcoming game. By watching videos, reading stories, solving riddles, and completing simple tasks, users earn points that will later become gaming coins used in our game. We believe games should be more than just entertainment – they should reward users for their curiosity, effort, and engagement. KlikkUp is our first step toward building a game ecosystem where users are active contributors and benefit from every interaction.",
   },
   {
     question: "HOW DO I REGISTER?",
     answer:
-      "Go to the sign-up page and fill in necessary information. Press the coupon code button to get a coupon code, then insert it in the sign-up page to register.",
+      "Go to the sign-up page and fill in the necessary information. Press the coupon code button to get a coupon code, then insert it on the sign-up page to register.",
   },
   {
     question: "WHAT INFORMATION DO I NEED TO PROVIDE TO OPEN AN ACCOUNT?",
-    answer: "We require an email address and username.",
+    answer: "We require an email address and a username.",
   },
   {
     question: "HOW DO I EARN POINTS?",
     answer:
-      "Earn points by completing tasks like reading stories, watching educative videos and engaging on our socials.",
+      "Earn points by completing tasks like reading stories, watching educative videos, and engaging on our social platforms.",
   },
   {
     question: "HOW DO I REFER SOMEONE?",
@@ -29,52 +29,46 @@ const faqData = [
   },
   {
     question: "HOW DO I GET COUPON CODE?",
-    answer: "Go to the get coupon section to get the code.",
+    answer: "Go to the 'Get Coupon' section to obtain the code.",
   },
   {
     question: "IS THERE ANY FEE TO JOIN KLIKK UP?",
     answer:
-      "Yes, joining Klikk Up requires a 3OOO Naira management fee. This fee grants access to all Klikk Up features and a one-time access to all future projects, including earning models, and the network's community activities. This fee is also to create value for our projects which you will surely get back during the structured airdrops.",
+      "Yes, joining KlikkUp requires a 3000 Naira management fee. This fee grants access to all KlikkUp features and a one-time entry to all future projects, including earning models and community activities. This fee also adds value to our projects, which you will surely get back during the structured airdrops.",
   },
   {
     question: "HOW DO I STAY UPDATED ON KLIKK UP AND CONNECT WITH THE COMMUNITY?",
     answer:
-      "Stay connected with Klikk Up by joining our official social channels. Use the social media icons on this page to follow us on WhatsApp, Telegram, TikTok for the latest updates and community engagement.",
+      "Stay connected with KlikkUp by joining our official social channels. Use the social media icons on this page to follow us on WhatsApp, Telegram, and TikTok for the latest updates and community engagement.",
   },
   {
     question: "HOW DO I GET REWARDED?",
     answer:
-      "You get rewarded during the airdrop seasons. If you miss one, there will surely be another one until our future project is revealed. You need to farm as many points as possible to get rewarded.",
+      "You get rewarded during the giveaways and monthly bonuses.",
   },
   {
-    question: "WHAT BLOCKCHAIN ARE YOU USING?",
+    question: "CAN I KEEP MY POINTS?",
     answer:
-      "The blockchain will be revealed after we reveal the future project. Log in to check the roadmap for more explanation.",
+      "Yes, keeping your points is the best decision because when the actual game is launched, you can convert your points to real money. The conversion ratio will be announced soon.",
   },
   {
-    question: "CAN I CONVERT MY FARMED POINTS TO MONEY?",
-    answer: "Yes, you can decide to convert it to money during airdrop season.",
-  },
-  {
-    question: "CAN I KEEP MY FARMED POINTS?",
-    answer:
-      "Yes, keeping your farmed points is the best decision for you. When the future project is revealed, you can convert your farmed points to real tokens. The conversion ratio will be announced soon.",
-  },
-  {
-    question: "IS THERE A LIMIT TO HOW MANY POINTS I CAN FARM?",
+    question: "IS THERE A LIMIT TO HOW MANY POINTS I CAN HAVE?",
     answer: "Yes, to prevent abuse.",
   },
   {
     question: "HOW DO I EARN N100K MONTHLY?",
-    answer: "Note, this monthly N100k is only for users that already have community to refer. To be eligibility for this you need to refer minimum of 50 users monthly. This bonus is available for limited time.",
+    answer:
+      "Note, this monthly N100k bonus is only for users who already have a community to refer. To be eligible, you need to refer a minimum of 50 users monthly. This bonus is available for a limited time.",
   },
   {
-    question: "WHAT IS AIRTIME AIRDROP?",
-    answer: "Is a promotion and giveaway of mobile phone airtime, to boost your  usage and engagement.",
+    question: "DO I EARN MONEY FROM REFERRING PEOPLE?",
+    answer:
+      "Yes, aside from the N100k monthly bonus, you also earn 10% from each of your referred users' payments.",
   },
   {
-    question: "WHAT IS SEASONAL NAIRA AIRDROP?",
-    answer: "It is the distribution of free Naira (the currency of Nigeria). The airdrop is used to raise awareness, promote our project.",
+    question: "WHEN DO WE MIGRATE TO THE GAME?",
+    answer:
+      "We will migrate once the game is fully developed and ready for launch.",
   },
 ]
 
@@ -108,4 +102,3 @@ const FAQ: React.FC = () => {
 }
 
 export default FAQ
-

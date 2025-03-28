@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
               you engage with content.
             </p>
             <p>
-              <strong>NOTE:</strong> This farming system is exclusive for
+              <strong>NOTE:</strong> This service is exclusive for
               Nigerians only
             </p>
           </div>

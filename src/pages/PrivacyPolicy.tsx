@@ -1,7 +1,10 @@
+"use client"
+
 import MainPadding from "@/layouts/MainPadding"
 import { useEffect } from "react"
 import { scrollToSection } from "@/lib/scroller"
 import { useSearchParams } from "react-router"
+
 
 export default function PrivacyPolicy() {
   const [searchParams] = useSearchParams()
@@ -16,19 +19,16 @@ export default function PrivacyPolicy() {
   return (
     <MainPadding className="py-10 bg-white">
       <div id="privacy">
-        <h1 className="text-4xl font-bold mb-6 text-center">Policies</h1>
+        <h1 className="text-4xl font-bold mb-6 text-center">KLIKKUP POLICIES</h1>
         <p className="mb-4">
           At KlikkUp, we value transparency, security, and user satisfaction. Our policies are designed to ensure a fair
           and rewarding experience for all users while maintaining compliance with legal and ethical standards.
         </p>
 
-        <h2 className="text-2xl font-semibold mb-4">Privacy Policy</h2>
+        <h2 className="text-2xl font-semibold mb-4">PRIVACY POLICY</h2>
         <p className="mb-4">
           KlikkUp is committed to protecting your personal information and ensuring a safe browsing and earnings
-          experience. To keep the KlikkUp Platform running, we use third-party advertising companies to serve ads when
-          you visit our website. These companies may use information (not including your name, address, email address,
-          or telephone number) about your visits to this and other Websites to provide advertisements about goods and
-          services of interest to you.
+          experience.
         </p>
         <p className="mb-4">
           KlikkUp uses a tool that collects your requests for pages and passes elements of them to search engines to
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
           <li>KlikkUp reserves the right to adjust reward structures based on platform updates.</li>
         </ul>
 
-        <h3 className="text-xl font-semibold mb-2">Token Conversion & Withdrawals</h3>
+        <h3 className="text-xl font-semibold mb-2">Points Conversion & Withdrawals</h3>
         <ul className="list-disc pl-6 mb-4">
           <li>Earned points can be converted into tokens at rates determined by KlikkUp.</li>
           <li>Withdrawals require identity verification to prevent fraud.</li>
@@ -148,11 +148,11 @@ export default function PrivacyPolicy() {
         </ul>
 
         <h3 className="text-xl font-semibold mb-2">Disclaimer & Liability</h3>
-        <p className="mb-4">KlikkUp operates as a Web3 rewards platform and does not guarantee any financial gain.</p>
+        <p className="mb-4">KlikkUp operates as a rewards platform and does not guarantee any financial gain.</p>
 
-        <h4 className="text-lg font-semibold mb-2">Token Value & Trading Risks</h4>
+        <h4 className="text-lg font-semibold mb-2">Coin Value & Trading Risks</h4>
         <ul className="list-disc pl-6 mb-4">
-          <li>The value of KlikkUp tokens may fluctuate based on market demand.</li>
+          <li>The value of KlikkUp tokens may fluctuate based on activities.</li>
           <li>KlikkUp is not responsible for financial losses incurred through trading or external investments.</li>
         </ul>
 
