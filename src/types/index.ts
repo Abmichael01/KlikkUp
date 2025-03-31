@@ -15,7 +15,7 @@ export type User = {
   next_level?: number;
   next_level_xp?: number;
   percent_xp_in_level?: number;
-  total_referrals: number;
+  total_referrals?: number;
 };
 
 export type ReferralUser = {
