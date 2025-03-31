@@ -10,18 +10,6 @@ import ReferralBonus from "@/components/Dashboard/Invite/ReferralBonus";
 import {useReferralsData} from "@/api/queries.ts";
 import {ReferralsData, ReferralUser} from "@/types";
 
-const leaderboard = [
-  { username: "John Doe", invites: 10 },
-  { username: "Jane Smith", invites: 15 },
-  { username: "Michael Johnson", invites: 20 },
-  { username: "Emily Davis", invites: 25 },
-  { username: "Sarah Wilson", invites: 30 },
-  { username: "David Brown", invites: 35 },
-  { username: "Sophia Green", invites: 40 },
-  { username: "Michael Wilson", invites: 45 },
-  { username: "Emily Thompson", invites: 50 },
-  { username: "David Johnson", invites: 55 },
-];
 
 const Invite: React.FC = () => {
   const [copied, setCopied] = useState(false);

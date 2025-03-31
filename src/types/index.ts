@@ -7,7 +7,7 @@ export type User = {
   roles?: number[];
   point_balance?: number;
   xp?: number;
-  xp_in_level: number;
+  xp_in_level?: number;
   current_level?: number;
   current_level_xp?: number;
   xp_needed?: number;
