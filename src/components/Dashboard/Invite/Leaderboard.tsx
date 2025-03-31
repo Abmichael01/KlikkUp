@@ -3,12 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {useAuthStore} from "@/stores/useAuthStore"
+import { ReferralUser } from "@/types";
 
 interface LeaderboardProps {
-  leaderboard: { username: string; invites: number }[];
+  leaderboard: ReferralUser[];
 }
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
+  const username = useAuthStore(state => state.user?.username)
   return (
     <Card className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
@@ -24,11 +27,11 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
               <TableRow className="bg-blue-900/50 hover:bg-blue-900/50">
                 <TableHead className="w-[80px] text-blue-300">Rank</TableHead>
                 <TableHead className="text-blue-300">Username</TableHead>
-                <TableHead className="text-blue-300 w-[100px]">Status</TableHead>
+                <TableHead className="text-blue-300 w-[100px]">Referrals</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {leaderboard.map((user, index) => (
+              {leaderboard?.map((user, index) => (
                 <TableRow
                   key={index}
                   className={`
@@ -60,19 +63,19 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                         <span>{user.username.charAt(0)}</span>
                       </div>
                       <span>{user.username}</span>
-                      {index === 3 && (
+                      {user.username === username && (
                         <span className="text-xs bg-blue-900/50 px-2 py-0.5 rounded text-blue-300">
                           You
                         </span>
                       )}
                     </div>
                   </TableCell>
-                  <TableCell>{user.invites}</TableCell>
+                  <TableCell>{user?.total_referrals}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
             <TableCaption className="text-blue-300 py-3">
-              Top 10 referrers this month
+              Top 100 referrers this month
             </TableCaption>
           </Table>
         </div>

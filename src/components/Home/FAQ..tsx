@@ -34,7 +34,7 @@ const faqData = [
   {
     question: "IS THERE ANY FEE TO JOIN KLIKK UP?",
     answer:
-      "Yes, joining KlikkUp requires a 3000 Naira management fee. This fee grants access to all KlikkUp features and a one-time entry to all future projects, including earning models and community activities. This fee also adds value to our projects, which you will surely get back during the structured airdrops.",
+      "Yes, joining KlikkUp requires a 3000 Naira management fee. This fee grants access to all KlikkUp features and a one-time entry to all future projects, including earning models and community activities. This fee also adds value to our projects, which you will surely get back during the giveaways.",
   },
   {
     question: "HOW DO I STAY UPDATED ON KLIKK UP AND CONNECT WITH THE COMMUNITY?",

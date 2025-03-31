@@ -5,19 +5,20 @@ import { CheckCircle } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
+import {useAuthStore} from "@/stores/useAuthStore.ts";
 
 export default function Overview() {
   const [checkedIn, setCheckedIn] = useState(false)
-  const [points, setPoints] = useState(25)
-  const [xp, setXP] = useState(75)
+
 
   const handleCheckIn = () => {
     if (!checkedIn) {
       setCheckedIn(true)
-      setPoints((prev) => prev + 25)
-      setXP((prev) => Math.min(prev + 10, 100))
     }
   }
+
+  const user = useAuthStore(state => state.user)
+  console.log(user?.percent_xp_in_level)
 
   return (
     <div className="relative overflow-hidden">
@@ -53,10 +54,10 @@ export default function Overview() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50 text-white">
-                <span className="text-xl font-semibold">U</span>
+                <span className="text-xl font-semibold uppercase">{user?.username[0]}</span>
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight">Urkelcodes</h2>
+                <h2 className="text-xl font-bold tracking-tight"> <span className="uppercase">{user?.username[0]}</span>{user?.username.slice(1)}</h2>
                 <p className="text-xs text-blue-300 mt-0.5">Earning Overview</p>
               </div>
             </div>
@@ -64,17 +65,17 @@ export default function Overview() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <p className="text-xs text-blue-300">Level 3</p>
+                  <p className="text-xs text-blue-300">Level {user?.current_level}</p>
                   <span className="inline-flex h-5 items-center rounded-full bg-blue-900/60 px-2 text-xs font-medium">
-                    {xp}/100 XP
+                    {user?.xp}/{user?.next_level_xp} XP
                   </span>
                 </div>
-                <p className="text-xs font-medium">Level 4</p>
+                <p className="text-xs font-medium">Level {user?.next_level}</p>
               </div>
               <div className="relative h-2 w-full overflow-hidden rounded-full bg-blue-900/50">
-                <Progress value={xp} className="h-full bg-gradient-to-r from-blue-400 to-indigo-400" />
+                <Progress value={user?.percent_xp_in_level} className="h-full bg-gradient-to-r from-blue-400 to-indigo-400" />
               </div>
-              <p className="text-xs text-blue-300">{100 - xp} XP needed to reach Level 4</p>
+              <p className="text-xs text-blue-300">{(user?.next_level_xp ?? 0) - (user?.xp ?? 0)} XP needed to reach Level {user?.next_level}</p>
             </div>
           </div>
 
@@ -82,7 +83,7 @@ export default function Overview() {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 rounded-lg bg-blue-900/40 p-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-800/50">
-                <span className="text-lg font-bold">{points}</span>
+                <span className="text-lg font-bold">{user?.point_balance}</span>
               </div>
               <div>
                 <p className="text-xs text-blue-300">Today's Points</p>

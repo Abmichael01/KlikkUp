@@ -5,7 +5,36 @@ export type User = {
   is_admin?: boolean;
   is_staff?: boolean;
   roles?: number[];
+  point_balance?: number;
+  xp?: number;
+  xp_in_level: number;
+  current_level?: number;
+  current_level_xp?: number;
+  xp_needed?: number;
+  xp_remaining?: number;
+  next_level?: number;
+  next_level_xp?: number;
+  percent_xp_in_level?: number;
+  total_referrals: number;
 };
+
+export type ReferralUser = {
+  id: number;
+  username: string;
+  email: string;
+  point_balance: number;
+  xp: number;
+  total_referrals: number;
+}
+
+export type ReferralsData = {
+    ref_code: string;
+    total_referrals: number;
+    referrals: ReferralUser[];
+    points_earned: number;
+    rank: number;
+    leaderboard: ReferralUser[];
+}
 
 export type RegisterData = {
   username: string;

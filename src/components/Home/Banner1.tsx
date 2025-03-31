@@ -68,8 +68,7 @@ const Banner1: React.FC = () => {
                 Klikk. Earn. Repeat!
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mt-4">
-                Don't just consume content – get rewarded for it. Sign up and
-                start farming now!
+                Don't just consume content – get rewarded for it.
               </p>
             </motion.div>
             <motion.div

@@ -1,4 +1,4 @@
-import { Coupon, LoginData, RegisterData, Story, Task, User } from "@/types";
+import {Coupon, LoginData, ReferralsData, RegisterData, Story, Task, User} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -175,3 +175,15 @@ export const deleteStory = async (id: Story["id"]) => {
     throw error;
   }
 };
+
+export const getReferralsData = async () => {
+  try {
+    const response = await apiClient.get(`/users/me/referrals/`);
+    return response.data as ReferralsData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+

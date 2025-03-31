@@ -7,8 +7,10 @@ import Overview from "@/components/Dashboard/Dashboard/Overview"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import RecentActivities from "@/components/Dashboard/Dashboard/RecentActivities"
+import {useAuthStore} from "@/stores/useAuthStore.ts";
 
 const Dashboard: React.FC = () => {
+    const user = useAuthStore(state => state.user)
   return (
     <div className="w-full">
 
@@ -62,7 +64,7 @@ const Dashboard: React.FC = () => {
                 <div>
                   <p className="text-sm text-blue-300">Total Points</p>
                   <p className="mt-1 text-3xl font-semibold">
-                    120,000 <span className="text-sm">Klikks</span>
+                      {user?.point_balance} <span className="text-sm">Klikks</span>
                   </p>
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50">
@@ -81,7 +83,7 @@ const Dashboard: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-blue-300">Current Level</p>
-                  <p className="mt-1 text-3xl font-semibold">Level 3</p>
+                  <p className="mt-1 text-3xl font-semibold">Level {user?.current_level}</p>
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50">
                   <Award className="h-6 w-6 text-secondary" />
@@ -90,10 +92,10 @@ const Dashboard: React.FC = () => {
               <div className="mt-3 space-y-1">
                 <div className="flex justify-between text-xs">
                   <span>Progress to Level 4</span>
-                  <span>75%</span>
+                  <span>{user?.percent_xp_in_level}%</span>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-blue-950">
-                  <Progress value={75} className="h-full bg-gradient-to-r from-blue-400 to-indigo-400" />
+                  <Progress value={user?.percent_xp_in_level} className="h-full bg-gradient-to-r from-blue-400 to-indigo-400" />
                 </div>
               </div>
             </CardContent>
@@ -126,7 +128,7 @@ const Dashboard: React.FC = () => {
                 <div>
                   <p className="text-sm text-blue-300">Total Invites</p>
                   <p className="mt-1 text-3xl font-semibold">
-                    11 <span className="text-sm">users</span>
+                      {user?.total_referrals} <span className="text-sm">users</span>
                   </p>
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50">
@@ -149,7 +151,7 @@ const Dashboard: React.FC = () => {
             <div className="flex gap-2">
               <input
                 type="text"
-                value="URKEL2024"
+                value={user?.username}
                 className="flex-grow rounded-md border border-white/20 bg-white/10 p-2 text-white"
                 readOnly
               />

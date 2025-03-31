@@ -7,6 +7,8 @@ import ReferralCode from "@/components/Dashboard/Invite/ReferralCode";
 import Leaderboard from "@/components/Dashboard/Invite/Leaderboard";
 import ReferralList from "@/components/Dashboard/Invite/ReferralList";
 import ReferralBonus from "@/components/Dashboard/Invite/ReferralBonus";
+import {useReferralsData} from "@/api/queries.ts";
+import {ReferralsData, ReferralUser} from "@/types";
 
 const leaderboard = [
   { username: "John Doe", invites: 10 },
@@ -19,12 +21,6 @@ const leaderboard = [
   { username: "Michael Wilson", invites: 45 },
   { username: "Emily Thompson", invites: 50 },
   { username: "David Johnson", invites: 55 },
-];
-
-const referrals = [
-  { name: "John Doe", email: "john@example.com", date: "2023-10-01" },
-  { name: "Jane Smith", email: "jane@example.com", date: "2023-10-02" },
-  { name: "Michael Johnson", email: "michael@example.com", date: "2023-10-03" },
 ];
 
 const Invite: React.FC = () => {
@@ -41,12 +37,14 @@ const Invite: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const { data } = useReferralsData()
+
   return (
     <div className="flex flex-col gap-6">
-      <ReferralStats />
-      <ReferralCode referralCode={referralCode} copyToClipboard={copyToClipboard} copied={copied} />
-      <ReferralList referrals={referrals} />
-      <Leaderboard leaderboard={leaderboard} />
+      <ReferralStats data={data as ReferralsData} />
+      <ReferralCode referralCode={data?.ref_code ?? ""} copyToClipboard={copyToClipboard} copied={copied} />
+      <ReferralList referrals={data?.referrals as ReferralUser[]} />
+      <Leaderboard leaderboard={data?.leaderboard as ReferralUser[]} />
       <ReferralBonus />
     </div>
   );
