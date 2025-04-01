@@ -49,14 +49,14 @@ const ReferralStats: React.FC<Props> = ({data}) => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-300">Leaderboard Rank</p>
-              <p className="mt-1 text-3xl font-semibold">#4</p>
+              <p className="mt-1 text-3xl font-semibold">#{data.rank}</p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <Medal className="h-6 w-6 text-secondary" />
             </div>
           </div>
           <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">Top 10%</span> of all users
+            <span className="text-green-400">{data.percentage_rank}%</span> of all users
           </div>
         </CardContent>
       </Card>

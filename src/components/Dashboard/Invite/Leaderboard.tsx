@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {useAuthStore} from "@/stores/useAuthStore"
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useShareDialogStore } from "@/stores/useShareDialogStore";
 import { ReferralUser } from "@/types";
 
 interface LeaderboardProps {
@@ -11,7 +12,11 @@ interface LeaderboardProps {
 }
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
-  const username = useAuthStore(state => state.user?.username)
+  const username = useAuthStore((state) => state.user?.username);
+  const openShareDialog = useShareDialogStore((state) => state.openDialog);
+
+  const leaderboardMessage = `Check out the leaderboard on KlikkUp and join the fun! Use my referral link to sign up: https://urkelcodes.com/leaderboard`;
+
   return (
     <Card className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
@@ -36,7 +41,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                   key={index}
                   className={`
                     border-b border-white/5 hover:bg-blue-900/30
-                    ${index === 3 ? "bg-blue-900/30" : ""}
+                    ${user.username === username ? "bg-blue-900/30" : ""}
                   `}
                 >
                   <TableCell className="font-medium">
@@ -59,7 +64,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-900/50 text-white">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-900/50 text-white uppercase">
                         <span>{user.username.charAt(0)}</span>
                       </div>
                       <span>{user.username}</span>
@@ -88,7 +93,10 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                 Share your referral code with more friends to increase your rank
               </p>
             </div>
-            <Button className="bg-secondary hover:bg-secondary/90 text-white whitespace-nowrap">
+            <Button
+              className="bg-secondary hover:bg-secondary/90 text-white whitespace-nowrap"
+              onClick={() => openShareDialog(leaderboardMessage)}
+            >
               Share Now
             </Button>
           </div>

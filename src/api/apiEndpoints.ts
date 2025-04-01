@@ -1,4 +1,4 @@
-import {Coupon, LoginData, ReferralsData, RegisterData, Story, Task, User} from "@/types";
+import {Coupon, LoginData, ReferralsData, RegisterData, Story, Task, TasksData, User} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -180,6 +180,17 @@ export const getReferralsData = async () => {
   try {
     const response = await apiClient.get(`/users/me/referrals/`);
     return response.data as ReferralsData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const getTasksData = async () => {
+  try {
+    console.log("Fetching tasks data...");
+    const response = await apiClient.get(`/users/me/tasks/`);
+    return response.data as TasksData;
   } catch (error) {
     console.error("Error fetching data", error);
     throw error;

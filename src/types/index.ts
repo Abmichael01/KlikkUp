@@ -34,6 +34,7 @@ export type ReferralsData = {
     points_earned: number;
     rank: number;
     leaderboard: ReferralUser[];
+    percentage_rank: number;
 }
 
 export type RegisterData = {
@@ -68,7 +69,13 @@ export type Task = {
   title: string;
   link: string;
   reward: number;
-  confirmation_code?: string;
+  estimated_time: number;
+}
+
+export type TasksData = {
+  completed_tasks: Task[];
+  available_tasks: Task[];
+  points_earned: number;
 }
 
 export type Story = {

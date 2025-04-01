@@ -4,10 +4,11 @@ import Sidebar from "@/components/Dashboard/Layouts/Sidebar";
 import Taskbar from "@/components/Dashboard/Layouts/Taskbar";
 import React from "react";
 import { Outlet } from "react-router";
+import ShareDialog from "@/components/Dashboard/ShareDialog";
 
 const DashboardLayout: React.FC = () => {
   return (
-    <div className="flex relative bg-gray-100 dark:bg-gray-800">
+    <div className="flex relative dark:bg-gray-800">
       <Sidebar />
       <Taskbar />
       <div className="flex-grow">
@@ -18,6 +19,7 @@ const DashboardLayout: React.FC = () => {
         <div className="h-24 w-full"></div>
       </div>
       <AnnouncementDialog />
+      <ShareDialog />
     </div>
   );
 };

@@ -14,18 +14,10 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle, AlertCircle, Loader2, Play, Video } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import { Task } from "@/types";
 
 
-// Match the exact task data structure
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-  points: number;
-  difficulty: string;
-  estimatedTime: string;
-  isNew: boolean;
-}
+
 
 interface TaskConfirmationFormProps {
   task: Task;
@@ -54,7 +46,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       if (success) {
         toast({
           title: "Story completed!",
-          description: `You've earned ${task.points} points for reading this story.`,
+          description: `You've earned ${task.reward} points for reading this story.`,
         });
         setTimeout(() => {
           onClose(); // Auto-close drawer
@@ -166,7 +158,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
             {mutation.isSuccess && (
               <div className="flex items-center gap-2 text-sm text-green-600 bg-green-100 p-2 rounded-lg">
                 <CheckCircle className="h-5 w-5" />
-                Task confirmed! {task.points} Klikks awarded.
+                Task confirmed! {task.reward} Klikks awarded.
               </div>
             )}
           </div>

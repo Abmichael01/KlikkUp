@@ -1,16 +1,19 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Copy, Users, Trophy, UserPlus } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { Users, Trophy, UserPlus } from "lucide-react";
+import CopyButton from "@/components/ui/CopyButton";
+import { useShareDialogStore } from "@/stores/useShareDialogStore";
 
 interface ReferralCodeProps {
   referralCode: string;
-  copyToClipboard: () => void;
-  copied: boolean;
 }
 
-const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode, copyToClipboard, copied }) => {
+const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
+  const openShareDialog = useShareDialogStore((state) => state.openDialog);
+
+  const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: https://urkelcodes.com/invite/${referralCode}`;
+
   return (
     <Card className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
@@ -32,13 +35,10 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode, copyToClipboa
                   {referralCode}
                 </p>
               </div>
-              <Button
-                onClick={copyToClipboard}
+              <CopyButton
+                textToCopy={referralCode}
                 className="bg-secondary hover:bg-secondary/90"
-              >
-                <Copy />
-                {copied ? "Copied" : "Copy"}
-              </Button>
+              />
             </div>
           </div>
 
@@ -46,22 +46,10 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode, copyToClipboa
             <div>
               <p className="text-sm text-blue-300">Referral Link</p>
             </div>
-            <Button
+            <CopyButton
+              textToCopy={`https://urkelcodes.com/invite/${referralCode}`}
               className="bg-secondary hover:bg-secondary/90 text-white float-right"
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `https://urkelcodes.com/invite/${referralCode}`
-                );
-                toast({
-                  title: "Copied to clipboard",
-                  description:
-                    "Your referral link has been copied to clipboard",
-                });
-              }}
-            >
-              <Copy className="h-4 w-4" />
-              Copy Link
-            </Button>
+            />
           </div>
         </div>
 
@@ -77,10 +65,15 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode, copyToClipboa
               </p>
             </div>
           </div>
-          <Button className="bg-secondary hover:bg-secondary/90 text-white">
-            <UserPlus className="h-4 w-4 mr-2" />
-            Invite Friends
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              className="bg-secondary hover:bg-secondary/90 text-white"
+              onClick={() => openShareDialog(referralMessage)}
+            >
+              <UserPlus className="h-4 w-4 mr-2" />
+              Invite Friends
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

@@ -1,126 +1,49 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Search, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { motion } from "framer-motion"
-import StatsCards from "@/components/Dashboard/Tasks/StatsCards"
-import TaskCard from "@/components/Dashboard/Tasks/TaskCard"
-
-const tasks = [
-  {
-    id: 1,
-    title: "Watch Product Tutorial",
-    description: "Learn how to use our platform effectively",
-    points: 2000,
-    difficulty: "Easy",
-    estimatedTime: "5 min",
-    isNew: true,
-  },
-  {
-    id: 2,
-    title: "Complete User Survey",
-    description: "Share your feedback about our services",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "3 min",
-    isNew: true,
-  },
-  {
-    id: 3,
-    title: "Share on Social Media",
-    description: "Spread the word about our platform",
-    points: 5000,
-    difficulty: "Medium",
-    estimatedTime: "10 min",
-    isNew: false,
-  },
-  {
-    id: 4,
-    title: "Refer a Friend",
-    description: "Invite someone to join our platform",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "2 min",
-    isNew: true,
-  },
-  {
-    id: 5,
-    title: "Complete Profile",
-    description: "Fill out all your profile information",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "5 min",
-    isNew: false,
-  },
-  {
-    id: 6,
-    title: "Join Discord Community",
-    description: "Connect with other users on Discord",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "3 min",
-    isNew: false,
-  },
-  {
-    id: 7,
-    title: "Follow on Twitter",
-    description: "Stay updated with our latest news",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "1 min",
-    isNew: true,
-  },
-  {
-    id: 8,
-    title: "Subscribe to Newsletter",
-    description: "Get weekly updates via email",
-    points: 1000,
-    difficulty: "Easy",
-    estimatedTime: "2 min",
-    isNew: false,
-  },
-  {
-    id: 9,
-    title: "Watch Feature Showcase",
-    description: "Learn about our newest features",
-    points: 1000,
-    difficulty: "Medium",
-    estimatedTime: "8 min",
-    isNew: true,
-  },
-]
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Search, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import StatsCards from "@/components/Dashboard/Tasks/StatsCards";
+import TaskCard from "@/components/Dashboard/Tasks/TaskCard";
+import { useTasksData } from "@/api/queries";
+import PageIsLoading from "@/components/Dashboard/PageIsLoading";
+import { Task, TasksData } from "@/types";
 
 const tabs = [
   {
-    label: "New tasks",
-    slug: "new-tasks",
+    label: "Available Tasks",
+    slug: "available-tasks",
   },
   {
-    label: "Completed tasks",
+    label: "Completed Tasks",
     slug: "completed-tasks",
   },
-]
+];
 
 const Tasks: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState("new-tasks")
-  const [searchQuery, setSearchQuery] = useState("")
+  const [currentTab, setCurrentTab] = useState("available-tasks");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredTasks = tasks.filter((task) => {
-    const matchesSearch =
-      task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      task.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesTab = currentTab === "new-tasks" ? task.isNew : !task.isNew
-    return matchesSearch && matchesTab
-  })
+  const { data, isLoading } = useTasksData();
+
+  if (isLoading) return <PageIsLoading />;
+
+  // Determine which tasks to display based on the current tab
+  const displayedTasks = currentTab === "available-tasks" ? data?.available_tasks : data?.completed_tasks as Task[];
+
+  // Filter tasks based on the search query
+  const filteredTasks = displayedTasks 
+
+  console.log(data)
 
   return (
     <div className="flex flex-col gap-6">
-      <StatsCards />
+      <StatsCards data={data as TasksData} />
 
       {/* Search and Filter */}
       <Card className="border-none bg-blue-950 text-white shadow-md">
@@ -143,7 +66,7 @@ const Tasks: React.FC = () => {
                     "text-center px-6 py-2 text-sm font-medium rounded-lg border border-blue-800 transition-colors",
                     tab.slug === currentTab
                       ? "bg-secondary text-white"
-                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950",
+                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950"
                   )}
                   onClick={() => setCurrentTab(tab.slug)}
                 >
@@ -156,9 +79,9 @@ const Tasks: React.FC = () => {
       </Card>
 
       {/* Tasks Grid */}
-      {filteredTasks.length > 0 ? (
+      {(filteredTasks?.length ?? 0) > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredTasks.map((task) => (
+          {filteredTasks?.map((task: Task) => (
             <motion.div
               key={task.id}
               initial={{ opacity: 0, y: 20 }}
@@ -177,12 +100,11 @@ const Tasks: React.FC = () => {
               <Search className="h-8 w-8 text-blue-300" />
             </div>
             <h3 className="text-xl font-semibold">No tasks found</h3>
-            <p className="text-blue-300 mt-2">Try adjusting your search or filter criteria</p>
             <Button
               className="mt-6 bg-secondary hover:bg-secondary/90 text-white"
               onClick={() => {
-                setSearchQuery("")
-                setCurrentTab("new-tasks")
+                setSearchQuery("");
+                setCurrentTab("available-tasks");
               }}
             >
               Reset Filters
@@ -206,8 +128,7 @@ const Tasks: React.FC = () => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Tasks
-
+export default Tasks;
