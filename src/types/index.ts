@@ -69,7 +69,8 @@ export type Task = {
   title: string;
   link: string;
   reward: number;
-  estimated_time: number;
+  confirmation_code?: string;
+  estimated_time?: number;
 }
 
 export type TasksData = {
