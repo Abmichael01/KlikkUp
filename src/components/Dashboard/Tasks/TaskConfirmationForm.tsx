@@ -10,14 +10,12 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
 import { CheckCircle, AlertCircle, Loader2, Play, Video } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "@/hooks/use-toast";
 import { Task } from "@/types";
-
-
-
+import { useConfirmTask } from "@/api/mutations";
+import { toast } from "@/hooks/use-toast";
+import { AxiosError } from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface TaskConfirmationFormProps {
   task: Task;
@@ -29,35 +27,31 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
   onClose,
 }) => {
   const [confirmationCode, setConfirmationCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(10); // 5 minutes default
+  const [timeRemaining, setTimeRemaining] = useState(2); // 5 minutes default
   const [timerStatus, setTimerStatus] = useState<
     "idle" | "running" | "completed"
   >("idle");
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const mutation = useConfirmTask();
+  const queryClient = useQueryClient()
 
   // Mutation handling confirmation logic
-  const mutation = useMutation({
-    mutationFn: async (code: string) => {
-      return new Promise<boolean>((resolve) => {
-        setTimeout(() => resolve(/^\d{6}$/.test(code)), 1500); // validate 6-digit code
-      });
-    },
-    onSuccess: (success) => {
-      if (success) {
+  const confirmTask = () => {
+    const data = { ...task, confirmation_code: confirmationCode };
+    mutation.mutate(data, {
+      onSuccess: () => {
         toast({
-          title: "Story completed!",
-          description: `You've earned ${task.reward} points for reading this story.`,
+          description: `Task confirmed! ${task.reward}points has been added to you balance`,
         });
-        setTimeout(() => {
-          onClose(); // Auto-close drawer
-        }, 2000);
-      }
-    },
-  });
+        queryClient.invalidateQueries({ queryKey: ["users"] })
+        queryClient.invalidateQueries({ queryKey: ["tasks-data"] })
+        onClose();
+      },
+    });
+  };
 
   // Reset and cleanup on mount
   useEffect(() => {
-    setTimeRemaining(10);
     setTimerStatus("idle");
     setConfirmationCode("");
     mutation.reset();
@@ -89,8 +83,6 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       seconds % 60
     ).padStart(2, "0")}`;
 
-  const progressPercentage = 100 - (timeRemaining / 10) * 100;
-
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <DrawerHeader>
@@ -101,9 +93,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
           {timerStatus === "idle"
             ? "Watch the video and click 'Start Task'"
             : timerStatus === "running"
-            ? `Please wait ${formatTime(timeRemaining)} before confirming "${
-                task.title
-              }"`
+            ? `Please wait for the countdown before confirming "${task.title}"`
             : `Enter the confirmation code to complete "${task.title}"`}
         </DrawerDescription>
       </DrawerHeader>
@@ -127,10 +117,9 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         {(timerStatus === "running" || timerStatus === "completed") && (
           <div className="space-y-6">
             <div>
-              <Progress
-                value={progressPercentage}
-                className="h-3 bg-blue-900/40 rounded-full"
-              />
+              <h1 className="text-blue-100 text-3xl text-center">
+                {formatTime(timeRemaining)}
+              </h1>
               <p className="mt-2 text-center text-xs text-white/80">
                 {timerStatus === "running" && "Timer in progress..."}
                 {timerStatus === "completed" &&
@@ -152,7 +141,12 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
             {mutation.isError && (
               <div className="flex items-center gap-2 text-sm text-red-500 bg-red-100 p-2 rounded-lg">
                 <AlertCircle className="h-5 w-5" />
-                Invalid code. Try again.
+                {mutation.error instanceof AxiosError &&
+                  mutation.error.response?.data?.error && (
+                    <span className="text-red-600 font-medium">
+                      {mutation.error.response.data.error}
+                    </span>
+                  )}
               </div>
             )}
             {mutation.isSuccess && (
@@ -168,7 +162,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       <DrawerFooter className="space-y-2">
         {timerStatus === "completed" && !mutation.isSuccess && (
           <Button
-            onClick={() => mutation.mutate(confirmationCode)}
+            onClick={confirmTask}
             disabled={!confirmationCode || mutation.isPending}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full"
           >

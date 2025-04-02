@@ -9,7 +9,6 @@ import { Task } from '@/types'
 
 const Table: React.FC = () => {
   const { data } = useGetTasks()
-  console.log(data)
   return (
     <div className="w-full">
       <DataTable columns={columns} data={data as Task[] || []} searchableColId='title' />

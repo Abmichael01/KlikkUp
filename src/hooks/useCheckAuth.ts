@@ -6,11 +6,11 @@ import type { User } from "@/types";
 
 export const useCheckAuth = () => {
     const setUser = useAuthStore((state) => state.setUser);
+    const logout = useAuthStore((state) => state.logout)
 
     const { data: user, isLoading, isError } = useQuery<User, Error>({
-        queryKey: ["authUser"],
+        queryKey: ["user"],
         queryFn: getUser,
-        retry: false, // Prevent unnecessary retries
     });
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const useCheckAuth = () => {
         } else if (isError) {
             setUser(null);
         }
-    }, [user, isError, setUser]);
+    }, [user, isError, setUser, logout]);
 
     return { user, isLoading, isAuthenticated: !!user, isError };
 };

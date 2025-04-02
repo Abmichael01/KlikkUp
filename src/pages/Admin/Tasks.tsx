@@ -26,7 +26,7 @@ const TasksManagement: React.FC = () => {
               New Task
             </GlidingButton>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent aria-describedby="addTask">
             <DialogHeader>
               <DialogTitle>Add a New Task</DialogTitle>
             </DialogHeader>

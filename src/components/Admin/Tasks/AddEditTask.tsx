@@ -53,7 +53,6 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
   const { setOpen: setUpdateDialog } = useDialog("updateTask")
   const { setOpen: setAddDialog } = useDialog("addTask")
 
-
   type FormField = {
     name: "title" | "link" | "reward" | "confirmation_code";
     placeholder: string;

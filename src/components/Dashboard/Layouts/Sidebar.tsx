@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 import {
   BookOpen,
   ClipboardList,
-  Gift,
   HomeIcon,
   UserPlus,
+  Wallet,
   Waypoints,
 } from "lucide-react";
 import React from "react";
@@ -15,7 +15,7 @@ const navs = [
   { icon: UserPlus, name: "Invite", path: "/invite" },
   { icon: ClipboardList, name: "Tasks", path: "/tasks?tab=new-tasks" },
   { icon: BookOpen, name: "Stories", path: "/stories?tab=new-stories" },
-  { icon: Gift, name: "Airdrop", path: "/airdrop" },
+  { icon: Wallet, name: "Wallet", path: "/wallet" },
   { icon: Waypoints, name: "Roadmap", path: "/roadmap" },
 ];
 

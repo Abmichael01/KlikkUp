@@ -26,7 +26,7 @@ const UsersManagement: React.FC = () => {
               New User
             </GlidingButton>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent aria-describedby="addUser">
             <DialogHeader>
               <DialogTitle>Add a New User</DialogTitle>
             </DialogHeader>

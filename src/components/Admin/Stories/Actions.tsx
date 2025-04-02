@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import AddEditStory from "./AddEditStory"
-import { useDialog } from "@/hooks/useDialog"
+// import { useDialog } from "@/hooks/useDialog"
 import { Alert } from "@/components/Alert"
 import { useDeleteStory } from "@/api/mutations"
 import { useMessageToaster } from "@/hooks/useMessageToaster"
@@ -23,14 +23,14 @@ interface ActionsProps {
 }
 
 const Actions: React.FC<ActionsProps> = ({ story }) => {
-  const { open, setOpen } = useDialog("updateStory")
+  // const { open, setOpen } = useDialog("updateStory")
   const { mutate: deleteStory } = useDeleteStory()
   const toastMessage = useMessageToaster()
   const queryClient = useQueryClient()
 
   return (
     <div>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">

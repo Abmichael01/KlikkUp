@@ -62,6 +62,7 @@ export const columns: ColumnDef<Task>[] = [
     id: "actions",
     cell: ({ row }) => {
       const task = row.original;
+      // console.log("Task from row.original:", task); // Debugging
       return (
         <Actions task={task} />
       );

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Search, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import StatsCards from "@/components/Dashboard/Tasks/StatsCards";
 import TaskCard from "@/components/Dashboard/Tasks/TaskCard";
@@ -27,7 +26,6 @@ const tabs = [
 
 const Tasks: React.FC = () => {
   const [currentTab, setCurrentTab] = useState("available-tasks");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const { data, isLoading } = useTasksData();
 
@@ -49,15 +47,7 @@ const Tasks: React.FC = () => {
       <Card className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-blue-300" />
-              <Input
-                placeholder="Search tasks..."
-                className="pl-9 bg-blue-900 border-blue-800 text-white placeholder:text-blue-300"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
+            
             <div className="flex gap-3">
               {tabs.map((tab) => (
                 <button
@@ -65,7 +55,7 @@ const Tasks: React.FC = () => {
                   className={cn(
                     "text-center px-6 py-2 text-sm font-medium rounded-lg border border-blue-800 transition-colors",
                     tab.slug === currentTab
-                      ? "bg-secondary text-white"
+                      ? "bg-secondary text-white border-0"
                       : "bg-blue-950/50 text-blue-300 hover:bg-blue-950"
                   )}
                   onClick={() => setCurrentTab(tab.slug)}
@@ -100,15 +90,6 @@ const Tasks: React.FC = () => {
               <Search className="h-8 w-8 text-blue-300" />
             </div>
             <h3 className="text-xl font-semibold">No tasks found</h3>
-            <Button
-              className="mt-6 bg-secondary hover:bg-secondary/90 text-white"
-              onClick={() => {
-                setSearchQuery("");
-                setCurrentTab("available-tasks");
-              }}
-            >
-              Reset Filters
-            </Button>
           </CardContent>
         </Card>
       )}

@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import AddEditTask from "./AddEditTask";
-import { useDialog } from "@/hooks/useDialog";
+// import { useDialog } from "@/hooks/useDialog";
 import { Alert } from "@/components/Alert";
 import { useDeleteTask } from "@/api/mutations";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
@@ -29,14 +29,16 @@ interface ActionsProps {
 }
 
 const Actions: React.FC<ActionsProps> = ({ task }) => {
-  const { open, setOpen } = useDialog("updateTask");
+  // const { open, setOpen } = useDialog("updateTask");
   const { mutate: deleteTask } = useDeleteTask();
   const toastMessage = useMessageToaster();
   const queyClient = useQueryClient();
 
+  
+
   return (
     <div>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -44,7 +46,7 @@ const Actions: React.FC<ActionsProps> = ({ task }) => {
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" aria-describedby="editTask">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
             <DialogTrigger className="w-full">

@@ -178,7 +178,7 @@ export const deleteStory = async (id: Story["id"]) => {
 
 export const getReferralsData = async () => {
   try {
-    const response = await apiClient.get(`/users/me/referrals/`);
+    const response = await apiClient.get(`/users/referrals/`);
     return response.data as ReferralsData;
   } catch (error) {
     console.error("Error fetching data", error);
@@ -188,11 +188,20 @@ export const getReferralsData = async () => {
 
 export const getTasksData = async () => {
   try {
-    console.log("Fetching tasks data...");
-    const response = await apiClient.get(`/users/me/tasks/`);
+    const response = await apiClient.get(`/users/tasks/`);
     return response.data as TasksData;
   } catch (error) {
     console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const confirmTask = async (data: Task) => {
+  try {
+    const response = await apiClient.post(`/users/confirm-task/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error confirming tasks", error);
     throw error;
   }
 };

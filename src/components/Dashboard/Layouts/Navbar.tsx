@@ -11,9 +11,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownCircleIcon, LogOut, User } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useQueryClient } from "@tanstack/react-query";
+import { useLogout } from "@/api/mutations";
 
 const Navbar: React.FC = () => {
   const { logout, user } = useAuthStore.getState()
+  const queryClient = useQueryClient()
+  const { mutate } = useLogout()
   return (
     <div className="px-5 py-4 border-b flex items-center justify-between sticky top-0 right-0 bg-white z-30">
       <div className="flex items-center gap-2">
@@ -37,7 +41,16 @@ const Navbar: React.FC = () => {
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem 
-            onClick={logout}
+            onClick={() => {
+              document.cookie = ""
+              mutate(undefined, {
+                onSuccess: (data) => {
+                  console.log(data)
+                  queryClient.invalidateQueries({ queryKey: ["user"]})
+                }
+              })
+              logout()
+            }}
           >
             <LogOut />
             Logout
