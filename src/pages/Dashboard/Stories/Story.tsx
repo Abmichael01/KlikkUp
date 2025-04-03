@@ -17,6 +17,7 @@ import {
   ArrowLeft,
   TrendingUp,
   Timer,
+  Loader2,
 } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { toast } from "@/hooks/use-toast";
@@ -33,14 +34,11 @@ const Story: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
 
-  const { data } = useGetStory(Number(id));
+  const { data, isLoading } = useGetStory(Number(id));
   const { mutate } = useConfirmStory()
 
-
-
-  console.log(data);
-
-  const MIN_READING_TIME = (data?.estimated_time ?? 0) * 60;
+  // const MIN_READING_TIME = (data?.estimated_time ?? 0) * 60;
+  const MIN_READING_TIME = 2;
 
   // Use Framer Motion's useInView to detect when the button is in view
   const isInView = useInView(buttonRef, { once: true, amount: 0.5 });
@@ -50,6 +48,7 @@ const Story: React.FC = () => {
 
   // Start timer when component mounts
   useEffect(() => {
+    if (isLoading) return;
     const timer = setInterval(() => {
       setElapsedTime((prev) => {
         if (prev >= MIN_READING_TIME) {
@@ -61,7 +60,7 @@ const Story: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [data, MIN_READING_TIME]);
+  }, [data, MIN_READING_TIME, isLoading]);
 
   // Calculate time progress percentage
   const timeProgress = Math.min((elapsedTime / MIN_READING_TIME) * 100, 100);
@@ -78,23 +77,21 @@ const Story: React.FC = () => {
   const canComplete = isInView && elapsedTime >= MIN_READING_TIME;
 
   const handleComplete = () => {
-    setIsCompleted(true);
+    
     mutate(story as StoryType, {
       onSuccess: () => {
+        setIsCompleted(true);
         toast({
           title: "Story completed!",
           description: `You've earned ${story?.reward} points for reading this story.`,
         });
       },
     })
-
-    // In a real app, you would make an API call to mark the story as read
-    // and award points to the user
-    toast({
-      title: "Story completed!",
-      description: `You've earned ${story?.reward} points for reading this story.`,
-    });
   };
+
+  if(isLoading) return <div className="flex items-center justify-center h-40">
+    <Loader2 className="animate-spin text-primary" />
+  </div>
 
   return (
     <div className="container mx-auto max-w-3xl">
