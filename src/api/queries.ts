@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {getCoupons, getReferralsData, getStories, getTasks, getTasksData, getUser, getUsers} from "@/api/apiEndpoints";
+import {getCoupons, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers} from "@/api/apiEndpoints";
 
 // Fetch Current User
 export const useGetUser = () => {
@@ -52,4 +52,20 @@ export const useTasksData = () => {
     queryFn: getTasksData,
   });
 };
+
+export const useStoriesData = () => {
+  return useQuery({
+    queryKey: ["stories-data"],
+    queryFn: getStoriesData,
+  });
+};
+
+export const useGetStory = (id: number) => {
+  return useQuery({
+    queryKey: ["story"],
+    queryFn: () => getStory(id),
+  });
+};
+
+
 

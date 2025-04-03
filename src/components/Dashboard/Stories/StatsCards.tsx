@@ -1,8 +1,13 @@
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { BookOpen, CheckCircle, TrendingUp } from "lucide-react"
+import { StoriesData } from "@/types"
 
-const StatsCards: React.FC = () => {
+interface Props {
+  data: StoriesData;
+}
+
+const StatsCards: React.FC<Props> = ({  data }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <Card className="border-none bg-blue-950 text-white shadow-md">
@@ -10,7 +15,7 @@ const StatsCards: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-300">Available Stories</p>
-              <p className="mt-1 text-3xl font-semibold">9</p>
+              <p className="mt-1 text-3xl font-semibold">{data.new_stories?.length}</p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <BookOpen className="h-6 w-6 text-secondary" />
@@ -27,7 +32,7 @@ const StatsCards: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-300">Stories Read</p>
-              <p className="mt-1 text-3xl font-semibold">16</p>
+              <p className="mt-1 text-3xl font-semibold">{data.stories_read?.length}</p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <CheckCircle className="h-6 w-6 text-secondary" />
@@ -44,7 +49,7 @@ const StatsCards: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-300">Points Earned</p>
-              <p className="mt-1 text-3xl font-semibold">16,000</p>
+              <p className="mt-1 text-3xl font-semibold">{data.points_earned}</p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <TrendingUp className="h-6 w-6 text-secondary" />

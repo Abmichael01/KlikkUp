@@ -84,6 +84,13 @@ export type Story = {
   title: string;
   body: string;
   reward: number;
+  estimated_time?: number;
+}
+
+export type StoriesData = {
+  stories_read: Story[];
+  new_stories: Story[];
+  points_earned: number;
 }
 
 export type Announcement = {

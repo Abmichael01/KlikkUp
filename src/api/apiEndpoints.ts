@@ -1,4 +1,4 @@
-import {Coupon, LoginData, ReferralsData, RegisterData, Story, Task, TasksData, User} from "@/types";
+import {Coupon, LoginData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -202,6 +202,38 @@ export const confirmTask = async (data: Task) => {
     return response.data;
   } catch (error) {
     console.error("Error confirming tasks", error);
+    throw error;
+  }
+};
+
+export const getStoriesData = async () => {
+  try {
+    const response = await apiClient.get(`/users/stories/`);
+    return response.data as StoriesData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const getStory = async (id: number) => {
+  try {
+    const response = await apiClient.get(`/users/story/${id}/`);
+    return response.data as Story;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+
+
+export const confirmStory = async (data: Story) => {
+  try {
+    const response = await apiClient.post(`/users/confirm-story/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error confirming story", error);
     throw error;
   }
 };
