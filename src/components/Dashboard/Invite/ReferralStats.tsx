@@ -1,16 +1,17 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { UserPlus, Trophy, Medal } from "lucide-react";
-import {ReferralsData} from "@/types";
+import { ReferralsData } from "@/types";
+import GradientCard from "@/components/ui/GradientCard";
 
 interface Props {
   data: ReferralsData;
 }
 
-const ReferralStats: React.FC<Props> = ({data}) => {
+const ReferralStats: React.FC<Props> = ({ data }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -25,9 +26,9 @@ const ReferralStats: React.FC<Props> = ({data}) => {
             <span className="text-green-400">↑ 5</span> from last month
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -42,9 +43,9 @@ const ReferralStats: React.FC<Props> = ({data}) => {
             <span className="text-green-400">500 points</span> per referral
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -59,7 +60,7 @@ const ReferralStats: React.FC<Props> = ({data}) => {
             <span className="text-green-400">{data.percentage_rank}%</span> of all users
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
     </div>
   );
 };

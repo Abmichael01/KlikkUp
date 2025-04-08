@@ -1,11 +1,12 @@
 import React from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { CardContent } from "@/components/ui/card"
 import { TrendingUp, Users, Gift } from "lucide-react"
+import GradientCard from "@/components/ui/GradientCard";
 
 const StatsCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -20,9 +21,9 @@ const StatsCards: React.FC = () => {
             <span className="text-green-400">Eligible</span> for next airdrop
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -37,9 +38,9 @@ const StatsCards: React.FC = () => {
             <span className="text-green-400">+1,245</span> this month
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -54,7 +55,7 @@ const StatsCards: React.FC = () => {
             <span className="text-green-400">100%</span> distribution rate
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
     </div>
   )
 }

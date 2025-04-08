@@ -85,6 +85,7 @@ export type Story = {
   body: string;
   reward: number;
   estimated_time?: number;
+  story_read: boolean;
 }
 
 export type StoriesData = {

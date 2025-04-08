@@ -2,16 +2,16 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Search, ChevronRight } from "lucide-react";
+import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import StatsCards from "@/components/Dashboard/Tasks/StatsCards";
 import TaskCard from "@/components/Dashboard/Tasks/TaskCard";
 import { useTasksData } from "@/api/queries";
 import PageIsLoading from "@/components/Dashboard/PageIsLoading";
 import { Task, TasksData } from "@/types";
+import GradientCard from "@/components/ui/GradientCard";
 
 const tabs = [
   {
@@ -44,7 +44,7 @@ const Tasks: React.FC = () => {
       <StatsCards data={data as TasksData} />
 
       {/* Search and Filter */}
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
             
@@ -66,7 +66,7 @@ const Tasks: React.FC = () => {
             </div>
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
       {/* Tasks Grid */}
       {(filteredTasks?.length ?? 0) > 0 ? (
@@ -84,18 +84,18 @@ const Tasks: React.FC = () => {
           ))}
         </div>
       ) : (
-        <Card className="border-none bg-blue-900 text-white shadow-md">
+        <GradientCard className="border-none bg-blue-900 text-white shadow-md">
           <CardContent className="py-12 flex flex-col items-center justify-center">
             <div className="h-16 w-16 rounded-full bg-blue-950 flex items-center justify-center mb-4">
               <Search className="h-8 w-8 text-blue-300" />
             </div>
             <h3 className="text-xl font-semibold">No tasks found</h3>
           </CardContent>
-        </Card>
+        </GradientCard>
       )}
 
       {/* View All Tasks */}
-      <Card className="border-none bg-blue-900 text-white shadow-md">
+      {/* <Card className="border-none bg-blue-900 text-white shadow-md">
         <CardContent className="py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
@@ -107,7 +107,7 @@ const Tasks: React.FC = () => {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Search, ChevronRight } from "lucide-react"
+import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
@@ -12,6 +12,7 @@ import StoryCard from "@/components/Dashboard/Stories/StoryCard"
 import { useStoriesData } from "@/api/queries"
 import { StoriesData, Story } from "@/types"
 import PageIsLoading from "@/components/Dashboard/PageIsLoading"
+import GradientCard from "@/components/ui/GradientCard"
 
 
 
@@ -42,7 +43,7 @@ const Stories: React.FC = () => {
       <StatsCards data={data as StoriesData} />
 
       {/* Search and Filter */}
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex gap-3">
@@ -50,10 +51,10 @@ const Stories: React.FC = () => {
                 <button
                   key={tab.label}
                   className={cn(
-                    "text-center px-6 py-2 text-sm font-medium rounded-lg border border-blue-800 transition-colors",
+                    "text-center px-6 py-2 text-sm font-medium rounded-lg  border-blue-800 transition-colors",
                     tab.slug === currentTab
                       ? "bg-secondary text-white"
-                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950",
+                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950 border",
                   )}
                   onClick={() => setCurrentTab(tab.slug)}
                 >
@@ -63,7 +64,7 @@ const Stories: React.FC = () => {
             </div>
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
       {/* Stories Grid */}
       {(filteredStories?.length ?? 0) > 0 ? (
@@ -101,7 +102,7 @@ const Stories: React.FC = () => {
       )}
 
       {/* View All Stories */}
-      <Card className="border-none bg-blue-900 text-white shadow-md">
+      {/* <Card className="border-none bg-blue-900 text-white shadow-md">
         <CardContent className="py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
@@ -113,7 +114,7 @@ const Stories: React.FC = () => {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   )
 }

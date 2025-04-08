@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ReferralUser } from "@/types";
+import GradientCard from "@/components/ui/GradientCard";
 
 interface ReferralListProps {
   referrals: ReferralUser[];
@@ -16,14 +17,14 @@ interface ReferralListProps {
 
 const ReferralList: React.FC<ReferralListProps> = ({ referrals }) => {
   return (
-    <Card className="border-none bg-blue-950 text-white shadow-md">
+    <GradientCard className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           Your Referrals
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="rounded-lg border border-white/10 overflow-hidden">
+        <div className="rounded-lg border bg-blue-950/80 border-white/10 overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow className="bg-blue-900/50 hover:bg-blue-900/50">
@@ -52,7 +53,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ referrals }) => {
           </Table>
         </div>
       </CardContent>
-    </Card>
+    </GradientCard>
   );
 };
 

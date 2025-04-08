@@ -1,7 +1,8 @@
 import React from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { CardContent } from "@/components/ui/card"
 import { BookOpen, CheckCircle, TrendingUp } from "lucide-react"
 import { StoriesData } from "@/types"
+import GradientCard from "@/components/ui/GradientCard";
 
 interface Props {
   data: StoriesData;
@@ -10,7 +11,7 @@ interface Props {
 const StatsCards: React.FC<Props> = ({  data }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -25,9 +26,9 @@ const StatsCards: React.FC<Props> = ({  data }) => {
             <span className="text-green-400">4 new</span> stories this week
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -42,9 +43,9 @@ const StatsCards: React.FC<Props> = ({  data }) => {
             <span className="text-green-400">+3</span> from last month
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -59,7 +60,7 @@ const StatsCards: React.FC<Props> = ({  data }) => {
             <span className="text-green-400">↑ 8%</span> from last month
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
     </div>
   )
 }

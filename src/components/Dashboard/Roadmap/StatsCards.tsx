@@ -1,7 +1,8 @@
 import React from "react"
 import { TrendingUp, Clock, Users } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import GradientCard from "@/components/ui/GradientCard"
 
 type RoadmapItem = {
   title: string
@@ -13,7 +14,7 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -33,9 +34,9 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
             </p>
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -50,9 +51,9 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
             <span className="text-green-400">{completedItems}/{roadmapItems.length}</span> milestones completed
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
 
-      <Card className="border-none bg-blue-950 text-white shadow-md">
+      <GradientCard className="border-none text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
@@ -67,7 +68,7 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
             <span className="text-green-400">Growing</span> steadily
           </div>
         </CardContent>
-      </Card>
+      </GradientCard>
     </div>
   )
 }

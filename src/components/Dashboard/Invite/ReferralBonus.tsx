@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
+import GradientCard from "@/components/ui/GradientCard";
 
 const ReferralBonus: React.FC = () => {
   return (
-    <Card className="border-none bg-blue-950 text-white shadow-md">
+    <GradientCard className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-secondary" />
@@ -26,7 +27,7 @@ const ReferralBonus: React.FC = () => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </GradientCard>
   );
 };
 

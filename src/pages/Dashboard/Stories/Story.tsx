@@ -35,10 +35,10 @@ const Story: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
   const { data, isLoading } = useGetStory(Number(id));
-  const { mutate } = useConfirmStory()
+  const { mutate } = useConfirmStory();
 
-  // const MIN_READING_TIME = (data?.estimated_time ?? 0) * 60;
-  const MIN_READING_TIME = 2;
+  const MIN_READING_TIME = (data?.estimated_time ?? 0) * 60;
+  // const MIN_READING_TIME = ;
 
   // Use Framer Motion's useInView to detect when the button is in view
   const isInView = useInView(buttonRef, { once: true, amount: 0.5 });
@@ -60,7 +60,7 @@ const Story: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [data, MIN_READING_TIME, isLoading]);
+  }, [MIN_READING_TIME, isLoading]);
 
   // Calculate time progress percentage
   const timeProgress = Math.min((elapsedTime / MIN_READING_TIME) * 100, 100);
@@ -77,7 +77,6 @@ const Story: React.FC = () => {
   const canComplete = isInView && elapsedTime >= MIN_READING_TIME;
 
   const handleComplete = () => {
-    
     mutate(story as StoryType, {
       onSuccess: () => {
         setIsCompleted(true);
@@ -86,12 +85,15 @@ const Story: React.FC = () => {
           description: `You've earned ${story?.reward} points for reading this story.`,
         });
       },
-    })
+    });
   };
 
-  if(isLoading) return <div className="flex items-center justify-center h-40">
-    <Loader2 className="animate-spin text-primary" />
-  </div>
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-40">
+        <Loader2 className="animate-spin text-primary" />
+      </div>
+    );
 
   return (
     <div className="container mx-auto max-w-3xl">
@@ -110,7 +112,7 @@ const Story: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 text-sm text-blue-300">
               <Clock className="h-4 w-4" />
-              <span>{story?.estimated_time} read</span>
+              <span>{story?.estimated_time} min(s) read</span>
             </div>
           </div>
           <CardTitle className="text-2xl mt-2 text-white">
@@ -119,61 +121,72 @@ const Story: React.FC = () => {
         </CardHeader>
 
         {/* Reading timer progress */}
-        <div className="px-6 py-2 border-b border-blue-800">
-          <div className="flex items-center justify-between text-xs text-blue-300 mb-1">
-            <span className="flex items-center">
-              <Timer className="h-3 w-3 mr-1" />
-              Reading time
-            </span>
-            {elapsedTime < MIN_READING_TIME ? (
-              <span>{formatRemainingTime()} remaining</span>
-            ) : (
-              <span className="text-green-400">Minimum time reached</span>
-            )}
+        {!story?.story_read && (
+          <div className="px-6 py-2 border-b border-blue-800">
+            <div className="flex items-center justify-between text-xs text-blue-300 mb-1">
+              <span className="flex items-center">
+                <Timer className="h-3 w-3 mr-1" />
+                 Reading time
+              </span>
+              {elapsedTime < MIN_READING_TIME ? (
+                <span>{formatRemainingTime()} remaining</span>
+              ) : (
+                <span className="text-green-400">Minimum time reached</span>
+              )}
+            </div>
+            <Progress value={timeProgress} className="h-1 bg-blue-900/50" />
           </div>
-          <Progress value={timeProgress} className="h-1 bg-blue-900/50" />
-        </div>
+        )}
 
         <CardContent className="p-6 text-blue-100">
-          <div className="prose prose-invert" dangerouslySetInnerHTML={{ __html: data?.body || "" }} />
+          <div
+            className="prose prose-invert"
+            dangerouslySetInnerHTML={{ __html: data?.body || "" }}
+          />
         </CardContent>
 
-        <CardFooter
-          ref={buttonRef}
-          className="flex justify-between items-center border-t border-blue-800 p-4"
-        >
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-secondary" />
-            <div className="text-sm">
-              <span className="font-medium text-secondary">
-                {story?.reward}
-              </span>
-              <span className="text-blue-300 ml-1">points upon completion</span>
-            </div>
-          </div>
-
-          <Button
-            onClick={handleComplete}
-            disabled={!canComplete || isCompleted}
-            className={
-              isCompleted
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-secondary hover:bg-secondary/90"
-            }
+        {!story?.story_read && (
+          <CardFooter
+            ref={buttonRef}
+            className="flex justify-between items-center border-t border-blue-800 p-4"
           >
-            {isCompleted ? (
-              <>
-                <CheckCircle className="mr-2 h-4 w-4" />
-                Completed
-              </>
-            ) : (
-              "Mark as Done"
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-secondary" />
+              <div className="text-sm">
+                <span className="font-medium text-secondary">
+                  {story?.reward}
+                </span>
+                <span className="text-blue-300 ml-1">
+                  points upon completion
+                </span>
+              </div>
+            </div>
+
+            {!story?.story_read && (
+              <Button
+                onClick={handleComplete}
+                disabled={!canComplete || isCompleted}
+                className={
+                  isCompleted
+                    ? "bg-green-600 hover:bg-green-700"
+                    : "bg-secondary hover:bg-secondary/90"
+                }
+              >
+                {isCompleted ? (
+                  <>
+                    <CheckCircle className="mr-2 h-4 w-4" />
+                    Completed
+                  </>
+                ) : (
+                  "Mark as Done"
+                )}
+              </Button>
             )}
-          </Button>
-        </CardFooter>
+          </CardFooter>
+        )}
       </Card>
 
-      {!canComplete && (
+      {!story?.story_read && !canComplete && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

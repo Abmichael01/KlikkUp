@@ -1,8 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, CheckCircle, MapPin } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import GradientCard from "@/components/ui/GradientCard";
 
 type RoadmapItem = {
   title: string;
@@ -11,7 +12,7 @@ type RoadmapItem = {
 
 const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems }) => {
   return (
-    <Card className="border-none bg-blue-950 text-white shadow-md">
+    <GradientCard className="border-none text-white shadow-md">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2">
           <Calendar className="h-5 w-5 text-secondary" />
@@ -55,7 +56,7 @@ const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems 
                 >
                   <div
                     className={cn(
-                      "flex items-center gap-3 p-3 rounded-lg transition-colors",
+                      "flex items-center gap-3 p-3 rounded-full transition-colors",
                       item.completed
                         ? "bg-blue-900/50 border border-secondary/30"
                         : "bg-blue-900/20 border border-blue-800"
@@ -64,12 +65,12 @@ const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems 
                     <div
                       className={cn(
                         "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-                        item.completed ? "bg-secondary/20 text-secondary" : "bg-blue-900 text-blue-300"
+                        item.completed ? "bg-secondary/20 text-secondary" : "bg-blue-900 text-blue-200"
                       )}
                     >
                       {item.completed ? <CheckCircle className="h-5 w-5" /> : <MapPin className="h-5 w-5" />}
                     </div>
-                    <span className={item.completed ? "text-white" : "text-blue-300"}>{item.title}</span>
+                    <span className={item.completed ? "text-white" : "text-blue-100"}>{item.title}</span>
                   </div>
                 </motion.div>
               </div>
@@ -77,7 +78,7 @@ const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems 
           ))}
         </div>
       </CardContent>
-    </Card>
+    </GradientCard>
   );
 };
 

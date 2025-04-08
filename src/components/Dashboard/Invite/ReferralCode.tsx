@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Trophy, UserPlus } from "lucide-react";
 import CopyButton from "@/components/ui/CopyButton";
 import { useShareDialogStore } from "@/stores/useShareDialogStore";
+import GradientCard from "@/components/ui/GradientCard";
 
 interface ReferralCodeProps {
   referralCode: string;
@@ -15,7 +16,7 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
   const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: https://urkelcodes.com/invite/${referralCode}`;
 
   return (
-    <Card className="border-none bg-blue-950 text-white shadow-md">
+    <GradientCard className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Users className="h-5 w-5 text-secondary" />
@@ -76,7 +77,7 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </GradientCard>
   );
 };
 

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import RecentActivities from "@/components/Dashboard/Dashboard/RecentActivities"
 import {useAuthStore} from "@/stores/useAuthStore.ts";
+import GradientCard from "@/components/ui/GradientCard"
 
 const Dashboard: React.FC = () => {
     const user = useAuthStore(state => state.user)
@@ -18,9 +19,9 @@ const Dashboard: React.FC = () => {
         {/* Top Row */}
         <div className="flex flex-col md:flex-row gap-6">
           {/* Simplified Overview Card */}
-          <Card className="col-span-2 border-none bg-blue-950 text-white shadow-md flex-grow">
+          <GradientCard bg="from-blue-950 to-blue-950" className="col-span-2 border-none text-white shadow-md flex-grow">
             <Overview />
-          </Card>
+          </GradientCard>
 
           {/* Streak Card */}
           <Card className="border-none shrink-0 bg-blue-950 text-white shadow-md w-full md:w-[300px] lg:w-[400px]">
