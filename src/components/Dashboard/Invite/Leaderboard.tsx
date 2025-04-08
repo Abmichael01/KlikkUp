@@ -22,7 +22,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
     <GradientCard bg="from-blue-950 to" className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-secondary" />
+          <Trophy className="h-5 w-5 text-secondary" /> 
           Referral Leaderboard
         </CardTitle>
       </CardHeader>
