@@ -19,7 +19,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
   const leaderboardMessage = `Check out the leaderboard on KlikkUp and join the fun! Use my referral link to sign up: https://urkelcodes.com/leaderboard`;
 
   return (
-    <GradientCard bg="from-blue-950 to" className="border-none bg-blue-950 text-white shadow-md">
+    <GradientCard hoverEffect="glow" bg="from-blue-950 to" className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-secondary" />
