@@ -100,3 +100,31 @@ export type Announcement = {
   message: string;
   link?: string; // Optional link for the announcement
 };
+
+
+
+// wallets
+
+export type TransactionType = "CREDIT" | "DEBIT";
+
+export interface Transaction {
+  id: number;
+  amount: number;
+  transaction_type: TransactionType;
+  description: string;
+  created_at: string; // ISO date string
+}
+
+export interface BankDetails {
+  account_name: string;
+  account_number: string;
+  bank_name: string;
+}
+
+export interface WalletDetail {
+  balance: number;
+  earned: number; // total credit
+  withdrawn: number; // total debit
+  bank_details: BankDetails | null;
+  transactions: Transaction[];
+}
