@@ -119,12 +119,19 @@ export interface BankDetails {
   account_name: string;
   account_number: string;
   bank_name: string;
+  bank_code: string;
 }
 
-export interface WalletDetail {
+export interface WalletDetails {
   balance: number;
   earned: number; // total credit
   withdrawn: number; // total debit
+  pending_withdrawal: number;
   bank_details: BankDetails | null;
   transactions: Transaction[];
+}
+
+export interface Bank {
+  name: string;
+  code: string;
 }

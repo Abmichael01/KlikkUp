@@ -7,12 +7,15 @@ import { Button } from "@/components/ui/button"
 import { Eye, EyeOff, Award } from "lucide-react"
 import { cn } from "@/lib/utils"
 import GradientCard from "@/components/ui/GradientCard"
+import { useWalletStore } from "@/stores/walletStore"
+
+
 
 export const BalanceCard: React.FC = () => {
   const [showBalance, setShowBalance] = useState(true)
-
+  const { walletDetails } = useWalletStore()
   // Mock data
-  const balance = 245075.5
+  
   const currency = "₦" // Nigerian Naira
 
   return (
@@ -25,7 +28,7 @@ export const BalanceCard: React.FC = () => {
             <div>
               <p className="text-xs font-light opacity-80">Available Balance</p>
               <p className="text-3xl font-bold mt-1">
-                {showBalance ? `${currency}${balance.toLocaleString("en-NG")}` : "••••••"}
+                {showBalance ? `${currency}${walletDetails.balance}` : "••••••"}
               </p>
             </div>
             <Button
@@ -51,21 +54,21 @@ export const BalanceCard: React.FC = () => {
           <div className="text-center p-3 bg-green-50 rounded-lg">
             <p className="text-xs text-gray-500 mb-1"> Earned</p>
             <p className={cn("font-semibold text-green-600", !showBalance && "text-gray-400")}>
-              {showBalance ? `${currency}325,000` : "••••••"}
+              {showBalance ? `${currency}${walletDetails.earned}` : "••••••"}
             </p>
           </div>
 
           <div className="text-center p-3 bg-blue-50 rounded-lg">
             <p className="text-xs text-gray-500 mb-1"> Withdrawn</p>
             <p className={cn("font-semibold text-blue-600", !showBalance && "text-gray-400")}>
-              {showBalance ? `${currency}79,925` : "••••••"}
+              {showBalance ? `${currency}${walletDetails.withdrawn}` : "••••••"}
             </p>
           </div>
 
           <div className="text-center p-3 bg-amber-50 rounded-lg">
             <p className="text-xs text-gray-500 mb-1">Pending</p>
             <p className={cn("font-semibold text-amber-600", !showBalance && "text-gray-400")}>
-              {showBalance ? `${currency}15,025` : "••••••"}
+              {showBalance ? `${currency}${walletDetails.pending_withdrawal}` : "••••••"}
             </p>
           </div>
         </div>

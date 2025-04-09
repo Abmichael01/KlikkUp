@@ -1,4 +1,4 @@
-import {Coupon, LoginData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User} from "@/types";
+import {BankDetails, Coupon, LoginData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -226,8 +226,6 @@ export const getStory = async (id: number) => {
   }
 };
 
-
-
 export const confirmStory = async (data: Story) => {
   try {
     const response = await apiClient.post(`/users/confirm-story/`, data);
@@ -237,5 +235,30 @@ export const confirmStory = async (data: Story) => {
     throw error;
   }
 };
+
+
+// wallets
+
+export const getWalletData = async () => {
+  try {
+    const response = await apiClient.get("/wallet/");
+    return response.data as WalletDetails;
+  } catch (error) {
+    console.error("Error fetching wallet data", error);
+    throw error;
+  }
+};
+
+export const updateBankDetails = async (data: BankDetails) => {
+  try {
+    const response = await apiClient.put("/wallet/bank-details/", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching wallet data", error);
+    throw error;
+  }
+};
+
+
 
 

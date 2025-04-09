@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             <ChevronDownCircleIcon size={20} className="text-foreground/60 " />
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
