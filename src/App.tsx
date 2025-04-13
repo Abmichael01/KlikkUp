@@ -12,6 +12,7 @@ import Tasks from "./pages/Dashboard/Tasks";
 import Stories from "./pages/Dashboard/Stories/Stories";
 import Roadmap from "./pages/Dashboard/Roadmap";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import BuyCoupon from "./components/Transactions/BuyCoupon";
 
 import { useEffect } from "react";
 import AdminLayout from "./layouts/AdminLayout";
@@ -43,7 +44,10 @@ const App: React.FC = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          
         </Route>
+
+        <Route path="/buy-coupon" element={<BuyCoupon />} />
 
         {/* Dashboard Layout */}
         <Route element={<ProtectedRoute allowedRoles={[1, 2, 3]} />}>
