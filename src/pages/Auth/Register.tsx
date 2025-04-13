@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Link, useNavigate } from "react-router";
-import { Eye, LockIcon, Mail, TicketIcon, User, Users } from "lucide-react";
+import { Eye, EyeClosed, LockIcon, Mail, TicketIcon, User, Users } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useRegister } from "@/api/mutations";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
@@ -108,6 +108,10 @@ const formFields: FormField[] = [
 ];
 
 const Register: React.FC = () => {
+  const [passwordVisibility, setPasswordVisibility] = React.useState<Record<string, boolean>>({
+    password: false,
+    confirmPassword: false
+  });
   const [errorMessages, setErrorMessages] =
     React.useState<Record<string, string[]>>();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -162,6 +166,14 @@ const Register: React.FC = () => {
     non_field_errors: "Error",
   };
 
+  const toggleVisibility = (fieldName: string) => {
+    setPasswordVisibility(prev => ({
+      ...prev,
+      [fieldName]: !prev[fieldName],
+    }));
+  };
+  
+
   return (
     <Form {...form}>
       <form
@@ -199,13 +211,21 @@ const Register: React.FC = () => {
                     <div className="text-primary">{formField.icon}</div>
                     <input
                       placeholder={formField.label}
-                      type={formField.type}
+                      type={
+                        formField.type === "password"
+                          ? passwordVisibility[formField.name]
+                            ? "text"
+                            : "password"
+                          : formField.type
+                      }
                       {...field}
                       className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
                     />
                     {formField.type === "password" && (
-                      <div className="border-l-[2px] border-primary pl-2">
-                        <Eye />
+                      <div 
+                      onClick={() => toggleVisibility(formField.name)}
+                      className="border-l-[2px] border-primary pl-2 cursor-pointer">
+                        {passwordVisibility[formField.name] ? <EyeClosed /> : <Eye />}
                       </div>
                     )}
                   </div>

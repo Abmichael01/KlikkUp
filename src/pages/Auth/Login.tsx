@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Link, useNavigate, useLocation } from "react-router";
-import { Eye, LockIcon, User } from "lucide-react";
+import { Eye, EyeClosed, LockIcon, User } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useLogin } from "@/api/mutations";
 import { LoginData } from "@/types";
@@ -53,6 +53,7 @@ const formFields: FormField[] = [
 ];
 
 const Login: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,7 +61,7 @@ const Login: React.FC = () => {
     },
   });
   const { mutate, isPending } = useLogin();
-  const { setUser } = useAuthStore()
+  const { setUser } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const toastMessage = useMessageToaster();
@@ -71,10 +72,9 @@ const Login: React.FC = () => {
     console.log(values);
     mutate(values as LoginData, {
       onSuccess: async (data) => {
-        setUser(data.user)
+        setUser(data.user);
         navigate(from);
-        console.log(data)
-
+        console.log(data);
       },
       onError: (error) => {
         const errorMessages = (error as AxiosError)?.response?.data as Record<
@@ -113,13 +113,17 @@ const Login: React.FC = () => {
                     <div className="text-primary">{formField.icon}</div>
                     <input
                       placeholder={formField.label}
-                      type={formField.type}
+                      type={showPassword ? "text" : formField.type}
                       {...field}
                       className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
+                      id={formField.name}
                     />
                     {formField.type === "password" && (
-                      <div className="border-l-[2px] border-primary pl-2">
-                        <Eye />
+                      <div
+                        onClick={() => setShowPassword(prev => !prev)}
+                        className="border-l-[2px] border-primary pl-2 cursor-pointer"
+                      >
+                        { showPassword ? <EyeClosed /> :  <Eye />}
                       </div>
                     )}
                   </div>

@@ -98,10 +98,10 @@ const Navbar: React.FC = () => {
           ))}
         </div>
         <button
-          className="px-3 py-2 border border-primary/60 rounded-xl lg:hidden hover:bg-primary/10 transition-colors"
+          className="px-2 py-2 border-2 bg-blue-200 shadow-lg border-primary/60 rounded-2xl lg:hidden hover:bg-blue-100 transition-colors"
           onClick={() => setIsSidebarOpen(true)}
         >
-          <LucideChartNoAxesGantt />
+          <LucideChartNoAxesGantt size={30} />
         </button>
       </div>
 

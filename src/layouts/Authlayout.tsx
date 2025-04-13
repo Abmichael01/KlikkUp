@@ -1,5 +1,6 @@
-import CircleWave from "@/components/CircleWave";
 import Logo from "@/components/Logo/Logo";
+import { CardContent } from "@/components/ui/card";
+import GradientCard from "@/components/ui/GradientCard";
 import React from "react";
 import { Outlet } from "react-router";
 
@@ -7,12 +8,19 @@ const AuthLayout: React.FC = () => {
   return (
     <div className="flex h-screen bg-primary">
       {/* Left section */}
-      <div className="relative w-1/2 flex-shrink-0 hidden md:flex overflow-hidden bg-white h-full justify-center items-center">
-        <CircleWave className="top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] scale-[0.7] md:scale-100 z-10" />
-        <div className="scale-[2.5] sm:scale-[4] relative z-20">
-          <Logo />
-        </div>
-      </div>
+
+      <GradientCard
+        className="relative w-1/2 flex-shrink-0 hidden md:flex rounded-r-3xl border-0 bg-white h-full justify-center items-center border-r border-blue-300"
+        bg="from-gray-900 via-gray-700 to-gray-900 "
+      >
+        <CardContent>
+          <div className="text-8xl text-white mt-10">
+            <p>Klikk.</p>
+            <p>Earn..</p>
+            <p>Repeat...</p>
+          </div>
+        </CardContent>
+      </GradientCard>
 
       {/* Right section */}
       <div className="relative bg-primary flex-grow sm:px-20 min-[500px]:px-14 px-10 overflow-y-auto overflow-hidden pb-20">

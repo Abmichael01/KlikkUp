@@ -3,6 +3,7 @@ import { Check, MousePointerClick, ArrowRight } from "lucide-react";
 import type React from "react";
 import GlidingButton from "../ui/GlidingButton";
 import { Link } from "react-router";
+import GradientCard from "../ui/GradientCard";
 
 const reasons = [
   { text: "Have fun klikking", icon: "🎉" },
@@ -39,7 +40,7 @@ const RegisterNow: React.FC = () => {
           </Link>
         </div>
         <div className="w-full lg:w-1/2">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
+          <GradientCard className="bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl border-0" bg="from-blue-500 to-blue-600">
             {reasons.map((reason, index) => (
               <div
                 key={index}
@@ -56,7 +57,7 @@ const RegisterNow: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </GradientCard>
         </div>
       </div>
     </MainPadding>

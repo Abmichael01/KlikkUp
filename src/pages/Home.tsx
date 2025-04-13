@@ -1,5 +1,6 @@
 import AboutUs from '@/components/Home/AboutUs'
 import Banner1 from '@/components/Home/Banner1'
+import Banner2 from '@/components/Home/Banner2'
 import FAQ from '@/components/Home/FAQ.'
 import Features from '@/components/Home/Features'
 import Hero from '@/components/Home/Hero'
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
         <Features />
         <AboutUs />
         <HowItWorks />
+        <Banner2 />
         <RegisterNow />
         <WhyJoin />
         <Banner1 />
