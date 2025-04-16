@@ -30,7 +30,7 @@ const features = [
 const Features: React.FC = () => {
   return (
     <MainPadding className="bg-primary py-10">
-      <div className="overflow-x-auto pb-4">
+      <div className="overflow-x-auto pb-4" id="features">
         <div className="flex justify-center flex-wrap gap-4 md:gap-8">
           {features.map((feature, index) => (
             <div

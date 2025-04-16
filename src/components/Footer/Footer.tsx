@@ -1,28 +1,49 @@
 import type React from "react";
 import Logo from "../Logo/Logo";
 import { FaTelegram, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ChevronRight, Contact2Icon, Mail, Phone } from "lucide-react";
 import { scrollToSection } from "@/lib/scroller";
 
-const footerLinks = {
-  QuickLinks: [
-    { title: "Home", href: "/" },
-    { title: "About", href: "/about" },
-    { title: "Features", href: "/features" },
-  ],
-  Support: [
-    { title: "Buy Coupon", href: "/buy-coupon" },
-    { title: "FAQs", href: "" },
-  ],
-};
-
 const socialLinks = [
   { icon: FaTelegram, href: "https://t.me/klikkup_official_channel" },
-  { icon: FaWhatsapp, href: "https://chat.whatsapp.com/E1QiSjaXU1l0pmZ8pqP4bW" },
+  {
+    icon: FaWhatsapp,
+    href: "https://chat.whatsapp.com/E1QiSjaXU1l0pmZ8pqP4bW",
+  },
 ];
 
-const Footer: React.FC = () => { 
+const Footer: React.FC = () => {
+  const navigate = useNavigate();
+
+  const navigator = (id?: string, href?: string) => {
+    // Check if the current path is not the home page
+    if (window.location.pathname !== "/") {
+      // Navigate to the home page
+      navigate("/");
+    }
+
+    const url = id ? `/#${id}` : href as string
+
+    // After navigating to the home page, scroll to the section with the given ID
+    setTimeout(() => {
+      navigate(url);
+      scrollToSection(id as string);
+    }, 200); // Use a minimal delay to ensure the navigation to the home page completes
+  };
+
+  const footerLinks = {
+    QuickLinks: [
+      { title: "Home", id: "/", href: undefined},
+      { title: "About", id: "about-us", href: undefined },
+      { title: "Features", id: "features", href: undefined },
+    ],
+    Support: [
+      { title: "Buy Coupon", href: "/buy-coupon", id: "" },
+      { title: "FAQs", href: "", id: "faq" },
+    ],
+  };
+
   return (
     <footer className="bg-black bg-opacity-90 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-primary opacity-10 blur-3xl"></div>
@@ -35,8 +56,8 @@ const Footer: React.FC = () => {
               you engage with content.
             </p>
             <p>
-              <strong>NOTE:</strong> This service is exclusive for
-              Nigerians only
+              <strong>NOTE:</strong> This service is exclusive for Nigerians
+              only
             </p>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
@@ -48,13 +69,15 @@ const Footer: React.FC = () => {
                 {links.map((link) => (
                   <li key={link.title} className="w-fit">
                     {link.href !== "" && (
-                      <Link
-                        to={link.href}
-                        className="text-sm hover:text-secondary transition-colors flex items-center group"
+                      <a
+                        onClick={() => {
+                          navigator(link.id, link.href)
+                        }}
+                        className="text-sm hover:text-secondary cursor-pointer transition-colors flex items-center group"
                       >
                         <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                         {link.title}
-                      </Link>
+                      </a>
                     )}
                     {link.href == "" && (
                       <p
