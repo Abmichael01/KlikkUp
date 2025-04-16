@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
               </p>
             ))}
             <Link
-                to={"#"}
+                to={"/buy-coupon"}
                 className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
               >
                Buy Coupon
