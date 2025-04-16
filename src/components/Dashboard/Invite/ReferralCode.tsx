@@ -13,7 +13,7 @@ interface ReferralCodeProps {
 const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
   const openShareDialog = useShareDialogStore((state) => state.openDialog);
 
-  const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: https://urkelcodes.com/invite/${referralCode}`;
+  const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: http://localhost:5173/auth/register?ref_code=${referralCode}`;
 
   return (
     <GradientCard className="border-none bg-blue-950 text-white shadow-md">
@@ -48,7 +48,7 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
               <p className="text-sm text-blue-300">Referral Link</p>
             </div>
             <CopyButton
-              textToCopy={`https://urkelcodes.com/invite/${referralCode}`}
+              textToCopy={`http://localhost:5173/auth/register?ref_code=${referralCode}`}
               className="bg-secondary hover:bg-secondary/90 text-white float-right"
             />
           </div>

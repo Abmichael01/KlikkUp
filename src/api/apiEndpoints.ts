@@ -1,4 +1,4 @@
-import {BankDetails, Coupon, LoginData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
+import {BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -255,6 +255,16 @@ export const updateBankDetails = async (data: BankDetails) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching wallet data", error);
+    throw error;
+  }
+};
+
+export const buyCoupon = async (data: PaymentData) => {
+  try {
+    const response = await apiClient.post("/buy-coupon/", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error initializing payment", error);
     throw error;
   }
 };

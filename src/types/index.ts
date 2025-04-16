@@ -107,7 +107,7 @@ export type Announcement = {
 
 export type TransactionType = "CREDIT" | "DEBIT";
 
-export interface Transaction {
+export type Transaction = {
   id: number;
   amount: number;
   transaction_type: TransactionType;
@@ -115,14 +115,14 @@ export interface Transaction {
   created_at: string; // ISO date string
 }
 
-export interface BankDetails {
+export type BankDetails = {
   account_name: string;
   account_number: string;
   bank_name: string;
   bank_code: string;
 }
 
-export interface WalletDetails {
+export type WalletDetails = {
   balance: number;
   earned: number; // total credit
   withdrawn: number; // total debit
@@ -131,7 +131,12 @@ export interface WalletDetails {
   transactions: Transaction[];
 }
 
-export interface Bank {
+export type Bank = {
   name: string;
   code: string;
+}
+
+export type PaymentData = {
+  email: string;
+  name: string;
 }

@@ -10,7 +10,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { Eye, EyeClosed, LockIcon, Mail, TicketIcon, User, Users } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useRegister } from "@/api/mutations";
@@ -108,7 +108,10 @@ const formFields: FormField[] = [
 ];
 
 const Register: React.FC = () => {
-  const [passwordVisibility, setPasswordVisibility] = React.useState<Record<string, boolean>>({
+  const [ params ] = useSearchParams()
+  const couponCode = params.get("coupon_code")
+  const refCode = params.get("ref_code")
+   const [passwordVisibility, setPasswordVisibility] = React.useState<Record<string, boolean>>({
     password: false,
     confirmPassword: false
   });
@@ -119,8 +122,8 @@ const Register: React.FC = () => {
     defaultValues: {
       username: "",
       email: "",
-      coupon: "",
-      ref_code: "",
+      coupon: couponCode || "",
+      ref_code: refCode || "",
       password: "",
       re_password: "",
     },
