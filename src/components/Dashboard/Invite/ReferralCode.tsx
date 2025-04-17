@@ -18,8 +18,10 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
   return (
     <GradientCard className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Users className="h-5 w-5 text-secondary" />
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <div className=" px-2 py-2 bg-secondary/20 rounded-xl">
+            <Users className="text-secondary size-5" />
+          </div>
           Your Referral Code
         </CardTitle>
       </CardHeader>

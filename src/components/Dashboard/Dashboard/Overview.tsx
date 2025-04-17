@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { AccountOverviewData } from "@/types";
 import { useCheckIn } from "@/api/mutations";
 import { useQueryClient } from "@tanstack/react-query";
-import { CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import GradientCard from "@/components/ui/GradientCard";
 
 interface Props {
@@ -31,27 +31,25 @@ export default function Overview({ data }: Props) {
       bg="from-blue-950 to-blue-950"
       className="col-span-2 border-none text-white shadow-md flex-grow"
     >
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50 text-white">
-            <span className="text-xl font-semibold uppercase">
-              {data?.username[0]}
-            </span>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold tracking-tight">
-              {" "}
-              <span className="uppercase">{data?.username[0]}</span>
-              {data?.username.slice(1)}
-            </h2>
-            <p className="text-xs text-blue-300 mt-0.5">Earning Overview</p>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="relative overflow-hidden">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <CardContent className="relative mt-5">
+        <div className="flex flex-col lg:flex-row justify-between gap-6">
           {/* User info and level */}
           <div className="space-y-4 w-full">
+            <div className="flex  items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-800/50 text-white">
+                <span className="text-xl font-semibold uppercase">
+                  {data?.username[0]}
+                </span>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold tracking-tight">
+                  {" "}
+                  <span className="uppercase">{data?.username[0]}</span>
+                  {data?.username.slice(1)}
+                </h2>
+                <p className="text-xs text-blue-300 mt-0.5">Earning Overview</p>
+              </div>
+            </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">

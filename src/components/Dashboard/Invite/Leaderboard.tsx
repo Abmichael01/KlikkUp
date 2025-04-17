@@ -33,8 +33,10 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
       className="border-none bg-blue-950 text-white shadow-md"
     >
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-secondary" />
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <div className=" px-2 py-2 bg-secondary/30 rounded-xl">
+            <Trophy className="text-secondary h-5 w-5" />
+          </div>
           Referral Leaderboard
         </CardTitle>
       </CardHeader>
@@ -47,9 +49,13 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-blue-900/50 hover:bg-blue-900/50">
-                    <TableHead className="w-[80px] text-blue-300">Rank</TableHead>
+                    <TableHead className="w-[80px] text-blue-300">
+                      Rank
+                    </TableHead>
                     <TableHead className="text-blue-300">Username</TableHead>
-                    <TableHead className="text-blue-300 w-[100px]">Referrals</TableHead>
+                    <TableHead className="text-blue-300 w-[100px]">
+                      Referrals
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
 
@@ -129,7 +135,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                         {index + 1}
                       </div>
                     ) : (
-                      <span className="text-blue-300 text-sm">#{index + 1}</span>
+                      <span className="text-blue-300 text-sm">
+                        #{index + 1}
+                      </span>
                     )}
                     <span className="font-medium">{user.username}</span>
                     {user.username === username && (
@@ -138,7 +146,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
                       </span>
                     )}
                   </div>
-                  <span className="text-blue-300 text-sm">{user.total_referrals} ref</span>
+                  <span className="text-blue-300 text-sm">
+                    {user.total_referrals} ref
+                  </span>
                 </div>
               </div>
             ))}
@@ -149,7 +159,8 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
               <div>
                 <h3 className="font-medium">Want to climb the leaderboard?</h3>
                 <p className="text-sm text-blue-300">
-                  Share your referral code with more friends to increase your rank
+                  Share your referral code with more friends to increase your
+                  rank
                 </p>
               </div>
               <Button

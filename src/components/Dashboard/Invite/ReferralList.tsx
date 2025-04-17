@@ -20,8 +20,10 @@ const ReferralList: React.FC<ReferralListProps> = ({ referrals }) => {
   return (
     <GradientCard className="border-none bg-blue-950 text-white shadow-md">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Users className="text-secondary" />
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <div className=" px-2 py-2 bg-secondary/20 rounded-xl">
+            <Users className="text-secondary size-5" />
+          </div>
           Your Referrals
         </CardTitle>
       </CardHeader>
@@ -70,7 +72,9 @@ const ReferralList: React.FC<ReferralListProps> = ({ referrals }) => {
                   </div>
                   <div>
                     <p className="text-sm font-semibold">{referral.username}</p>
-                    <p className="text-xs text-blue-300">Points: {referral.point_balance}</p>
+                    <p className="text-xs text-blue-300">
+                      Points: {referral.point_balance}
+                    </p>
                   </div>
                 </div>
               </div>
