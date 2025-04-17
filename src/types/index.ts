@@ -18,6 +18,33 @@ export type User = {
   total_referrals?: number;
 };
 
+export type RecentActivity = {
+  id: number;                     // unique identifier of the activity
+  activity_type: 'task' | 'story'; // possible values based on ACTIVITY_TYPE_CHOICES
+  reward: number;                  // reward points for this activity
+  created_at: string;              // ISO timestamp string
+};
+
+export type AccountOverviewData = {
+  username: string;
+  point_balance?: number;
+  xp?: number;
+  xp_in_level?: number;
+  current_level?: number;
+  current_level_xp?: number;
+  xp_needed?: number;
+  xp_remaining?: number;
+  next_level?: number;
+  next_level_xp?: number;
+  percent_xp_in_level?: number;
+  total_referrals?: number;
+  points_earned_today: number;
+  total_activities_done: number;
+  recent_activities: RecentActivity[];
+  checked_in_today: boolean;
+  streak: number;
+}
+
 export type ReferralUser = {
   id: number;
   username: string;

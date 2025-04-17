@@ -16,7 +16,7 @@ const Invite: React.FC = () => {
   if (isLoading) return <PageIsLoading />;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-full">
       <ReferralStats data={data as ReferralsData} />
       <ReferralCode referralCode={data?.ref_code ?? ""} />
       <ReferralList referrals={data?.referrals as ReferralUser[]} />

@@ -60,10 +60,10 @@ const transactions = walletDetails.transactions
 
         <ScrollArea className="min-h-[100px] pr-2">
           <div className="space-y-1 h-full">
-            {(transactions.length != 0) && transactions?.map((transaction) => (
+            {(transactions?.length != 0) && transactions?.map((transaction) => (
               <TransactionItem key={transaction.id} transaction={transaction} />
             ))}
-            {transactions.length === 0 && (
+            {transactions?.length === 0 && (
               <div className="flex justify-center items-center mt-6">
                 <p className="text-white/60 text-[14px]">No transactions found</p>
               </div>

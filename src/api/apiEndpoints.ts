@@ -1,4 +1,4 @@
-import {BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
+import {AccountOverviewData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -265,6 +265,26 @@ export const buyCoupon = async (data: PaymentData) => {
     return response.data;
   } catch (error) {
     console.error("Error initializing payment", error);
+    throw error;
+  }
+};
+
+export const accountOverview = async () => {
+  try {
+    const response = await apiClient.get("/users/account-overview/");
+    return response.data as AccountOverviewData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const checkin = async () => {
+  try {
+    const response = await apiClient.post("/daily-checkin/");
+    return response.data;
+  } catch (error) {
+    console.error("Error checking in", error);
     throw error;
   }
 };
