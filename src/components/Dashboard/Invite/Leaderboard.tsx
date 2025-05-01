@@ -25,7 +25,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ leaderboard }) => {
   const username = useAuthStore((state) => state.user?.username);
   const openShareDialog = useShareDialogStore((state) => state.openDialog);
 
-  const leaderboardMessage = `Signup on KlikkUp and join the fun! Use my referral link to sign up: http://localhost:5173/auth/register?ref_code=${username}`;
+  const leaderboardMessage = `Signup on KlikkUp and join the fun! Use my referral link to sign up: https://klikkupp.com/auth/register?ref_code=${username}`;
 
   return (
     <GradientCard

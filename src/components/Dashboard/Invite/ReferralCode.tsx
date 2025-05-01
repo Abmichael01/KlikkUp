@@ -13,7 +13,7 @@ interface ReferralCodeProps {
 const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
   const openShareDialog = useShareDialogStore((state) => state.openDialog);
 
-  const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: http://localhost:5173/auth/register?ref_code=${referralCode}`;
+  const referralMessage = `Join KlikkUp today and start earning rewards! Use my referral link to sign up: https://klikkupp.com/auth/register?ref_code=${referralCode}`;
 
   return (
     <GradientCard className="border-none bg-blue-950 text-white shadow-md">

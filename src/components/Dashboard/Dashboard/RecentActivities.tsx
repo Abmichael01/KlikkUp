@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { RecentActivity } from "@/types"  // make sure this path matches your project
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RecentActivity } from "@/types"; // make sure this path matches your project
 
 type RecentActivitiesProps = {
   data: RecentActivity[];
@@ -24,9 +24,17 @@ const RecentActivities: React.FC<RecentActivitiesProps> = ({ data }) => {
                   <div className="mt-1 h-2 w-2 rounded-full bg-orange-400"></div>
                   <div>
                     <p className="font-medium">
-                      {item.activity_type === 'task' ? 'Completed task' : 'Completed story'}
+                      {item.activity_type === "task"
+                        ? "Completed task"
+                        : item.activity_type === "story"
+                        ? "Completed story"
+                        : item.activity_type === "checkin"
+                        ? "Checked In"
+                        : ""}
                     </p>
-                    <p className="text-sm text-blue-300">+{item.reward} points</p>
+                    <p className="text-sm text-blue-300">
+                      +{item.reward} points
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -36,10 +44,9 @@ const RecentActivities: React.FC<RecentActivitiesProps> = ({ data }) => {
               </div>
             ))}
             {data?.length === 0 && (
-              <p className=''>You haven't done any activity</p>
+              <p className="">You haven't done any activity</p>
             )}
           </div>
-          
         </CardContent>
       </Card>
     </div>
