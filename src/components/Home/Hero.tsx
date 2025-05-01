@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
           <span className="text-foreground">Rewards</span>
         </h1>
         <p className="text-xl mb-8 text-primary-foreground/80 max-w-2xl">
-          Earn Points. Unlock Your Gaming Power. Test test another testing 
+          Earn Points. Unlock Your Gaming Power.
         </p>
         <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
           <Link to="/auth/register">
