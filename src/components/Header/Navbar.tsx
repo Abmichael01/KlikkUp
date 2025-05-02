@@ -1,9 +1,15 @@
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router"
-import { GanttChartIcon as LucideChartNoAxesGantt, X } from "lucide-react"
-import Logo from "../Logo/Logo"
-import { scrollToSection } from "@/lib/scroller"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
+import {
+  ArrowRight,
+  GanttChartIcon as LucideChartNoAxesGantt,
+  X,
+} from "lucide-react";
+import Logo from "../Logo/Logo";
+import { scrollToSection } from "@/lib/scroller";
+import { useAuthStore } from "@/stores/useAuthStore";
+import GlidingButton from "../ui/GlidingButton";
 
 const links = [
   {
@@ -16,7 +22,7 @@ const links = [
     link: "/auth/register",
     className: "bg-foreground",
   },
-]
+];
 
 const navs = [
   {
@@ -35,32 +41,32 @@ const navs = [
     name: "FAQs",
     id: "faq",
   },
-]
+];
 
 const Navbar: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const navigate = useNavigate()
-  
+  const { isAuthenticated } = useAuthStore();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSidebarOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset"
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isSidebarOpen])
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
 
   const navigator = (id: string) => {
     // Check if the current path is not the home page
-    if (window.location.pathname !== '/') {
+    if (window.location.pathname !== "/") {
       // Navigate to the home page
-      navigate('/');
+      navigate("/");
     }
-  
+
     // After navigating to the home page, scroll to the section with the given ID
     setTimeout(() => {
       navigate(`/#${id}`);
@@ -68,8 +74,6 @@ const Navbar: React.FC = () => {
       scrollToSection(id);
     }, 200); // Use a minimal delay to ensure the navigation to the home page completes
   };
-
-  
 
   return (
     <>
@@ -86,17 +90,29 @@ const Navbar: React.FC = () => {
             </p>
           ))}
         </div>
-        <div className="hidden lg:flex gap-5 items-center">
-          {links.map((link, index) => (
-            <Link
-              key={index}
-              to={link.link}
-              className={`${link.className} px-5 py-2 text-sm text-white rounded-md hover:opacity-90 transition-opacity`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+        {!isAuthenticated && (
+          <div className="hidden lg:flex gap-5 items-center">
+            {links.map((link, index) => (
+              <Link
+                key={index}
+                to={link.link}
+                className={`${link.className} px-5 py-2 text-sm text-white rounded-md hover:opacity-90 transition-opacity`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {isAuthenticated && (
+          <Link to={"/dashboard"} className="hidden lg:flex gap-5 items-center">
+            <GlidingButton className="px-5 text-sm text-white bg-black rounded-md hover:opacity-90 transition-opacity">
+              Dashboard
+              <ArrowRight />
+            </GlidingButton>
+          </Link>
+        )}
+
         <button
           className="px-2 py-2 border-2 bg-blue-200 shadow-lg border-primary/60 rounded-2xl lg:hidden hover:bg-blue-100 transition-colors"
           onClick={() => setIsSidebarOpen(true)}
@@ -108,7 +124,9 @@ const Navbar: React.FC = () => {
       {/* Sidebar for small screens */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 lg:hidden transition-opacity duration-300 z-[9999] ${
-          isSidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isSidebarOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsSidebarOpen(false)}
       />
@@ -118,7 +136,7 @@ const Navbar: React.FC = () => {
         }`}
       >
         <div className="p-5">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-4">
             <Logo />
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -127,7 +145,8 @@ const Navbar: React.FC = () => {
               <X className="h-6 w-6" />
             </button>
           </div>
-          <div className="flex flex-col gap-6">
+          <h2 className="text-sm text-black/70">Engage in fun tasks, earn rewards, and convert your points</h2>
+          <div className="flex flex-col gap-6 mt-8">
             {navs.map((nav, index) => (
               <p
                 key={index}
@@ -138,27 +157,40 @@ const Navbar: React.FC = () => {
               </p>
             ))}
             <Link
-                to={"/buy-coupon"}
-                className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
-              >
-               Buy Coupon
-              </Link>
-            {links.map((link, index) => (
+              to={"/buy-coupon"}
+              className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+            >
+              Buy Coupon
+            </Link>
+            {!isAuthenticated &&
+              links.map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.link}
+                  className={`${link.className} px-5 py-2 text-sm text-white rounded-md hover:opacity-90 transition-opacity text-center`}
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+
+            {isAuthenticated && (
               <Link
-                key={index}
-                to={link.link}
-                className={`${link.className} px-5 py-2 text-sm text-white rounded-md hover:opacity-90 transition-opacity text-center`}
-                onClick={() => setIsSidebarOpen(false)}
+                to={"/dashboard"}
+                className="gap-5 items-center w-full"
               >
-                {link.name}
+                <GlidingButton className="px-5 text-sm text-white bg-secondary rounded-md hover:opacity-90 transition-opacity w-full justify-between">
+                  Dashboard
+                  <ArrowRight />
+                </GlidingButton>
               </Link>
-            ))}
+            )}
+            
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Navbar;
-
