@@ -4,11 +4,7 @@ import { Calendar, CheckCircle, MapPin } from "lucide-react";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import GradientCard from "@/components/ui/GradientCard";
-
-type RoadmapItem = {
-  title: string;
-  completed: boolean;
-};
+import { RoadmapItem } from "@/types";
 
 const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems }) => {
   return (
@@ -24,7 +20,7 @@ const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems 
           {/* Timeline Line */}
           <div className="absolute left-[22px] top-8 bottom-0 w-[2px] bg-blue-800"></div>
 
-          {roadmapItems.map((item, index) => (
+          {roadmapItems?.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -50 }}

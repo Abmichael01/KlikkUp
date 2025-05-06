@@ -167,3 +167,13 @@ export type PaymentData = {
   email: string;
   name: string;
 }
+
+export type RoadmapItem = {
+  title: string;
+  completed: boolean;
+};
+
+export type RoadmapData = {
+  roadmap: RoadmapItem[];
+  users_count: number;
+};

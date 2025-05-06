@@ -31,9 +31,4 @@ export const roadmapItems = [
   { title: "Post-launch scaling", completed: false }
 ]
 
-export const calculateProgress = () => {
-  const totalItems = roadmapItems.length
-  const completedItems = roadmapItems.filter((item) => item.completed).length
 
-  return Math.round((completedItems / totalItems) * 100)
-}

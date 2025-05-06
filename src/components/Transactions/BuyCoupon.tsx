@@ -52,7 +52,7 @@ const BuyCoupon: React.FC = () => {
           >
             <Ticket className="w-3.5 h-3.5 mr-1" /> KlikkUp Registration
           </Badge>
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-600 mb-3">
+          <h1 className="text-3xl md:text-4xl fancy-font font-bold text-blue-600 mb-3">
             Purchase Your KlikkUp Coupon
           </h1>
           <p className="text-gray-600">

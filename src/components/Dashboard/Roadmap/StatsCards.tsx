@@ -3,14 +3,20 @@ import { TrendingUp, Clock, Users } from "lucide-react"
 import { CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import GradientCard from "@/components/ui/GradientCard"
+import { RoadmapData, RoadmapItem } from "@/types"
 
-type RoadmapItem = {
-  title: string
-  completed: boolean
-}
 
-const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = ({ progress, roadmapItems }) => {
-  const completedItems = roadmapItems.filter(item => item.completed).length
+
+const StatsCards: React.FC<{data: RoadmapData }> = ({ data }) => {
+  const roadmapItems = data?.roadmap as RoadmapItem[]
+  const completedItems = roadmapItems?.filter(item => item.completed)?.length
+  const calculateProgress = () => {
+    const totalItems = roadmapItems?.length
+    const completedItems = roadmapItems?.filter((item) => item.completed)?.length
+  
+    return Math.round((completedItems / totalItems) * 100)
+  }
+  const progress = calculateProgress()
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -30,7 +36,7 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
               <Progress value={progress} className="h-full bg-secondary" />
             </div>
             <p className="text-xs text-blue-300">
-              {completedItems} of {roadmapItems.length} items completed
+              {completedItems} of {roadmapItems?.length} items completed
             </p>
           </div>
         </CardContent>
@@ -48,7 +54,7 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
             </div>
           </div>
           <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">{completedItems}/{roadmapItems.length}</span> milestones completed
+            <span className="text-green-400">{completedItems}/{roadmapItems?.length}</span> milestones completed
           </div>
         </CardContent>
       </GradientCard>
@@ -58,7 +64,7 @@ const StatsCards: React.FC<{ progress: number, roadmapItems: RoadmapItem[] }> = 
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-300">Community Size</p>
-              <p className="mt-1 text-3xl font-semibold">24,567</p>
+              <p className="mt-1 text-3xl font-semibold">{data?.users_count}</p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <Users className="h-6 w-6 text-secondary" />
