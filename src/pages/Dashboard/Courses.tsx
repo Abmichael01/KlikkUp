@@ -6,12 +6,12 @@ const Courses: React.FC = () => {
     <div className="space-y-6">
       <div>
         <div className="p-5 py-8 flex flex-col items-center text-center">
-          <h2 className="text-5xl font-bold fancy-font bg-gradient-to-b from-secondary to-primary bg-clip-text text-transparent">Free Courses</h2>
-          <p className="text-sm text-foreground/70 font-medium">Skill up with the free courses from Klikkup</p>
+          <h2 className="text-5xl font-bold fancy-font bg-gradient-to-b from-secondary to-blue-700 bg-clip-text text-transparent">Free Courses</h2>
+          <p className="text-sm text-foreground/70 font-semibold tracking-[4px]">Skill up with the free courses from Klikkup</p>
         </div>
       </div>
       <div className="p-0 flex justify-center">
-          <div className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border-4 border-secondary/10 focus:border-secondary/30">
+          <div className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border shadow-md">
             <input
               type="text"
               placeholder="Search a keyword"
