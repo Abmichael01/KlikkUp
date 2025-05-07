@@ -1,50 +1,36 @@
-import { CardContent } from "@/components/ui/card";
-import GlidingButton from "@/components/ui/GlidingButton";
-import GradientCard from "@/components/ui/GradientCard";
-import { BookOpen, Search } from "lucide-react";
+import { GraduationCap, Search } from "lucide-react";
 import React from "react";
 
 const Courses: React.FC = () => {
   return (
     <div className="space-y-6">
-      <GradientCard>
-        <CardContent className="p-5 py-8 flex flex-col items-center text-center text-white">
-          <h2 className="text-xl font-semibold fancy-font">Free Courses</h2>
-          <p className="text-sm">Skill up with free courses from Klikkup</p>
-        </CardContent>
-      </GradientCard>
-      <GradientCard className="p-0">
-        <CardContent className="p-5 py-6 text-center text-white">
-          <div className="flex items-center mb-4 bg-white/10 shadow-xl  w-full rounded-full h-[50px] overflow-hidden">
+      <div>
+        <div className="p-5 py-8 flex flex-col items-center text-center">
+          <h2 className="text-5xl font-bold fancy-font bg-gradient-to-b from-secondary to-primary bg-clip-text text-transparent">Free Courses</h2>
+          <p className="text-sm text-foreground/70 font-medium">Skill up with the free courses from Klikkup</p>
+        </div>
+      </div>
+      <div className="p-0 flex justify-center">
+          <div className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border-4 border-secondary/10 focus:border-secondary/30">
             <input
               type="text"
               placeholder="Search a keyword"
-              className="border-0  outline-none bg-transparent w-full px-5 py-2"
+              className="border-0  outline-none bg-transparent w-full px-5 py-3 "
             />
-            <div className="bg-gradient-to-tr from-orange-400 via-secondary to-orange-600 h-full px-6 flex justify-center items-center rounded-full cursor-pointer">
+            <div className="bg-secondary h-full px-6 flex justify-center items-center text-orange-100 cursor-pointer">
               <Search />
             </div>
           </div>
-        </CardContent>
-      </GradientCard>
-      <div className="grid grid-cols-3 gap-6">
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-0 sm:px-8 md:px-20">
         {Array.from({ length: 20 }).map((_, index) => (
-          <div
-            key={index}
-            className="bg-blue-00 shadow-xl rounded-xl space-y-5 border p-5"
-          >
-            <div className="">
-              <div className="flex gap-2 items-center pb-5">
-                <div className=" text-orange-600 bg-orange-200 rounded-full size-[40px] flex items-center justify-center">
-                  <BookOpen className="size-[20px]" />
-                </div>
-                <h2 className="font-medium">
-                  Here is the course the course name
-                </h2>
-              </div>
-              <GlidingButton className="bg-blue-900 px-5 py-2 text-sm float-end">
-                Go to course
-              </GlidingButton>
+          <div key={index} className="border rounded-2xl overflow-hidden sm:hover:scale-[1.05] transition-all duration-1000 shadow-xl">
+            <div className="flex justify-center items-center py-[50px] bg-gradient-to-tr from-secondary/20 via-primary/20 to-gray-300 from-[1%]">
+              <GraduationCap className="size-[60px]"/>
+            </div>
+            <div className="space-y-[15px] p-5">
+              <h2 className="">This is the title of the course</h2>
+              <button className="bg-primary rounded-full text-primary-foreground w-full py-2 text-sm">Go to course</button>
             </div>
           </div>
         ))}
