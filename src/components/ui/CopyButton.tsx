@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface CopyButtonProps {
   textToCopy: string;
@@ -22,7 +23,9 @@ const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy, children, className
   };
 
   return (
-    <Button onClick={handleCopy} className={className}>
+    <Button onClick={handleCopy} className={cn(
+      className, "rounded-full"
+    )}>
       {children || (
         <>
           <Copy className="h-4 w-4 mr-2" />

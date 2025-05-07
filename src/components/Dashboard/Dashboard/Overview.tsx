@@ -8,12 +8,15 @@ import { useCheckIn } from "@/api/mutations";
 import { useQueryClient } from "@tanstack/react-query";
 import { CardContent } from "@/components/ui/card";
 import GradientCard from "@/components/ui/GradientCard";
+import CheckinSuccess from "./CheckinSuccess";
+import { useDialog } from "@/hooks/useDialog";
 
 interface Props {
   data: AccountOverviewData;
 }
 
 export default function Overview({ data }: Props) {
+  const { setOpen } = useDialog("checkinSuccess")
   const { mutate, isPending } = useCheckIn();
   const queryClient = useQueryClient();
 
@@ -21,6 +24,7 @@ export default function Overview({ data }: Props) {
     mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["account-overview"] });
+        setOpen(true);
       },
     });
   };
@@ -113,7 +117,9 @@ export default function Overview({ data }: Props) {
             </Button>
           </div>
         </div>
+        <CheckinSuccess streaks={data?.streak} />
       </CardContent>
+      
     </GradientCard>
   );
 }

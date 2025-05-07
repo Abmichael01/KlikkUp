@@ -17,9 +17,12 @@ import { useAccountOverviewData } from "@/api/queries";
 import { AccountOverviewData, RecentActivity } from "@/types";
 import CopyButton from "@/components/ui/CopyButton";
 import StreakCard from "@/components/Dashboard/Dashboard/StreakCard";
+import PageIsLoading from "@/components/Dashboard/PageIsLoading";
 
 const Dashboard: React.FC = () => {
-  const { data } = useAccountOverviewData();
+  const { data, isLoading } = useAccountOverviewData();
+
+  if (isLoading) return <PageIsLoading />
 
   return (
     <div className="w-full">
