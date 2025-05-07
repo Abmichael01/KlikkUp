@@ -24,6 +24,7 @@ import StoriesManagement from "./pages/Admin/Stories";
 import UsersManagement from "./pages/Admin/Users";
 import Story from "./pages/Dashboard/Stories/Story";
 import Wallet from "./pages/Dashboard/Wallet";
+import Courses from "./pages/Dashboard/Courses";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -59,6 +60,7 @@ const App: React.FC = () => {
             <Route path="story/:id" element={<Story />} />
             <Route path="wallet" element={<Wallet />} />
             <Route path="roadmap" element={<Roadmap />} />
+            <Route path="courses" element={<Courses />} />
           </Route>
         </Route>
 

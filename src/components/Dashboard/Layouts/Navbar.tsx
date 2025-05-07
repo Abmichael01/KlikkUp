@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
 
       <div className="flex items-center gap-5">
         <Link
-          to="#"
+          to="/courses"
           className="relative overflow-hidden px-5 py-2 rounded-full bg-secondary shadow-md shadow-secondary flex items-center gap-2 text-sm text-foreground/80 font-bold border-[3px] border-orange-400 hover:scale-[1.05] transition-all duration-500"
         >
           <span className="relative z-[1]">Free Courses</span>
