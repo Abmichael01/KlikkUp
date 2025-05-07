@@ -1,11 +1,10 @@
 import { CardContent } from "@/components/ui/card";
 import GlidingButton from "@/components/ui/GlidingButton";
 import GradientCard from "@/components/ui/GradientCard";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import { BookOpen, Search } from "lucide-react";
 import React from "react";
 
-const Courses = () => {
+const Courses: React.FC = () => {
   return (
     <div className="space-y-6">
       <GradientCard>
