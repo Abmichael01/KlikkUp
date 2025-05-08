@@ -11,7 +11,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Link, useNavigate, useSearchParams } from "react-router";
-import { Eye, EyeClosed, LockIcon, Mail, TicketIcon, User, Users } from "lucide-react";
+import {
+  Eye,
+  EyeClosed,
+  LockIcon,
+  Mail,
+  TicketIcon,
+  User,
+  Users,
+} from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useRegister } from "@/api/mutations";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
@@ -108,12 +116,14 @@ const formFields: FormField[] = [
 ];
 
 const Register: React.FC = () => {
-  const [ params ] = useSearchParams()
-  const couponCode = params.get("coupon_code")
-  const refCode = params.get("ref_code")
-   const [passwordVisibility, setPasswordVisibility] = React.useState<Record<string, boolean>>({
+  const [params] = useSearchParams();
+  const couponCode = params.get("coupon_code");
+  const refCode = params.get("ref_code");
+  const [passwordVisibility, setPasswordVisibility] = React.useState<
+    Record<string, boolean>
+  >({
     password: false,
-    confirmPassword: false
+    confirmPassword: false,
   });
   const [errorMessages, setErrorMessages] =
     React.useState<Record<string, string[]>>();
@@ -170,12 +180,11 @@ const Register: React.FC = () => {
   };
 
   const toggleVisibility = (fieldName: string) => {
-    setPasswordVisibility(prev => ({
+    setPasswordVisibility((prev) => ({
       ...prev,
       [fieldName]: !prev[fieldName],
     }));
   };
-  
 
   return (
     <Form {...form}>
@@ -193,7 +202,10 @@ const Register: React.FC = () => {
             Object.keys(errorMessages).length > 0 &&
             Object.entries(errorMessages).map(([field, messages]) =>
               messages.map((message: string, index: number) => (
-                <Alert key={`${field}-${index}`} className="text-destructive-foreground bg-destructive border-destructive">
+                <Alert
+                  key={`${field}-${index}`}
+                  className=" bg-red-300/80 text-red-600 font-semibold border-0 border-destructive"
+                >
                   <AlertDescription>
                     {`${fieldLabels[field] || field}: ${message}`}
                   </AlertDescription>
@@ -210,27 +222,63 @@ const Register: React.FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="bg-white px-4 rounded-lg flex items-center gap-2 border border-black/80">
-                    <div className="text-primary">{formField.icon}</div>
-                    <input
-                      placeholder={formField.label}
-                      type={
-                        formField.type === "password"
-                          ? passwordVisibility[formField.name]
-                            ? "text"
-                            : "password"
-                          : formField.type
-                      }
-                      {...field}
-                      className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
-                    />
-                    {formField.type === "password" && (
-                      <div 
-                      onClick={() => toggleVisibility(formField.name)}
-                      className="border-l-[2px] border-primary pl-2 cursor-pointer">
-                        {passwordVisibility[formField.name] ? <EyeClosed /> : <Eye />}
+                  <div className="space-y-3">
+                    {formField.name === "coupon" && (
+                      <div className="flex gap-5 justify-between items-center">
+                        <h2 className="text-sm text-white/80 font-medium">
+                          Don't have coupon code?{" "}
+                        </h2>
+                        <Link
+                          to="/buy-coupon"
+                          className="bg-secondary text-orange-700 px-3 py-1 text-xs rounded-full font-semibold"
+                        >
+                          Buy Coupon
+                        </Link>
                       </div>
                     )}
+                    {formField.name === "ref_code" && (
+                      <div className="flex gap-5 justify-between items-center">
+                        <h2 className="text-sm text-white/80 font-medium">
+                          Don't have referral code?{" "}
+                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            form.setValue("ref_code", "klikkup");
+                          }}
+                          className="bg-secondary text-orange-700 px-3 py-1 text-xs rounded-full font-semibold"
+                        >
+                          Use klikkup
+                        </button>
+                      </div>
+                    )}
+                    <div className="bg-white px-4 rounded-lg flex items-center gap-2 border border-black/80">
+                      <div className="text-primary">{formField.icon}</div>
+                      <input
+                        placeholder={formField.label}
+                        type={
+                          formField.type === "password"
+                            ? passwordVisibility[formField.name]
+                              ? "text"
+                              : "password"
+                            : formField.type
+                        }
+                        {...field}
+                        className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
+                      />
+                      {formField.type === "password" && (
+                        <div
+                          onClick={() => toggleVisibility(formField.name)}
+                          className="border-l-[2px] border-primary pl-2 cursor-pointer"
+                        >
+                          {passwordVisibility[formField.name] ? (
+                            <EyeClosed />
+                          ) : (
+                            <Eye />
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </FormControl>
                 <FormMessage className=" px-4 py-1 bg-destructive/80 text-destructive-foreground rounded-full" />

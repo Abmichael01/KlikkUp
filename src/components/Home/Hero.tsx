@@ -3,8 +3,10 @@ import { MousePointerClick, ArrowRight } from "lucide-react";
 import GlidingButton from "../ui/GlidingButton";
 import MainPadding from "@/layouts/MainPadding";
 import { Link } from "react-router";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const Hero: React.FC = () => {
+  const { isAuthenticated } = useAuthStore();
   return (
     <MainPadding className="relative py-20 overflow-hidden bg-primary text-primary-foreground">
       {/* Background Elements */}
@@ -26,20 +28,30 @@ const Hero: React.FC = () => {
         <p className="text-xl mb-8 text-primary-foreground/80 max-w-2xl">
           Earn Points. Unlock Your Gaming Power.
         </p>
-        <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
+        {!isAuthenticated && (
+          <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
+            <Link to="/auth/register">
+              <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
+                <MousePointerClick className="mr-2" />
+                Get Started Now!
+              </GlidingButton>
+            </Link>
+            <Link to="/auth/login">
+              <GlidingButton className="px-8 py-3 text-primary-foreground font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
+                Login Now
+                <ArrowRight className="ml-2" />
+              </GlidingButton>
+            </Link>
+          </div>
+        )}
+        {isAuthenticated && (
           <Link to="/auth/register">
             <GlidingButton className="px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground  font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
               <MousePointerClick className="mr-2" />
-              Get Started Now!
+              Dashboard
             </GlidingButton>
           </Link>
-          <Link to="/auth/login">
-            <GlidingButton className="px-8 py-3 text-primary-foreground font-semibold transition-all duration-300 ease-in-out transform hover:scale-105">
-              Login Now
-              <ArrowRight className="ml-2" />
-            </GlidingButton>
-          </Link>
-        </div>
+        )}
       </div>
     </MainPadding>
   );

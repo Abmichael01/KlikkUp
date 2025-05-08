@@ -9,35 +9,40 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Key, Loader, ShieldCheck, Ticket, UserPlus } from "lucide-react";
+import {
+  ArrowRight,
+  Key,
+  Loader,
+  ShieldCheck,
+  Ticket,
+  UserPlus,
+} from "lucide-react";
 import Logo from "../Logo/Logo";
 import { useBuyCoupon } from "@/api/mutations";
-import PaystackPop from '@paystack/inline-js'
+import PaystackPop from "@paystack/inline-js";
+import { Link } from "react-router";
 
 const BuyCoupon: React.FC = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  const { mutate, isPending } = useBuyCoupon()
+  const { mutate, isPending } = useBuyCoupon();
 
   const makePayment = () => {
     const details = {
       email: email,
       name: name,
-    }
+    };
     mutate(details, {
       onSuccess: (response) => {
-        const popup = new PaystackPop()
-        popup.resumeTransaction(response.data?.access_code)
-        
-        
+        const popup = new PaystackPop();
+        popup.resumeTransaction(response.data?.access_code);
       },
       onError: (error) => {
-        console.log(error)
-      }
-  
-    })
-  }
+        console.log(error);
+      },
+    });
+  };
 
   return (
     <MainPadding className="py-10 border-0  flex justify-center">
@@ -94,9 +99,17 @@ const BuyCoupon: React.FC = () => {
                 </div>
 
                 <div className="pt-4">
-                  <Button onClick={makePayment} disabled={isPending} className="w-full py-6 text-lg bg-blue-600 hover:bg-blue-700">
+                  <Button
+                    onClick={makePayment}
+                    disabled={isPending}
+                    className="w-full py-6 text-lg bg-blue-600 hover:bg-blue-700"
+                  >
                     Proceed to Payment
-                    {isPending ? <Loader className="w-5 h-5 ml-2 animate-spin" /> : <ArrowRight className="w-5 h-5 ml-2" />}
+                    {isPending ? (
+                      <Loader className="w-5 h-5 ml-2 animate-spin" />
+                    ) : (
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    )}
                   </Button>
                 </div>
 
@@ -156,13 +169,15 @@ const BuyCoupon: React.FC = () => {
                         Have a coupon already?
                       </p>
                     </div>
-                    <Button
-                      variant="ghost"
-                      className="text-white hover:text-blue-200 hover:bg-white/10 p-2 h-auto"
-                    >
-                      <UserPlus />
-                      <span className="text-sm">Sign Up</span>
-                    </Button>
+                    <Link to="/auth/register">
+                      <Button
+                        variant="ghost"
+                        className="text-white hover:text-blue-200 hover:bg-white/10 p-2 h-auto"
+                      >
+                        <UserPlus />
+                        <span className="text-sm">Sign Up</span>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>

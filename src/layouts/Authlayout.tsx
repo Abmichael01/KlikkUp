@@ -23,7 +23,7 @@ const AuthLayout: React.FC = () => {
       </GradientCard>
 
       {/* Right section */}
-      <div className="relative bg-primary flex-grow sm:px-20 min-[500px]:px-14 px-10 overflow-y-auto overflow-hidden pb-20">
+      <div className="relative bg-primary flex-grow sm:px-20 md:px-10 lg:px-20 min-[500px]:px-14 px-10 overflow-y-auto overflow-hidden pb-20">
         <div className="h-fit max-w-full">
           {/* Background gradient */}
 
