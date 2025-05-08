@@ -272,9 +272,9 @@ const Register: React.FC = () => {
                           className="border-l-[2px] border-primary pl-2 cursor-pointer"
                         >
                           {passwordVisibility[formField.name] ? (
-                            <EyeClosed />
-                          ) : (
                             <Eye />
+                          ) : (
+                            <EyeClosed />
                           )}
                         </div>
                       )}

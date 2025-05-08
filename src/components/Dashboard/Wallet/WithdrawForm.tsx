@@ -7,10 +7,12 @@ import { Label } from "@/components/ui/label";
 import { ArrowUpRight, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useWalletStore } from "@/stores/walletStore";
+import { useWithdraw } from "@/api/mutations";
 
 export const WithdrawForm: React.FC = () => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
+  const { mutate } = useWithdraw()
 
   const { walletDetails } = useWalletStore();
 
@@ -36,6 +38,10 @@ export const WithdrawForm: React.FC = () => {
       setError("");
     }
   };
+
+  const handleWithdrawal = () => {
+    mutate(Number(parseFloat(amount).toFixed(2)))
+  }
 
   return (
     <div className="space-y-4">
@@ -84,6 +90,7 @@ export const WithdrawForm: React.FC = () => {
 
       <Button
         className="w-full bg-green-600 hover:bg-green-700"
+          onClick={handleWithdrawal}
         disabled={
           !amount || !!error || Number.parseFloat(amount) < minWithdrawal
         }

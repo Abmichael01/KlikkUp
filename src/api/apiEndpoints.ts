@@ -299,6 +299,15 @@ export const roadmapData = async () => {
   }
 };
 
+export const withdraw = async (amount: number) => {
+  try {
+    const response = await apiClient.post("/wallet/withdraw/", {amount});
+    return response.data;
+  } catch (error) {
+    console.error("Error withdrawing", error);
+    throw error;
+  }
+};
 
 
 

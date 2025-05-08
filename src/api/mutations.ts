@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { addStory, addTask, buyCoupon, checkin, confirmStory, confirmTask, deleteStory, deleteTask, deleteUser, generateCoupon, login, logout, register, updateBankDetails, updateStory, updateTask, updateUser } from "@/api/apiEndpoints";
+import { addStory, addTask, buyCoupon, checkin, confirmStory, confirmTask, deleteStory, deleteTask, deleteUser, generateCoupon, login, logout, register, updateBankDetails, updateStory, updateTask, updateUser, withdraw } from "@/api/apiEndpoints";
 import { BankDetails, LoginData, PaymentData, RegisterData, Story, Task, User } from "@/types";
 
 
@@ -117,6 +117,12 @@ export const useCheckIn = () => {
   // Implement deleteTask mutation
   return useMutation({
     mutationFn:  checkin,
+  });
+}
+
+export const useWithdraw = () => {
+  return useMutation({
+    mutationFn: (amount: number) => withdraw(amount),
   });
 }
 
