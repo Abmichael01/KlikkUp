@@ -39,12 +39,13 @@ export const WithdrawForm: React.FC = () => {
   };
 
   const handleWithdrawal = () => {
-    mutate(Number(parseFloat(amount).toFixed(2)), {
+    mutate(Number(parseFloat(amount).toFixed(2))-10, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["wallet-data"] });
         setSuccess(true);
       },
       onError: (error) => {
+        setError("An error occurred from our end, contact the customer support for quick fix")
         console.error("Withdrawal error:", error);
       },
     });
