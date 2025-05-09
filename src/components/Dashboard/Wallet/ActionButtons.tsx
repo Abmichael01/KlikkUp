@@ -40,12 +40,13 @@ const actions = [
 ];
 
 export const ActionButtons: React.FC = () => {
+  
   return (
     <GradientCard>
       <CardContent className="p-4">
         <div className="grid grid-cols-3 gap-3">
           {actions.map((action) => (
-            <Dialog key={action.name}>
+            <Dialog key={action.name} >
               <DialogTrigger asChild>
                 <Button
                   variant="outline"

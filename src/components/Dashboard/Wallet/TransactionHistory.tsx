@@ -94,7 +94,7 @@ export const TransactionHistory: React.FC = () => {
         <ScrollArea className="min-h-[100px] pr-2">
           <div className="space-y-1 h-full">
             {transactions?.length != 0 &&
-              transactions?.reverse().map((transaction) => (
+              transactions?.map((transaction) => (
                 <TransactionItem
                   key={transaction.id}
                   transaction={transaction}
