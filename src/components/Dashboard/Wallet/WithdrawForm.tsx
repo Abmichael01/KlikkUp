@@ -39,7 +39,7 @@ export const WithdrawForm: React.FC = () => {
   };
 
   const handleWithdrawal = () => {
-    mutate(Number(parseFloat(amount).toFixed(2))-10, {
+    mutate(Number(parseFloat(amount).toFixed(2)), {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["wallet-data"] });
         setSuccess(true);
