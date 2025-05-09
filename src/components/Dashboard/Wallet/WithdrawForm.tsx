@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowUpRight, AlertCircle } from "lucide-react";
+import { ArrowUpRight, AlertCircle, Loader } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useWalletStore } from "@/stores/walletStore";
 import { useWithdraw } from "@/api/mutations";
@@ -12,7 +12,7 @@ import { useWithdraw } from "@/api/mutations";
 export const WithdrawForm: React.FC = () => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
-  const { mutate } = useWithdraw()
+  const { mutate, isPending } = useWithdraw()
 
   const { walletDetails } = useWalletStore();
 
@@ -92,10 +92,10 @@ export const WithdrawForm: React.FC = () => {
         className="w-full bg-green-600 hover:bg-green-700"
           onClick={handleWithdrawal}
         disabled={
-          !amount || !!error || Number.parseFloat(amount) < minWithdrawal
+          !amount || isPending || !!error || Number.parseFloat(amount) < minWithdrawal
         }
       >
-        <ArrowUpRight className="h-4 w-4 mr-2" />
+        { !isPending ? (<ArrowUpRight className="h-4 w-4 mr-2" />) : ( <Loader className="animate-spin" /> ) }
         Withdraw Funds
       </Button>
     </div>

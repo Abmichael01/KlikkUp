@@ -139,7 +139,8 @@ export type Transaction = {
   amount: number;
   transaction_type: TransactionType;
   description: string;
-  created_at: string; // ISO date string
+  timestamp: string; // ISO date string
+  status: string;
 }
 
 export type BankDetails = {

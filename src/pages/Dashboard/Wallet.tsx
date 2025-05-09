@@ -13,6 +13,8 @@ const Wallet: React.FC = () => {
   const { data, isLoading } = useWalletData()
   const setWalletDetails = useWalletStore((state) => state.setWalletDetails);
 
+  console.log(data?.transactions)
+
   useEffect(() => {
     if (data) {
       setWalletDetails(data); // Save wallet data to the store
