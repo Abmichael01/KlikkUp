@@ -19,7 +19,7 @@ export const WithdrawForm: React.FC = () => {
 
   const { walletDetails } = useWalletStore();
 
-  const minWithdrawal = 1000;
+  const minWithdrawal = 500;
   const maxWithdrawal = 200000;
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
