@@ -1,4 +1,4 @@
-import {AccountOverviewData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails} from "@/types";
+import {AccountOverviewData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -299,12 +299,22 @@ export const roadmapData = async () => {
   }
 };
 
-export const withdraw = async (amount: number) => {
+export const withdraw = async (data: WithdrawalData) => {
   try {
-    const response = await apiClient.post("/wallet/withdraw/", {amount});
+    const response = await apiClient.post("/wallet/withdraw/", data );
     return response.data;
   } catch (error) {
     console.error("Error withdrawing", error);
+    throw error;
+  }
+};
+
+export const sendOtp = async () => {
+  try {
+    const response = await apiClient.post("/users/send-otp/");
+    return response.data;
+  } catch (error) {
+    console.error("Error sending otp", error);
     throw error;
   }
 };

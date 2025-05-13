@@ -54,7 +54,7 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
               </p>
               <h2
                 className={cn(
-                  "px-2 py-1 text-[10px] text-white rounded-full tracking-wide font-semibold w-fit",
+                  "px-2 py-1 text-[10px] text-white rounded-full tracking-wide font-semibold w-fit float-right ",
                   transaction.status === "PENDING"
                     ? "bg-amber-600"
                     : transaction.status === "SUCCESS"

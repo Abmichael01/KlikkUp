@@ -178,3 +178,8 @@ export type RoadmapData = {
   roadmap: RoadmapItem[];
   users_count: number;
 };
+
+export type WithdrawalData = {
+  amount: number;
+  otp: string;
+}
