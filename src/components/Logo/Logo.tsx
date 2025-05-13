@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import logoImg from "@/assets/icons/logo.svg";
+import logoImg from "@/assets/icons/logo.png";
 import logo2Img from "@/assets/icons/logo2.svg";
 import { Link } from "react-router";
 
