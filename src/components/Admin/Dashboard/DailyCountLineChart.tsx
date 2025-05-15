@@ -36,7 +36,7 @@ export function DailyCountLineChart({ data }: { data: AnalyticsData }) {
       date,
       count,
     }));
-  }
+  } 
   const chartData = formatDailyCountsForChart(data?.users?.new_users_daily);
   console.log(data)
 
