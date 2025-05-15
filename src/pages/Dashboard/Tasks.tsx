@@ -15,12 +15,16 @@ import GradientCard from "@/components/ui/GradientCard";
 
 const tabs = [
   {
-    label: "Available Tasks",
+    label: "Available",
     slug: "available-tasks",
   },
   {
-    label: "Completed Tasks",
+    label: "Completed",
     slug: "completed-tasks",
+  },
+  {
+    label: "Missed",
+    slug: "missed-tasks",
   },
 ];
 
@@ -32,12 +36,17 @@ const Tasks: React.FC = () => {
   if (isLoading) return <PageIsLoading />;
 
   // Determine which tasks to display based on the current tab
-  const displayedTasks = currentTab === "available-tasks" ? data?.available_tasks : data?.completed_tasks as Task[];
+  const displayedTasks =
+    currentTab === "available-tasks"
+      ? data?.available_tasks
+      : currentTab === "missed-tasks"
+      ? data?.missed_tasks
+      : (data?.completed_tasks as Task[]);
 
   // Filter tasks based on the search query
-  const filteredTasks = displayedTasks 
+  const filteredTasks = displayedTasks;
 
-  console.log(data)
+  console.log(data);
 
   return (
     <div className="flex flex-col gap-6">
@@ -47,7 +56,6 @@ const Tasks: React.FC = () => {
       <GradientCard className="border-none bg-blue-950 text-white shadow-md">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
-            
             <div className="flex gap-3">
               {tabs.map((tab) => (
                 <button

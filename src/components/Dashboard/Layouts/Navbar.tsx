@@ -9,14 +9,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { LogOut, LucideBell, User } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLogout } from "@/api/mutations";
 import { Link } from "react-router";
+import { useAnnouncementStore } from "@/stores/announcementStore";
 
 const Navbar: React.FC = () => {
   const { logout, user } = useAuthStore.getState();
+  const { setIsOpen } = useAnnouncementStore()
   const queryClient = useQueryClient();
   const { mutate } = useLogout();
   return (
@@ -33,6 +35,10 @@ const Navbar: React.FC = () => {
           <span className="relative z-[1]">Free Courses</span>
           <span className="absolute inset-0 bg-gradient-to-r from-orange-300 via-orange-700 to-orange-300 blur-md"></span>
         </Link>
+        <div onClick={() => setIsOpen(true)} className="relative items-center justify-center rounded-full border-muted shadow-sm hover:bg-accent transition cursor-pointer">
+          <LucideBell className=" text-muted-foreground" />
+          <span className="absolute top-[2px] right-[3px] h-2 w-2 rounded-full bg-amber-500 ring-2 ring-white" />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger className="cursor-pointer" asChild>
             <div className="flex gap-1 items-center ">

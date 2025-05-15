@@ -1,4 +1,4 @@
-import {AccountOverviewData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
+import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -320,4 +320,13 @@ export const sendOtp = async () => {
 };
 
 
+export const analyticsData = async () => {
+  try {
+    const response = await apiClient.get("/admin/analytics-data/");
+    return response.data as AnalyticsData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
 

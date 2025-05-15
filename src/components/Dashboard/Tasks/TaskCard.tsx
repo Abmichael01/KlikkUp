@@ -47,7 +47,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             <span className="text-xs text-blue-300">Klikks</span>
           </div>
 
-          <Drawer open={open} onOpenChange={setOpen}>
+          { !task.completed && <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
               <Button className="bg-secondary hover:bg-secondary/90 text-white px-8 py-2 h-auto rounded-full" size="sm">
                 Start
@@ -56,7 +56,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             <DrawerContent className="bg-blue-950 text-white">
               <TaskConfirmationForm task={task} onClose={() => setOpen(false)} />
             </DrawerContent>
-          </Drawer>
+          </Drawer>}
         </div>
       </CardContent>
     </Card>

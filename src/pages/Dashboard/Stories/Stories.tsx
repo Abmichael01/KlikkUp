@@ -1,42 +1,49 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Search } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Card, CardContent } from "@/components/ui/card"
-import { motion } from "framer-motion"
-import StatsCards from "@/components/Dashboard/Stories/StatsCards"
-import StoryCard from "@/components/Dashboard/Stories/StoryCard"
-import { useStoriesData } from "@/api/queries"
-import { StoriesData, Story } from "@/types"
-import PageIsLoading from "@/components/Dashboard/PageIsLoading"
-import GradientCard from "@/components/ui/GradientCard"
-
-
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import StatsCards from "@/components/Dashboard/Stories/StatsCards";
+import StoryCard from "@/components/Dashboard/Stories/StoryCard";
+import { useStoriesData } from "@/api/queries";
+import { StoriesData, Story } from "@/types";
+import PageIsLoading from "@/components/Dashboard/PageIsLoading";
+import GradientCard from "@/components/ui/GradientCard";
 
 const tabs = [
   {
-    label: "New stories",
+    label: "New",
     slug: "new-stories",
   },
   {
-    label: "Old stories",
+    label: "Old",
     slug: "old-stories",
   },
-]
+  {
+    label: "Missed",
+    slug: "missed-stories",
+  },
+];
 
 const Stories: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState("new-stories")
-  
-  const { data, isLoading } = useStoriesData()
-  
-  const displayedStories = currentTab === "new-stories" ? data?.new_stories : data?.stories_read as Story[];
+  const [currentTab, setCurrentTab] = useState("new-stories");
 
-  const filteredStories = displayedStories
+  const { data, isLoading } = useStoriesData();
 
-  if(isLoading) return <PageIsLoading />
+  const displayedStories =
+    currentTab === "new-stories"
+      ? data?.new_stories
+      : currentTab === "old-stories"
+      ? data?.stories_read
+      : (data?.missed_stories as Story[]);
+
+  const filteredStories = displayedStories;
+
+  if (isLoading) return <PageIsLoading />;
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,7 +61,7 @@ const Stories: React.FC = () => {
                     "text-center px-6 py-2 text-sm font-medium rounded-lg  border-blue-800 transition-colors",
                     tab.slug === currentTab
                       ? "bg-secondary text-white"
-                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950 border",
+                      : "bg-blue-950/50 text-blue-300 hover:bg-blue-950 border"
                   )}
                   onClick={() => setCurrentTab(tab.slug)}
                 >
@@ -88,11 +95,13 @@ const Stories: React.FC = () => {
               <Search className="h-8 w-8 text-blue-300" />
             </div>
             <h3 className="text-xl font-semibold">No stories found</h3>
-            <p className="text-blue-300 mt-2">Try adjusting your search or filter criteria</p>
+            <p className="text-blue-300 mt-2">
+              Try adjusting your search or filter criteria
+            </p>
             <Button
               className="mt-6 bg-secondary hover:bg-secondary/90 text-white"
               onClick={() => {
-                setCurrentTab("new-stories")
+                setCurrentTab("new-stories");
               }}
             >
               Reset Filters
@@ -116,8 +125,7 @@ const Stories: React.FC = () => {
         </CardContent>
       </Card> */}
     </div>
-  )
-}
+  );
+};
 
-export default Stories
-
+export default Stories;

@@ -8,7 +8,7 @@ import ShareDialog from "@/components/Dashboard/ShareDialog";
 
 const DashboardLayout: React.FC = () => {
   return (
-    <div className="flex relative dark:bg-gray-800">
+    <div className="flex relative dark:bg-gray-800 font-sans">
       <Sidebar />
       <Taskbar />
       <div className="flex-grow">

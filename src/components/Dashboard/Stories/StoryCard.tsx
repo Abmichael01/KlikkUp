@@ -36,9 +36,9 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
             <span className="font-bold">{story.reward}</span>
             <span className="text-xs text-blue-300">Klikks</span>
           </div>
-          <Link to={`/story/${story.id}`} className="bg-secondary px-8 text-sm py-2 hover:bg-secondary/90 rounded-full">
+          { !story?.story_read && <Link to={`/story/${story.id}`} className="bg-secondary px-8 text-sm py-2 hover:bg-secondary/90 rounded-full">
             Read
-          </Link>
+          </Link>}
         </div>
       </CardContent>
     </Card>

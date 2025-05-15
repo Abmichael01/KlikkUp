@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {accountOverview, getCoupons, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
+import {accountOverview, analyticsData, getCoupons, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
 
 // Fetch Current User
 export const useGetUser = () => {
@@ -85,6 +85,13 @@ export const useRoadmapData = () => {
   return useQuery({
     queryKey: ["roadmap-data"],
     queryFn: roadmapData,
+  });
+};
+
+export const useAnalyticsData = () => {
+  return useQuery({
+    queryKey: ["analytics-data"],
+    queryFn: analyticsData,
   });
 };
 

@@ -98,11 +98,13 @@ export type Task = {
   reward: number;
   confirmation_code?: string;
   estimated_time?: number;
+  completed: boolean;
 }
 
 export type TasksData = {
   completed_tasks: Task[];
   available_tasks: Task[];
+  missed_tasks: Task[];
   points_earned: number;
 }
 
@@ -118,6 +120,7 @@ export type Story = {
 export type StoriesData = {
   stories_read: Story[];
   new_stories: Story[];
+  missed_stories: Story[];
   points_earned: number;
 }
 
@@ -182,4 +185,45 @@ export type RoadmapData = {
 export type WithdrawalData = {
   amount: number;
   otp: string;
+}
+
+
+export type AnalyticsData = {
+  tasks: {
+    total: number;
+    completed: number;
+    new_today: number;       // % change compared to previous period (e.g. yesterday)
+    daily_completed?: Record<string, number>;  // optional, for charts later
+  };
+  stories: {
+    total: number;
+    completed: number;
+    new_today: number;
+    daily_completed?: Record<string, number>;
+  };
+  users: {
+    total: number;
+    new_today: number;
+    new_users_daily?: Record<string, number>;
+  };
+  coupons: {
+    total: number;
+    sold: number;
+    used: number;
+    new_today: number;
+  };
+  top_users: {
+    username: string;
+    points: number;
+  }[];
+  rewards_summary: {
+    total_rewards_given: number;
+    average_per_user: number;
+  };
+  activity_distribution: {
+    task: number;
+    story: number;
+    checkin: number;
+    [key: string]: number; // in case more types are added
+  };
 }
