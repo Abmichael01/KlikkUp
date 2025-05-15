@@ -98,7 +98,7 @@ export type Task = {
   reward: number;
   confirmation_code?: string;
   estimated_time?: number;
-  completed: boolean;
+  completed?: boolean;
 }
 
 export type TasksData = {
