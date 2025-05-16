@@ -227,3 +227,29 @@ export type AnalyticsData = {
     [key: string]: number; // in case more types are added
   };
 }
+
+
+export type CourseCategory = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+export type Course = {
+  id: number;
+  title: string;
+  course_url: string;
+  created_at: string; // ISO date string
+  category: CourseCategory;
+};
+
+export type CreateCourseData = {
+  title: string;
+  course_url: string;
+  category_id: number;
+};
+
+export type CreateCourseCategoryData = {
+  name: string;
+  slug: string;
+};

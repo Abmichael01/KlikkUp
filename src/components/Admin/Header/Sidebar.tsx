@@ -6,11 +6,11 @@ import React from "react";
 import { Link, useLocation } from "react-router"; // Note: Changed to react-router-dom
 
 const navs = [
-  { icon: LayoutDashboard, name: "Dashboard", path: "/admin/dashboard" },
-  { icon: Users, name: "Users", path: "/admin/users" },
-  { icon: Ticket, name: "Coupon", path: "/admin/coupon" },
-  { icon: ClipboardList, name: "Tasks", path: "/admin/tasks" },
-  { icon: BookOpen, name: "Stories", path: "/admin/stories" },
+  { icon: LayoutDashboard, name: "Dashboard", path: "/dashboard" },
+  { icon: Users, name: "Users", path: "/users" },
+  { icon: Ticket, name: "Coupon", path: "/coupon" },
+  { icon: ClipboardList, name: "Tasks", path: "/tasks" },
+  { icon: BookOpen, name: "Stories", path: "/stories" },
   { icon: Gift, name: "Airdrop", path: "/airdrop" },
   { icon: Waypoints, name: "Roadmap", path: "/roadmap" },
 ];
