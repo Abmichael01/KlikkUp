@@ -1,9 +1,6 @@
-// App.tsx
 import React from 'react';
-import { Routes, Route, BrowserRouter, useLocation } from 'react-router';
-import { getSubdomain } from '@/lib/utils';
+import { Routes, Route, BrowserRouter, useLocation, Navigate } from 'react-router-dom';
 
-// Main & Dashboard imports
 import Home from './pages/Home';
 import MainLayout from './layouts/MainLayout';
 import DashboardLayout from './layouts/DashboardLayout';
@@ -45,50 +42,55 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      {subdomain === 'admin' ? (
-        <Routes>
-          <Route element={<ProtectedRoute allowedRoles={[1]} />}>
-            <Route path="/" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="users" element={<UsersManagement />} />
-              <Route path="coupon" element={<Coupon />} />
-              <Route path="tasks" element={<TasksManagement />} />
-              <Route path="stories" element={<StoriesManagement />} />
+      <Routes>
+        {/* Public Shared Auth Routes */}
+        <Route path="/auth" element={<Authlayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+
+        {/* Subdomain-based Routing */}
+        {subdomain === 'admin' ? (
+          <>
+            <Route element={<ProtectedRoute allowedRoles={[1]} />}>
+              <Route path="/" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="users" element={<UsersManagement />} />
+                <Route path="coupon" element={<Coupon />} />
+                <Route path="tasks" element={<TasksManagement />} />
+                <Route path="stories" element={<StoriesManagement />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      ) : (
-        <Routes>
-          {/* Main Layout */}
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          </Route>
-
-          <Route path="/buy-coupon" element={<BuyCoupon />} />
-
-          {/* Auth Layout */}
-          <Route path="/auth" element={<Authlayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-
-          {/* Dashboard Layout */}
-          <Route element={<ProtectedRoute allowedRoles={[1, 2, 3]} />}>
-            <Route element={<DashboardLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="invite" element={<Invite />} />
-              <Route path="tasks" element={<Tasks />} />
-              <Route path="stories" element={<Stories />} />
-              <Route path="story/:id" element={<Story />} />
-              <Route path="wallet" element={<Wallet />} />
-              <Route path="roadmap" element={<Roadmap />} />
-              <Route path="courses" element={<Courses />} />
+          </>
+        ) : (
+          <>
+            {/* Main Site Routes */}
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
             </Route>
-          </Route>
-        </Routes>
-      )}
+
+            <Route path="/buy-coupon" element={<BuyCoupon />} />
+
+            <Route element={<ProtectedRoute allowedRoles={[1, 2, 3]} />}>
+              <Route element={<DashboardLayout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="invite" element={<Invite />} />
+                <Route path="tasks" element={<Tasks />} />
+                <Route path="stories" element={<Stories />} />
+                <Route path="story/:id" element={<Story />} />
+                <Route path="wallet" element={<Wallet />} />
+                <Route path="roadmap" element={<Roadmap />} />
+                <Route path="courses" element={<Courses />} />
+              </Route>
+            </Route>
+          </>
+        )}
+
+        {/* Fallback route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </BrowserRouter>
   );
 };
