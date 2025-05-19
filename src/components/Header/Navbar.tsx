@@ -14,7 +14,7 @@ import GlidingButton from "../ui/GlidingButton";
 const links = [
   {
     name: "Login",
-    link: "/auth/login",
+    link: "https://admin.klikkupp.com/dashboard",
     className: "bg-amber-500 text-black",
   },
   {
@@ -145,7 +145,9 @@ const Navbar: React.FC = () => {
               <X className="h-6 w-6" />
             </button>
           </div>
-          <h2 className="text-sm text-black/70">Engage in fun tasks, earn rewards, and convert your points</h2>
+          <h2 className="text-sm text-black/70">
+            Engage in fun tasks, earn rewards, and convert your points
+          </h2>
           <div className="flex flex-col gap-6 mt-8">
             {navs.map((nav, index) => (
               <p
@@ -175,17 +177,13 @@ const Navbar: React.FC = () => {
               ))}
 
             {isAuthenticated && (
-              <Link
-                to={"/dashboard"}
-                className="gap-5 items-center w-full"
-              >
+              <Link to={"/dashboard"} className="gap-5 items-center w-full">
                 <GlidingButton className="px-5 text-sm text-white bg-secondary rounded-md hover:opacity-90 transition-opacity w-full justify-between">
                   Dashboard
                   <ArrowRight />
                 </GlidingButton>
               </Link>
             )}
-            
           </div>
         </div>
       </div>

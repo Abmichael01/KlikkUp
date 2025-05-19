@@ -32,9 +32,7 @@ const Actions: React.FC<ActionsProps> = ({ task }) => {
   // const { open, setOpen } = useDialog("updateTask");
   const { mutate: deleteTask } = useDeleteTask();
   const toastMessage = useMessageToaster();
-  const queyClient = useQueryClient();
-
-  
+  const queyClient = useQueryClient()
 
   return (
     <div>
