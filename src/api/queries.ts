@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {accountOverview, analyticsData, getCoupons, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
+import {accountOverview, analyticsData, getAllCourses, getCoupons, getCoursesCategories, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
 
 // Fetch Current User
 export const useGetUser = () => {
@@ -37,6 +37,27 @@ export const useGetUsers = () => {
     queryFn: getUsers,
   });
 };
+
+
+export const useGetAllCourses = () => {
+  return useQuery({
+    queryKey: ["courses"],
+    queryFn: getAllCourses,
+  });
+};
+
+export const useGetCourseCategories = () => {
+  return useQuery({
+    queryKey: ["course-categories"],
+    queryFn: getCoursesCategories,
+  });
+};
+
+
+
+
+
+// User dashboard
 
 export const useReferralsData = () => {
   return useQuery({
@@ -94,6 +115,8 @@ export const useAnalyticsData = () => {
     queryFn: analyticsData,
   });
 };
+
+
 
 
 

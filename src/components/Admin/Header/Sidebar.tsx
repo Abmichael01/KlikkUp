@@ -1,7 +1,7 @@
 import Logo from "@/components/Logo/Logo";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/stores/sidebarStore";
-import { BookOpen, ClipboardList, Gift, LayoutDashboard, Ticket, Users, Waypoints } from 'lucide-react';
+import { BookOpen, ClipboardList, GraduationCap, LayoutDashboard, Ticket, Users } from 'lucide-react';
 import React from "react";
 import { Link, useLocation } from "react-router"; // Note: Changed to react-router-dom
 
@@ -11,8 +11,8 @@ const navs = [
   { icon: Ticket, name: "Coupon", path: "/coupon" },
   { icon: ClipboardList, name: "Tasks", path: "/tasks" },
   { icon: BookOpen, name: "Stories", path: "/stories" },
-  { icon: Gift, name: "Airdrop", path: "/airdrop" },
-  { icon: Waypoints, name: "Roadmap", path: "/roadmap" },
+  { icon: GraduationCap, name: "Courses", path: "/courses" },
+  // { icon: Waypoints, name: "Roadmap", path: "/roadmap" },
 ];
 
 const Sidebar: React.FC = () => {
@@ -46,9 +46,9 @@ const Sidebar: React.FC = () => {
             to={nav.path}
             key={index}
             className={cn(
-              "flex items-center gap-4 w-full py-3 px-3 rounded-lg hover:bg-gray-200 cursor-pointer overflow-hidden",
+              "flex items-center gap-4 w-full py-3 px-3 rounded-xl hover:bg-gray-100 cursor-pointer overflow-hidden",
               nav.path.includes(location.pathname) &&
-                "bg-primary text-white hover:bg-primary/90"
+                "bg-blue-100 text-primary hover:bg-blue-100/70"
             )}
           >
             <div className="flex-shrink-0">

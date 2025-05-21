@@ -27,6 +27,7 @@ import ProtectedRoute from './layouts/ProtectedRoutesLayout';
 import StoriesManagement from './pages/Admin/Stories';
 import UsersManagement from './pages/Admin/Users';
 import { getSubdomain } from './lib/utils';
+import CoursesManagement from './pages/Admin/Courses';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -61,6 +62,7 @@ const App: React.FC = () => {
                 <Route path="coupon" element={<Coupon />} />
                 <Route path="tasks" element={<TasksManagement />} />
                 <Route path="stories" element={<StoriesManagement />} />
+                <Route path="courses" element={<CoursesManagement />} />
               </Route>
             </Route>
           </>

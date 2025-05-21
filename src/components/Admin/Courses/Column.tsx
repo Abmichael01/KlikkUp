@@ -1,11 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Task } from "@/types";
-import { Link } from "react-router";
-// import { cn } from "@/lib/utils";
+import { Course } from "@/types";
+import { Link } from "react-router"; // Make sure you're using react-router-dom
 import Actions from "./Actions";
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<Course>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -28,44 +27,44 @@ export const columns: ColumnDef<Task>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-
   {
     accessorKey: "title",
     header: "Title",
   },
-
   {
-    accessorKey: "link",
-    header: "Link",
+    accessorKey: "category",
+    header: "Category",
     cell: ({ row }) => {
-      const link = row.original.link;
+      // You can expand this later if you have category name instead of ID
+      return <span>{row.original.category?.name}</span>;
+    },
+  },
+  {
+    accessorKey: "course_url",
+    header: "Course URL",
+    cell: ({ row }) => {
+      const url = row.original.course_url;
 
       return (
-        <Link to={link} className="hover:underline">
-          link
+        <Link to={url as string} className="hover:underline" target="_blank">
+          {url}
         </Link>
       );
     },
   },
-
   {
-    accessorKey: "reward",
-    header: "Reward",
+    accessorKey: "created_at",
+    header: "Created At",
+    cell: ({ row }) => {
+      const date = new Date(row.original.created_at as string);
+      return <span>{date.toLocaleDateString()}</span>;
+    },
   },
-
-  {
-    accessorKey: "confirmation_code",
-    header: "Confirmation Code",
-  },
-
   {
     id: "actions",
     cell: ({ row }) => {
-      const task = row.original;
-      // console.log("Task from row.original:", task); // Debugging
-      return (
-        <Actions task={task} />
-      );
+      const course = row.original;
+      return <Actions course={course} />;
     },
   },
 ];

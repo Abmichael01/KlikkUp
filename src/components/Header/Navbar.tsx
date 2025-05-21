@@ -14,7 +14,7 @@ import GlidingButton from "../ui/GlidingButton";
 const links = [
   {
     name: "Login",
-    link: "https://admin.klikkupp.com/dashboard",
+    link: "/auth/login",
     className: "bg-amber-500 text-black",
   },
   {

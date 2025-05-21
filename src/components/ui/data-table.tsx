@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
-      <div className="flex items-center py-4">
+      <div className="flex flex-col-reverse gap-3 sm:flex-row  justify-between items-start sm:items-center py-4">
         <Input
           placeholder={`Filter ${searchableColId}...`}
           value={
@@ -94,7 +94,7 @@ export function DataTable<TData, TValue>({
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className="w-fit">
               Columns
               <ChevronDown />
             </Button>
@@ -120,7 +120,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <ScrollArea className="rounded-md border-b w-full pb-3 whitespace-nowrap">
+      <ScrollArea className="border-b w-full pb-3 whitespace-nowrap">
         <ScrollBar orientation="horizontal" />
         <div className="border rounded-md text-nowrap">
           <Table className="w-full">

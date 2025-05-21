@@ -1,4 +1,4 @@
-import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
+import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, Course, CourseCategory, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -176,6 +176,109 @@ export const deleteStory = async (id: Story["id"]) => {
   }
 };
 
+
+export const getAllCourses = async (): Promise<Course[]> => {
+  try {
+    const response = await apiClient.get("/courses/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching courses", error);
+    throw error;
+  }
+};
+
+// Fetch a single course by ID
+export const getCourseById = async (id: number): Promise<Course> => {
+  try {
+    const response = await apiClient.get(`/courses/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching course with ID ${id}`, error);
+    throw error;
+  }
+};
+
+// Add a new course
+export const addCourse = async (courseData: Course): Promise<Course> => {
+  try {
+    const response = await apiClient.post("/courses/", courseData);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding course", error);
+    throw error;
+  }
+};
+
+// Update an existing course
+export const updateCourse = async (
+  courseData: Course
+): Promise<Course> => {
+  try {
+    const response = await apiClient.put(`/courses/${courseData.id}/`, courseData);
+    return response.data;        
+  } catch (error) {
+    console.error(`Error updating course with ID ${courseData.id}`, error);
+    throw error;
+  }
+};
+
+// Delete a course
+export const deleteCourse = async (id: number): Promise<void> => {
+  try {
+    await apiClient.delete(`/courses/${id}/`);
+  } catch (error) {
+    console.error(`Error deleting course with ID ${id}`, error);
+    throw error;
+  }
+};
+
+export const addCourseCategory = async (data: CourseCategory): Promise<CourseCategory> => {
+  try {
+    const response = await apiClient.post("/course-categories/", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding category", error);
+    throw error;
+  }
+};
+
+export const getCoursesCategories = async () => {
+  try {
+    const response = await apiClient.get(`/course-categories/`);
+    return response.data as CourseCategory[];
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const updateCourseCategory = async (data: CourseCategory) => {
+  try {
+    const response = await apiClient.put(`/course-categories/${data.id}/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating category", error);
+    throw error;
+  }
+};
+
+export const deleteCourseCategory = async (id: number) => {
+  try {
+    const response = await apiClient.delete(`/course-categories/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting category", error);
+    throw error;
+  }
+};
+
+
+
+
+
+
+// User dashboard 
+
 export const getReferralsData = async () => {
   try {
     const response = await apiClient.get(`/users/referrals/`);
@@ -329,4 +432,5 @@ export const analyticsData = async () => {
     throw error;
   }
 };
+
 

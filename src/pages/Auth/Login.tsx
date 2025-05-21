@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import {
   Form,
   FormControl,
@@ -97,7 +96,8 @@ const Login: React.FC = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 w-full flex flex-col"
       >
-        <div className="flex flex-col items-center gap-2 text-white">
+        <div
+         className="flex flex-col items-center gap-2 text-white">
           <h2 className="text-3xl fancy-font text-center ">Welcome Back</h2>
           <p>Login to your account</p>
         </div>

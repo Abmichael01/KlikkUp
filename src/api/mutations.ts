@@ -1,11 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import {
+  addCourse,
+  addCourseCategory,
   addStory,
   addTask,
   buyCoupon,
   checkin,
   confirmStory,
   confirmTask,
+  deleteCourse,
+  deleteCourseCategory,
   deleteStory,
   deleteTask,
   deleteUser,
@@ -15,6 +19,8 @@ import {
   register,
   sendOtp,
   updateBankDetails,
+  updateCourse,
+  updateCourseCategory,
   updateStory,
   updateTask,
   updateUser,
@@ -22,6 +28,7 @@ import {
 } from "@/api/apiEndpoints";
 import {
   BankDetails,
+  Course,
   LoginData,
   PaymentData,
   RegisterData,
@@ -159,3 +166,40 @@ export const useSendOtp = () => {
     mutationFn: sendOtp,
   });
 };
+export const useAddCourse = () => {
+  return useMutation({
+    mutationFn: addCourse,
+  });
+};
+
+export const useUpdateCourse = () => {
+  return useMutation({
+    mutationFn: (data: Course) => updateCourse(data),
+  });
+};
+
+export const useDeleteCourse = () => {
+  return useMutation({
+    mutationFn: (id: number) => deleteCourse(id),
+  });
+};
+
+export const useAddCourseCategory = () => {
+  return useMutation({
+    mutationFn: addCourseCategory,
+  });
+};
+
+export const useUpdateCourseCategory = () => {
+  return useMutation({
+    mutationFn: updateCourseCategory,
+  });
+};
+ 
+export const useDeleteCourseCategory = () => {
+  return useMutation({
+    mutationFn: (id: number) => deleteCourseCategory(id),
+  });
+};
+ 
+

@@ -58,7 +58,7 @@ const faqData = [
   {
     question: "HOW DO I EARN N100K MONTHLY?",
     answer:
-      "Note, this monthly N100k bonus is only for users who already have a community to refer. To be eligible, you need to refer a minimum of 50 users monthly. This bonus is available for a limited time.",
+      "Note, this monthly N100k bonus is only for users who already have a community to refer. To be eligible, you need to refer a minimum of 100 users monthly. This bonus is available for a limited time.",
   },
   {
     question: "DO I EARN MONEY FROM REFERRING PEOPLE?",

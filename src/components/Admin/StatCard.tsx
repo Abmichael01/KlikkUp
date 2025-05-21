@@ -13,7 +13,9 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, new_today }) =>
     <Card className="bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        {icon}
+        <div className="text-primary">
+          {icon}
+        </div>
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>

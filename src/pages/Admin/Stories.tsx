@@ -17,7 +17,7 @@ const StoriesManagement: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start gap-5 justify-between sm:items-center">
-        <h1 className="text-3xl font-semibold fancy-font">Stories Management</h1>
+        <h1 className="text-xl md:text-3xl font-semibold fancy-font">Stories Management</h1>
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>

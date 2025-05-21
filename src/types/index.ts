@@ -230,17 +230,19 @@ export type AnalyticsData = {
 
 
 export type CourseCategory = {
-  id: number;
+  id?: number;
   name: string;
-  slug: string;
+  slug?: string;
+  courses_count?: number;
 };
 
 export type Course = {
-  id: number;
+  id?: number;
   title: string;
-  course_url: string;
-  created_at: string; // ISO date string
-  category: CourseCategory;
+  course_url?: string;
+  created_at?: string; // ISO date string
+  category?: CourseCategory;
+  category_id?: number;
 };
 
 export type CreateCourseData = {

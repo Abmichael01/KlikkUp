@@ -1,6 +1,8 @@
 import {
   AlignEndVerticalIcon,
+  AppWindow,
   BrainIcon,
+  GraduationCap,
   MousePointerClickIcon,
   Video,
 } from "lucide-react";
@@ -25,6 +27,15 @@ const features = [
     icon: <BrainIcon className={iconsClassName} />,
     name: "Solve Riddles",
   },
+  {
+    icon: <GraduationCap className={iconsClassName} />,
+    name: "Free Courses",
+  },
+  {
+    icon: <AppWindow className={iconsClassName} />,
+    name: "Free Premium \n Apps",
+  },
+
 ];
 
 const Features: React.FC = () => {
