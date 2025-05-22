@@ -435,7 +435,7 @@ export const analyticsData = async () => {
 
 export const getCoursesData = async (category: number, page: number, query: string) => {
   try {
-    const response = await apiClient.get(`/users/courses/?category=${category}&page=${page}&query=${query}`);
+    const response = await apiClient.get(`/users/courses/?category=${category}&page=${page}${ query ? `&query=${query}` : ""}`);
     return response.data as CoursesData;
   } catch (error) {
     console.error("Error fetching data", error);
