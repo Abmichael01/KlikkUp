@@ -251,7 +251,11 @@ export type CreateCourseData = {
   category_id: number;
 };
 
-export type CreateCourseCategoryData = {
-  name: string;
-  slug: string;
+export type CoursesData = {
+  courses: Course[];
+  categories: CourseCategory[];
+  has_next: boolean;
+  current_page: number;
+  total_pages: number;
+  total_results: number;
 };

@@ -1,4 +1,4 @@
-import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, Course, CourseCategory, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
+import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, Course, CourseCategory, CoursesData, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -384,7 +384,7 @@ export const accountOverview = async () => {
 
 export const checkin = async () => {
   try {
-    const response = await apiClient.post("/daily-checkin/");
+    const response = await apiClient.post("/users/daily-checkin/");
     return response.data;
   } catch (error) {
     console.error("Error checking in", error);
@@ -427,6 +427,16 @@ export const analyticsData = async () => {
   try {
     const response = await apiClient.get("/admin/analytics-data/");
     return response.data as AnalyticsData;
+  } catch (error) {
+    console.error("Error fetching data", error);
+    throw error;
+  }
+};
+
+export const getCoursesData = async (category: number, page: number, query: string) => {
+  try {
+    const response = await apiClient.get(`/users/courses/?category=${category}&page=${page}&query=${query}`);
+    return response.data as CoursesData;
   } catch (error) {
     console.error("Error fetching data", error);
     throw error;
