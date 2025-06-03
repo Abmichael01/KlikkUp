@@ -5,6 +5,7 @@ import {
   addStory,
   addTask,
   buyCoupon,
+  changePassword,
   checkin,
   confirmStory,
   confirmTask,
@@ -28,6 +29,7 @@ import {
 } from "@/api/apiEndpoints";
 import {
   BankDetails,
+  ChangePasswordData,
   Course,
   LoginData,
   PaymentData,
@@ -201,5 +203,11 @@ export const useDeleteCourseCategory = () => {
     mutationFn: (id: number) => deleteCourseCategory(id),
   });
 };
+
+export const useChangePassword = () => {
+  return useMutation({
+    mutationFn: (data: ChangePasswordData) => changePassword(data)
+  });
+}
  
 

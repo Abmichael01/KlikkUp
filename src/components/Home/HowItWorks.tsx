@@ -23,11 +23,6 @@ const steps = [
     description: "Transform your earned points into valuable tokens.",
     icon: "💱",
   },
-  {
-    title: "Use or Withdraw",
-    description: "Spend tokens in the ecosystem or withdraw them.",
-    icon: "💰",
-  },
 ]
 
 const HowItWorks: React.FC = () => {

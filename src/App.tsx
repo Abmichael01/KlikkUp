@@ -28,6 +28,8 @@ import StoriesManagement from './pages/Admin/Stories';
 import UsersManagement from './pages/Admin/Users';
 import { getSubdomain } from './lib/utils';
 import CoursesManagement from './pages/Admin/Courses';
+import Settings from './pages/Dashboard/Settings';
+import BecomePartner from './pages/BecomePartner';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -75,6 +77,9 @@ const App: React.FC = () => {
             </Route>
 
             <Route path="/buy-coupon" element={<BuyCoupon />} />
+            <Route path="/become-partner" element={<BecomePartner />} />
+
+            {/* Auth Routes */}
 
             <Route element={<ProtectedRoute allowedRoles={[1, 2, 3]} />}>
               <Route element={<DashboardLayout />}>
@@ -86,6 +91,7 @@ const App: React.FC = () => {
                 <Route path="wallet" element={<Wallet />} />
                 <Route path="roadmap" element={<Roadmap />} />
                 <Route path="courses" element={<Courses />} />
+                <Route path="settings" element={<Settings />} />
               </Route>
             </Route>
           </>

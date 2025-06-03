@@ -2,14 +2,16 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { QueryProvider } from "./QueryProvider.tsx";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/sonner"
 
 createRoot(document.getElementById("root")!).render(
   <>
     <QueryProvider>
       <App />
     </QueryProvider>
-    <Toaster />
+    <Toaster richColors 
+    
+     />
   </>
   
 );

@@ -1,4 +1,4 @@
-import {AccountOverviewData, AnalyticsData, BankDetails, Coupon, Course, CourseCategory, CoursesData, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
+import {AccountOverviewData, AnalyticsData, BankDetails, ChangePasswordData, Coupon, Course, CourseCategory, CoursesData, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -443,4 +443,12 @@ export const getCoursesData = async (category: number, page: number, query: stri
   }
 };
 
-
+export const changePassword = async ( data: ChangePasswordData ) => {
+  try {
+    const response = await apiClient.post("/users/change-password/", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error changing password", error);
+    throw error;
+  }
+}

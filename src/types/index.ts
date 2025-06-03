@@ -18,6 +18,12 @@ export type User = {
   total_referrals?: number;
 };
 
+export type ChangePasswordData = {
+  oldPassword: string;
+  newPassword: string;
+  otp: string;
+}
+
 export type RecentActivity = {
   id: number;                     // unique identifier of the activity
   activity_type: 'task' | 'story' | 'checkin'; // possible values based on ACTIVITY_TYPE_CHOICES

@@ -9,15 +9,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, LucideBell, User } from "lucide-react";
+import { LogOut, LucideBell, Settings } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLogout } from "@/api/mutations";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAnnouncementStore } from "@/stores/announcementStore";
 
 const Navbar: React.FC = () => {
   const { logout, user } = useAuthStore.getState();
+  const navigate = useNavigate()
   const { setIsOpen } = useAnnouncementStore()
   const queryClient = useQueryClient();
   const { mutate } = useLogout();
@@ -55,9 +56,9 @@ const Navbar: React.FC = () => {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User />
-              Profile
+            <DropdownMenuItem onClick={() => navigate("/settings")}>
+              <Settings />
+              Settings
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {

@@ -56,7 +56,7 @@ export const useGetCourseCategories = () => {
 
 export const useGetCoursesData = (category: number, query: string) => {
   return useInfiniteQuery<CoursesData>({
-    queryKey: ["courses-data", { category }],
+    queryKey: ["courses-data", { category, query }],
     queryFn: ({ pageParam = 1 }) => getCoursesData(category, pageParam as number, query as string),
     getNextPageParam: (lastPage) => {
       return lastPage.has_next ? lastPage.current_page + 1 : undefined;

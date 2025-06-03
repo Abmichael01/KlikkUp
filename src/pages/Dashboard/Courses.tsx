@@ -10,10 +10,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useGetCoursesData } from "@/api/queries";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Courses: React.FC = () => {
   const [category, setCategory] = useState<number>();
   const [query, setQuery] = useState<string>();
+  const queryClient = useQueryClient();
   
   const { data, isFetching, fetchNextPage, refetch, isFetchingNextPage } = useGetCoursesData(
     category as number, 
@@ -35,8 +37,12 @@ const Courses: React.FC = () => {
     fetchNextPage();
   };
 
-  const searchCourse = () => {
-
+  const searchCourse = (e: React.FormEvent) => {
+    e.preventDefault()
+    queryClient.removeQueries({
+      queryKey: ["courses-data", { category, query }]
+    });
+    refetch()
   }
 
   return (
@@ -55,7 +61,7 @@ const Courses: React.FC = () => {
 
       {/* Search Bar */}
       <div className="p-0 flex justify-center">
-        <form onSubmit={searchCourse} className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border shadow-md">
+        <form  className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border shadow-md">
           <input
             type="text"
             value={query}
@@ -63,7 +69,7 @@ const Courses: React.FC = () => {
             placeholder="Search a keyword"
             className="border-0 outline-none bg-transparent w-full px-5 py-3"
           />
-          <button className="bg-secondary h-full px-6 flex justify-center items-center text-orange-100 cursor-pointer">
+          <button onClick={searchCourse} className="bg-secondary h-full px-6 flex justify-center items-center text-orange-100 cursor-pointer">
             <Search />
           </button>
         </form>
@@ -112,6 +118,7 @@ const Courses: React.FC = () => {
                 </div>
                 <div className="space-y-[15px] p-5">
                   <h2 className="font-semibold">{course.title}</h2>
+                  p
                   <a
                     href={course.course_url}
                     target="_blank"

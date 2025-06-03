@@ -14,6 +14,7 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import {
   Eye,
   EyeClosed,
+  Handshake,
   LockIcon,
   Mail,
   TicketIcon,
@@ -197,6 +198,13 @@ const Register: React.FC = () => {
           <p>Create your account</p>
         </div>
 
+        <Link to="/become-partner" className="flex justify-center">
+          <GlidingButton className="bg-secondary text-orange-950 font-medium">
+            Become a Partner at Klikkup
+            <Handshake />
+          </GlidingButton>
+        </Link>
+
         <div className="space-y-5">
           {errorMessages &&
             Object.keys(errorMessages).length > 0 &&
@@ -230,7 +238,7 @@ const Register: React.FC = () => {
                         </h2>
                         <Link
                           to="/buy-coupon"
-                          className="bg-secondary text-orange-700 px-3 py-1 text-xs rounded-full font-semibold"
+                          className="bg-secondary text-orange-950 px-3 py-1 text-xs rounded-full font-medium"
                         >
                           Buy Coupon
                         </Link>
@@ -246,7 +254,7 @@ const Register: React.FC = () => {
                           onClick={() => {
                             form.setValue("ref_code", "klikkup");
                           }}
-                          className="bg-secondary text-orange-700 px-3 py-1 text-xs rounded-full font-semibold"
+                          className="bg-secondary text-orange-950 px-3 py-1 text-xs rounded-full font-medium"
                         >
                           Use klikkup
                         </button>
