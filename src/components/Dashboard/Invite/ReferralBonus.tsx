@@ -19,7 +19,7 @@ const ReferralBonus: React.FC = () => {
               <Trophy className="h-5 w-5 text-secondary" />
             </div>
             <div>
-              <p className="font-medium">Refer 50 users in a month</p>
+              <p className="font-medium">Refer 100 users in a month</p>
               <p className="text-sm text-blue-300">
                 and receive 100,000 Naira
               </p>

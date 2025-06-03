@@ -83,12 +83,18 @@ const Navbar: React.FC = () => {
           {navs.map((nav, index) => (
             <p
               key={index}
-              className="text-s hover:text-primary transition-colors cursor-pointer"
+              className=" hover:text-primary transition-colors cursor-pointer"
               onClick={() => navigator(nav.id)}
             >
               {nav.name}
             </p>
           ))}
+          <Link
+            to={"/become-partner"}
+            className=" font-medium hover:text-primary transition-colors cursor-pointer"
+          >
+            Become a Partner
+          </Link>
         </div>
         {!isAuthenticated && (
           <div className="hidden lg:flex gap-5 items-center">
@@ -163,6 +169,12 @@ const Navbar: React.FC = () => {
               className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
             >
               Buy Coupon
+            </Link>
+            <Link
+              to={"/become-partner"}
+              className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+            >
+              Become a Partner
             </Link>
             {!isAuthenticated &&
               links.map((link, index) => (
