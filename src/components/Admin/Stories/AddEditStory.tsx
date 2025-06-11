@@ -15,13 +15,14 @@ import {
 } from "@/components/ui/form";
 import { useAddStory, useUpdateStory } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { BookOpen, Gift } from "lucide-react";
+import { BookOpen, Gift, Timer } from "lucide-react";
 import type { Story } from "@/types";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
 import type { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import { useState } from "react";
+import ImagePicker from "../ImagePicker";
 
 const formSchema = z.object({
   title: z
@@ -32,6 +33,7 @@ const formSchema = z.object({
     message: "Body is required and must be at least 20 characters",
   }),
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
+  estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
 });
 
 interface AddEditStoryProps {
@@ -40,12 +42,14 @@ interface AddEditStoryProps {
 }
 
 const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
+  const [imgUrl, setImgUrl] = useState<string>()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: update ? data?.title : "",
       body: update ? data?.body : "",
       reward: update ? data?.reward : 500,
+      estimated_time: update ? data?.estimated_time : 1,
     },
   });
   const { isDirty } = form.formState;
@@ -59,7 +63,7 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
   const [body, setBody] = useState(form.getValues("body") || "");
 
   type FormField = {
-    name: "title" | "reward" | "body";
+    name: "title" | "reward" | "body" | "estimated_time";
     placeholder: string;
     type: string;
     icon: React.ReactNode;
@@ -83,6 +87,12 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
       type: "number",
       placeholder: "Reward e.g 500",
       icon: <Gift />,
+    },
+    {
+      name: "estimated_time",
+      type: "text",
+      placeholder: "Estimated Time",
+      icon: <Timer />,
     },
   ];
 
@@ -123,6 +133,7 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
     <div className="max-h-[70vh] overflow-y-auto p-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <ImagePicker imgUrl={imgUrl} setImgUrl={setImgUrl} title="Upload Banner" />
           {formFields.map((formField, index) =>
             formField.name !== "body" ? (
               <FormField
@@ -191,9 +202,6 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
       </Form>
     </div>
   );
-  
 };
 
 export default AddEditStory;
-
-

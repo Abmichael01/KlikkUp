@@ -118,7 +118,6 @@ const Courses: React.FC = () => {
                 </div>
                 <div className="space-y-[15px] p-5">
                   <h2 className="font-semibold">{course.title}</h2>
-                  p
                   <a
                     href={course.course_url}
                     target="_blank"

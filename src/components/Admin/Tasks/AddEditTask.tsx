@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,12 +13,13 @@ import {
 } from "@/components/ui/form";
 import { useAddTask, useUpdateTask } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { ClipboardList, Gift, Link, ThumbsUp } from "lucide-react";
+import { ClipboardList, Gift, Link, ThumbsUp, Timer } from "lucide-react";
 import { Task } from "@/types";
 import { useMessageToaster } from "@/hooks/useMessageToaster";
 import { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
+import ImagePicker from "../ImagePicker";
 
 const formSchema = z.object({
   title: z
@@ -28,6 +29,7 @@ const formSchema = z.object({
   link: z.string().min(1, { message: "Link is required" }),
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   confirmation_code: z.string().optional(),
+  estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
 });
 
 interface AddEditTaskProps {
@@ -36,6 +38,7 @@ interface AddEditTaskProps {
 }
 
 const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
+  const [imgUrl, setImgUrl] = useState<string>()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +46,7 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       link: update ? data?.link : "",
       confirmation_code: update ? data?.confirmation_code : "",
       reward: update ? data?.reward : 500,
+      estimated_time: update ? data?.estimated_time :  1,
     },
   });
   const { isDirty } = form.formState;
@@ -54,7 +58,7 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
   const { setOpen: setAddDialog } = useDialog("addTask")
 
   type FormField = {
-    name: "title" | "link" | "reward" | "confirmation_code";
+    name: "title" | "link" | "reward" | "confirmation_code" | "estimated_time";
     placeholder: string;
     type: string;
     icon: React.ReactNode;
@@ -84,6 +88,12 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       type: "text",
       placeholder: "Confirmation Code",
       icon: <ThumbsUp />,
+    },
+    {
+      name: "estimated_time",
+      type: "text",
+      placeholder: "Estimated Time",
+      icon: <Timer />,
     },
   ];
 
@@ -119,7 +129,8 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className=" max-h-[70vh] overflow-y-auto space-y-8">
+        <ImagePicker imgUrl={imgUrl} setImgUrl={setImgUrl} title="Upload Banner" />
         {formFields.map((formField, index) => (
           <FormField
             key={index}

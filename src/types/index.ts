@@ -2,6 +2,7 @@ export type User = {
   id?: number;
   username: string;
   email: string;
+  is_partner?: boolean;
   is_admin?: boolean;
   is_staff?: boolean;
   roles?: number[];

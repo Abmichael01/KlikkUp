@@ -9,9 +9,7 @@ createRoot(document.getElementById("root")!).render(
     <QueryProvider>
       <App />
     </QueryProvider>
-    <Toaster richColors 
-    
-     />
+    <Toaster richColors />
   </>
   
 );

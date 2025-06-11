@@ -16,11 +16,11 @@ import { useUpdateUser } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { Mail, UserIcon } from "lucide-react";
 import { User } from "@/types";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import errorMessage from "@/api/errorMessage";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -29,6 +29,7 @@ const formSchema = z.object({
   email: z.string().min(2, { message: "Email is required" }),
   is_admin: z.boolean(),
   is_staff: z.boolean(),
+  is_partner: z.boolean(),
 });
 
 type FormField = {
@@ -61,19 +62,19 @@ interface EditUserProps {
 }
 
 const EditUser: React.FC<EditUserProps> = ({ data }) => {
-  console.log(data)
+  console.log(data);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: data ? data.username : "",
       email: data ? data.email : "",
+      is_partner: data ? data.is_partner : false,
       is_admin: data ? data.is_admin : false,
       is_staff: data ? data.is_staff : false,
     },
   });
   const { isDirty } = form.formState;
   const { mutate, isPending: adding } = useUpdateUser();
-  const toastMessage = useMessageToaster();
   const queryClient = useQueryClient();
   const { setOpen: setEditDialog } = useDialog("updateUser");
 
@@ -84,24 +85,12 @@ const EditUser: React.FC<EditUserProps> = ({ data }) => {
     console.log(values);
     mutate(values, {
       onSuccess: () => {
-        toastMessage({
-          message: `${values.username} account was successfully updated`,
-          type: "success",
-        });
+        toast.success(`${values.username}'s account was successfully updated`);
         setEditDialog(false);
         queryClient.invalidateQueries({ queryKey: ["users"] });
       },
       onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<
-          string,
-          string[]
-        >;
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error",
-          });
-        }
+        toast(errorMessage(error));
       },
     });
   }
@@ -135,6 +124,29 @@ const EditUser: React.FC<EditUserProps> = ({ data }) => {
               )}
             />
           ))}
+
+          <FormField
+            control={form.control}
+            name="is_partner"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="text-sm font-medium">
+                    User is a Partner
+                  </FormLabel>
+                  <p className="text-sm text-muted-foreground">
+                    Gets 50% referral bonus
+                  </p>
+                </div>
+              </FormItem>
+            )}
+          />
 
           <div className="space-y-3">
             <h1 className="pb-4 border-b">User Permissions</h1>
@@ -172,9 +184,7 @@ const EditUser: React.FC<EditUserProps> = ({ data }) => {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel className="text-sm font-medium">
-                      Staff
-                    </FormLabel>
+                    <FormLabel className="text-sm font-medium">Staff</FormLabel>
                     <p className="text-sm text-muted-foreground">
                       Can moderate user content and comments
                     </p>
@@ -185,11 +195,7 @@ const EditUser: React.FC<EditUserProps> = ({ data }) => {
           </div>
 
           <Button type="submit" disabled={adding || !isDirty}>
-            {adding ? (
-              <LoadingAnimation size="small" />
-            ) : (
-              "Update User"
-            )}
+            {adding ? <LoadingAnimation size="small" /> : "Update User"}
           </Button>
         </form>
       </Form>

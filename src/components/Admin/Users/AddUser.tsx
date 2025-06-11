@@ -16,11 +16,11 @@ import { useRegister } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { Mail, UserIcon, TicketIcon, LockIcon, Users } from "lucide-react";
 import { User } from "@/types";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import errorMessage from "@/api/errorMessage";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -38,6 +38,7 @@ const formSchema = z.object({
   re_password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters." }),
+  is_partner: z.boolean(),
   is_admin: z.boolean(),
   is_staff: z.boolean(),
 });
@@ -120,7 +121,6 @@ const AddUser: React.FC<AddEditTaskProps> = ({ data, update }) => {
   });
   const { isDirty } = form.formState;
   const { mutate, isPending: adding } = useRegister();
-  const toastMessage = useMessageToaster();
   const queryClient = useQueryClient();
   const { setOpen: setAddDialog } = useDialog("addUser");
 
@@ -128,24 +128,12 @@ const AddUser: React.FC<AddEditTaskProps> = ({ data, update }) => {
     console.log(values);
     mutate(values, {
       onSuccess: () => {
-        toastMessage({
-          message: `${values.username} account was successfully created`,
-          type: "success",
-        });
+        toast.success("User added successfully")
         setAddDialog(false);
         queryClient.invalidateQueries({ queryKey: ["users"] });
       },
-      onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<
-          string,
-          string[]
-        >;
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error",
-          });
-        }
+      onError: (error: Error) => {
+        toast(errorMessage(error))
       },
     });
   }
@@ -154,6 +142,7 @@ const AddUser: React.FC<AddEditTaskProps> = ({ data, update }) => {
     <div className="max-h-[70vh] overflow-y-auto p-1 sm:p-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          
           {formFields.map((formField, index) => (
             <FormField
               key={index}
@@ -179,6 +168,29 @@ const AddUser: React.FC<AddEditTaskProps> = ({ data, update }) => {
               )}
             />
           ))}
+
+          <FormField
+              control={form.control}
+              name="is_partner"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm font-medium">
+                      User is a Partner
+                    </FormLabel>
+                    <p className="text-sm text-muted-foreground">
+                      Gets 50% referral bonus
+                    </p>
+                  </div>
+                </FormItem>
+              )}
+            />
 
           <div className="space-y-3">
             <h1 className="pb-4 border-b">User Permissions</h1>

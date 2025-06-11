@@ -27,7 +27,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
   onClose,
 }) => {
   const [confirmationCode, setConfirmationCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(2); // 5 minutes default
+  const [timeRemaining, setTimeRemaining] = useState((task.estimated_time ?? 0) * 60); // 5 minutes default
   const [timerStatus, setTimerStatus] = useState<
     "idle" | "running" | "completed"
   >("idle");
