@@ -4,36 +4,18 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
 import { useAnnouncementStore } from "@/stores/announcementStore";
-import type { Announcement } from "@/types";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import GradientCard from "../ui/GradientCard";
 import { CardContent, CardHeader } from "../ui/card";
+import { useAnnouncementData } from "@/api/queries";
 
-const announcements: Announcement[] = [
-  {
-    id: 1,
-    title: "🚀 New Feature",
-    message: "We just launched a new dashboard!",
-    link: "/dashboard",
-  },
-  {
-    id: 2,
-    title: "🔥 Limited Offer",
-    message: "Get 20% off on all purchases today!",
-    link: "/pricing",
-  },
-  {
-    id: 3,
-    title: "📢 System Update",
-    message: "Scheduled maintenance at 2 AM.",
-  },
-];
 
 const AnnouncementDialog: React.FC = () => {
   const { isOpen, setIsOpen } = useAnnouncementStore();
   const [dontShow, setDontShow] = useState(false);
+  const { data } = useAnnouncementData()
 
   useEffect(() => {
     const lastDismissed = localStorage.getItem("announcement-dismissed");
@@ -65,7 +47,7 @@ const AnnouncementDialog: React.FC = () => {
 
         <ScrollArea className="max-h-[50vh] pr-4">
           <div className="space-y-4 mt-5">
-            {announcements.map((announcement) => (
+            {data?.map((announcement) => (
               <GradientCard
                 key={announcement.id}
                 className=" text-white rounded-xl "
@@ -75,7 +57,7 @@ const AnnouncementDialog: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-blue-100">
-                    {announcement.message}
+                    {announcement.content}
                   </p>
                   {announcement.link && (
                     <a

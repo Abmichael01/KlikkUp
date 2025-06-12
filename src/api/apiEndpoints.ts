@@ -1,4 +1,4 @@
-import {AccountOverviewData, AnalyticsData, BankDetails, ChangePasswordData, Coupon, Course, CourseCategory, CoursesData, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
+import {AccountOverviewData, AnalyticsData, Announcement, BankDetails, ChangePasswordData, Coupon, Course, CourseCategory, CoursesData, Giveaway, LoginData, PaymentData, ReferralsData, RegisterData, RoadmapData, StoriesData, Story, Task, TasksData, User, WalletDetails, WithdrawalData} from "@/types";
 import apiClient from "./apiClient";
 import axios from  "axios"
 
@@ -452,3 +452,87 @@ export const changePassword = async ( data: ChangePasswordData ) => {
     throw error;
   }
 }
+
+export const getAnnouncements = async (): Promise<Announcement[]> => {
+  try {
+    const response = await apiClient.get('/announcements/');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching announcements", error);
+    throw error;
+  }
+};
+
+
+// Create new announcement
+export const addAnnouncement = async (data: Partial<Announcement>): Promise<Announcement> => {
+  try {
+    const response = await apiClient.post('/announcements/', data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding announcement", error);
+    throw error;
+  }
+};
+
+// Update existing announcement
+export const updateAnnouncement = async (data: Partial<Announcement>): Promise<Announcement> => {
+  try {
+    const response = await apiClient.put(`/announcements/${data.id}/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating announcement", error);
+    throw error;
+  }
+};
+
+
+// Delete announcement
+export const deleteAnnouncement = async (id: number): Promise<void> => {
+  try {
+    await apiClient.delete(`/announcements/${id}/`);
+  } catch (error) {
+    console.error("Error deleting announcement", error);
+    throw error;
+  }
+};
+
+export const getGiveaways = async (): Promise<Giveaway[]> => {
+  try {
+    const response = await apiClient.get('/giveaways/');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching giveaways", error);
+    throw error;
+  }
+};
+
+export const addGiveaway = async (data: Partial<Giveaway>) => {
+  try {
+    const response = await apiClient.post("/giveaways/", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error Adding giveaway", error);
+    throw error;
+  }
+};
+
+export const updateGiveaway = async (data: Partial<Giveaway>) => {
+  try {
+    const response = await apiClient.put(`/giveaways/${data.id}/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error Updating giveaway", error);
+    throw error;
+  }
+};
+
+export const deleteGiveaway = async (id: number) => {
+  try {
+    const response = await apiClient.delete(`/giveaways/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error Deleting giveaway", error);
+    throw error;
+  }
+};

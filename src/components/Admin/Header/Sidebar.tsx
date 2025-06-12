@@ -2,8 +2,10 @@ import Logo from "@/components/Logo/Logo";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/stores/sidebarStore";
 import {
+  Bell,
   BookOpen,
   ClipboardList,
+  Gift,
   GraduationCap,
   LayoutDashboard,
   Ticket,
@@ -19,6 +21,8 @@ const navs = [
   { icon: ClipboardList, name: "Tasks", path: "/tasks" },
   { icon: BookOpen, name: "Stories", path: "/stories" },
   { icon: GraduationCap, name: "Courses", path: "/courses" },
+  { icon: Bell, name: "Announcement", path: "/announcements" },
+  { icon: Gift, name: "Giveaway", path: "/giveaways" },
   // { icon: Waypoints, name: "Roadmap", path: "/roadmap" },
 ];
 

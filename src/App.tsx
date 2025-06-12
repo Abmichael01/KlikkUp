@@ -31,6 +31,8 @@ import CoursesManagement from './pages/Admin/Courses';
 import Settings from './pages/Dashboard/Settings';
 import BecomePartner from './pages/BecomePartner';
 import Giveaway from './pages/Dashboard/Giveaway';
+import AnnouncementsManagement from './pages/Admin/Announcements';
+import GiveawaysManagement from './pages/Admin/Giveaways';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -66,6 +68,8 @@ const App: React.FC = () => {
                 <Route path="tasks" element={<TasksManagement />} />
                 <Route path="stories" element={<StoriesManagement />} />
                 <Route path="courses" element={<CoursesManagement />} />
+                <Route path="announcements" element={<AnnouncementsManagement />} />
+                <Route path="giveaways" element={<GiveawaysManagement />} />
               </Route>
             </Route>
           </>

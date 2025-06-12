@@ -1,7 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import {
+  addAnnouncement,
   addCourse,
   addCourseCategory,
+  addGiveaway,
   addStory,
   addTask,
   buyCoupon,
@@ -9,8 +11,10 @@ import {
   checkin,
   confirmStory,
   confirmTask,
+  deleteAnnouncement,
   deleteCourse,
   deleteCourseCategory,
+  deleteGiveaway,
   deleteStory,
   deleteTask,
   deleteUser,
@@ -19,18 +23,22 @@ import {
   logout,
   register,
   sendOtp,
+  updateAnnouncement,
   updateBankDetails,
   updateCourse,
   updateCourseCategory,
+  updateGiveaway,
   updateStory,
   updateTask,
   updateUser,
   withdraw,
 } from "@/api/apiEndpoints";
 import {
+  Announcement,
   BankDetails,
   ChangePasswordData,
   Course,
+  Giveaway,
   LoginData,
   PaymentData,
   RegisterData,
@@ -209,5 +217,41 @@ export const useChangePassword = () => {
     mutationFn: (data: ChangePasswordData) => changePassword(data)
   });
 }
+
+export const useAddAnnouncement = () => {
+  return useMutation({
+    mutationFn: (data: Partial<Announcement>) => addAnnouncement(data),
+  });
+};
+
+export const useUpdateAnnouncement = () => {
+  return useMutation({
+    mutationFn: (data: Partial<Announcement>) => updateAnnouncement(data),
+  });
+};
+
+export const useDeleteAnnouncement = () => {
+  return useMutation({
+    mutationFn: (id: number) => deleteAnnouncement(id),
+  });
+};
+
+export const useAddGiveaway = () => {
+  return useMutation({
+    mutationFn: (data: Partial<Giveaway>) => addGiveaway(data),
+  });
+};
+
+export const useUpdateGiveaway = () => {
+  return useMutation({
+    mutationFn: (data: Partial<Giveaway>) => updateGiveaway(data),
+  });
+};
+
+export const useDeleteGiveaway = () => {
+  return useMutation({
+    mutationFn: (id: number) => deleteGiveaway(id),
+  });
+};
  
 

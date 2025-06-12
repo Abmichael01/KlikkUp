@@ -133,15 +133,6 @@ export type StoriesData = {
   points_earned: number;
 }
 
-export type Announcement = {
-  id: number;
-  title: string;
-  message: string;
-  link?: string; // Optional link for the announcement
-};
-
-
-
 // wallets
 
 export type TransactionType = "CREDIT" | "DEBIT";
@@ -268,3 +259,25 @@ export type CoursesData = {
   total_pages: number;
   total_results: number;
 };
+
+export type Announcement = {
+  id: number;
+  title: string;
+  content: string;
+  created_at: string;
+  link: string; 
+  is_active: boolean;
+}
+
+export type Giveaway = {
+  id: number;
+  title: string;
+  prize: string;
+  date: string;
+  created_at: string;
+  participants_count: number;
+  winners: Array<{
+    username: string;
+    id: number;
+  }>;
+}
