@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,11 +15,11 @@ import { useAddTask, useUpdateTask } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { ClipboardList, Gift, Link, ThumbsUp, Timer } from "lucide-react";
 import { Task } from "@/types";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import ImagePicker from "../ImagePicker";
+import { toast } from "sonner";
+import errorMessage from "@/api/errorMessage";
 
 const formSchema = z.object({
   title: z
@@ -30,6 +30,7 @@ const formSchema = z.object({
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   confirmation_code: z.string().optional(),
   estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
+  banner: z.string().optional()
 });
 
 interface AddEditTaskProps {
@@ -47,15 +48,27 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       confirmation_code: update ? data?.confirmation_code : "",
       reward: update ? data?.reward : 500,
       estimated_time: update ? data?.estimated_time :  1,
+      banner: imgUrl,
     },
   });
+
+  useEffect(() => {
+    if (imgUrl !== form.getValues('banner')) {
+      form.setValue('banner', imgUrl || '', { shouldDirty: true });
+    }
+  }, [imgUrl, form]);
+  
   const { isDirty } = form.formState;
   const { mutate: addTask, isPending: adding } = useAddTask();
   const { mutate: updateTask, isPending: updating } = useUpdateTask();
-  const toastMessage = useMessageToaster();
   const queryClient = useQueryClient()
   const { setOpen: setUpdateDialog } = useDialog("updateTask")
   const { setOpen: setAddDialog } = useDialog("addTask")
+  console.log(data)
+
+  useEffect(() => {
+    setImgUrl(data?.banner)
+  }, [setImgUrl, data])
 
   type FormField = {
     name: "title" | "link" | "reward" | "confirmation_code" | "estimated_time";
@@ -97,36 +110,31 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
     },
   ];
 
-  function onSubmit(values: Task) {
-    if (data && data.id) {
-      values.id = data.id;
-    }
+  function onSubmit(values: z.infer<typeof formSchema>) {
     const mutate = data ? updateTask : addTask;
-    mutate(values, {
+    console.log({...values, 
+      banner: imgUrl,
+      id: data?.id
+    })
+    mutate({...values, 
+      id: data?.id
+    }, {
       onSuccess: () => {
-        toastMessage({
-          message: `Task ${data ? "updated" : "added"} successfully`,
-        });
-        queryClient.invalidateQueries({ queryKey: ["tasks"] })
-        console.log(open)
+        toast.success("Task update was successfull")
+        queryClient.invalidateQueries({ queryKey: ["tasks"] });
         if (data) {
-          setUpdateDialog(false)
+          setUpdateDialog(false);
         } else {
-          setAddDialog(false)
+          setAddDialog(false);
         }
-        
       },
-      onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<string, string[]>;
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error"
-          })
-        }
+      onError: (error: Error) => {
+        toast.error(errorMessage(error));
       },
     });
   }
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className=" max-h-[70vh] overflow-y-auto space-y-8">

@@ -106,6 +106,7 @@ export type Task = {
   confirmation_code?: string;
   estimated_time?: number;
   completed?: boolean;
+  banner?: string;
 }
 
 export type TasksData = {
@@ -122,6 +123,7 @@ export type Story = {
   reward: number;
   estimated_time?: number;
   story_read?: boolean;
+  banner?: string;
 }
 
 export type StoriesData = {

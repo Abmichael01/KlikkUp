@@ -55,7 +55,7 @@ const ImagePicker: React.FC<ImageUploaderProps> = ({ imgUrl, setImgUrl: setImage
         {/* Upload area */}
         <div
           onClick={handleClick}
-          className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 cursor-pointer transition-colors bg-gray-50 hover:bg-gray-100"
+          className="relative border-2 border-dashed border-gray-300 rounded-lg py-6 text-center hover:border-gray-400 cursor-pointer transition-colors bg-gray-50 hover:bg-gray-100"
         >
           {imgUrl ? (
             // Image preview
@@ -63,13 +63,13 @@ const ImagePicker: React.FC<ImageUploaderProps> = ({ imgUrl, setImgUrl: setImage
               <img
                 src={imgUrl}
                 alt="Preview"
-                className="max-h-64 mx-auto rounded-lg object-cover"
+                className="h-[300px] w-full rounded-lg object-cover"
               />
               
               {/* Remove button */}
               <button
                 onClick={handleRemove}
-                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                className="absolute -top-4 left-[50%] -translate-x-[50%] bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
                 title="Remove image"
               >
                 <X size={16} />

@@ -17,12 +17,12 @@ import { useAddStory, useUpdateStory } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { BookOpen, Gift, Timer } from "lucide-react";
 import type { Story } from "@/types";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import type { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImagePicker from "../ImagePicker";
+import { toast } from "sonner";
+import errorMessage from "@/api/errorMessage";
 
 const formSchema = z.object({
   title: z
@@ -34,6 +34,7 @@ const formSchema = z.object({
   }),
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
+  banner: z.string().optional(),
 });
 
 interface AddEditStoryProps {
@@ -42,7 +43,7 @@ interface AddEditStoryProps {
 }
 
 const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
-  const [imgUrl, setImgUrl] = useState<string>()
+  const [imgUrl, setImgUrl] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,17 +51,28 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
       body: update ? data?.body : "",
       reward: update ? data?.reward : 500,
       estimated_time: update ? data?.estimated_time : 1,
+      banner: imgUrl,
     },
   });
   const { isDirty } = form.formState;
   const { mutate: addStory, isPending: adding } = useAddStory();
   const { mutate: updateStory, isPending: updating } = useUpdateStory();
-  const toastMessage = useMessageToaster();
   const queryClient = useQueryClient();
   const { setOpen: setUpdateDialog } = useDialog("updateStory");
   const { setOpen: setAddDialog } = useDialog("addStory");
 
   const [body, setBody] = useState(form.getValues("body") || "");
+
+  console.log(data)
+  useEffect(() => {
+    if (imgUrl !== form.getValues("banner")) {
+      form.setValue("banner", imgUrl || "", { shouldDirty: true });
+    }
+  }, [imgUrl, form]);
+
+  useEffect(() => {
+    setImgUrl(data?.banner);
+  }, [setImgUrl, data]);
 
   type FormField = {
     name: "title" | "reward" | "body" | "estimated_time";
@@ -102,38 +114,34 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
       values.id = data.id;
     }
     const mutate = data ? updateStory : addStory;
-    mutate(values, {
-      onSuccess: () => {
-        toastMessage({
-          message: `Story ${data ? "updated" : "added"} successfully`,
-        });
-        queryClient.invalidateQueries({ queryKey: ["stories"] });
-        if (data) {
-          setUpdateDialog(false);
-        } else {
-          setAddDialog(false);
-        }
-      },
-      onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<
-          string,
-          string[]
-        >;
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error",
-          });
-        }
-      },
-    });
+    mutate(
+      { ...values, id: data?.id },
+      {
+        onSuccess: () => {
+          toast.success("Story updated successfully");
+          queryClient.invalidateQueries({ queryKey: ["stories"] });
+          if (data) {
+            setUpdateDialog(false);
+          } else {
+            setAddDialog(false);
+          }
+        },
+        onError: (error: Error) => {
+          toast.error(errorMessage(error));
+        },
+      }
+    );
   }
 
   return (
     <div className="max-h-[70vh] overflow-y-auto p-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <ImagePicker imgUrl={imgUrl} setImgUrl={setImgUrl} title="Upload Banner" />
+          <ImagePicker
+            imgUrl={imgUrl}
+            setImgUrl={setImgUrl}
+            title="Upload Banner"
+          />
           {formFields.map((formField, index) =>
             formField.name !== "body" ? (
               <FormField
