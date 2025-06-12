@@ -97,7 +97,7 @@ export const useStoriesData = () => {
 
 export const useGetStory = (id: number) => {
   return useQuery({
-    queryKey: ["story"],
+    queryKey: ["story", id],
     queryFn: () => getStory(id),
   });
 };

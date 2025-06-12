@@ -16,11 +16,9 @@ const Courses: React.FC = () => {
   const [category, setCategory] = useState<number>();
   const [query, setQuery] = useState<string>();
   const queryClient = useQueryClient();
-  
-  const { data, isFetching, fetchNextPage, refetch, isFetchingNextPage } = useGetCoursesData(
-    category as number, 
-    query as string
-  );
+
+  const { data, isFetching, fetchNextPage, refetch, isFetchingNextPage } =
+    useGetCoursesData(category as number, query as string);
 
   const coursesData = data?.pages?.[data?.pages?.length - 1];
 
@@ -38,12 +36,12 @@ const Courses: React.FC = () => {
   };
 
   const searchCourse = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     queryClient.removeQueries({
-      queryKey: ["courses-data", { category, query }]
+      queryKey: ["courses-data", { category, query }],
     });
-    refetch()
-  }
+    refetch();
+  };
 
   return (
     <div className="space-y-10">
@@ -61,15 +59,18 @@ const Courses: React.FC = () => {
 
       {/* Search Bar */}
       <div className="p-0 flex justify-center">
-        <form  className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border shadow-md">
+        <form className="flex items-center mb-4 w-full rounded-xl bg-[#f9f9f9] h-[50px] overflow-hidden md:w-[650px] border shadow-md">
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value) }
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Search a keyword"
             className="border-0 outline-none bg-transparent w-full px-5 py-3"
           />
-          <button onClick={searchCourse} className="bg-secondary h-full px-6 flex justify-center items-center text-orange-100 cursor-pointer">
+          <button
+            onClick={searchCourse}
+            className="bg-secondary h-full px-6 flex justify-center items-center text-orange-100 cursor-pointer"
+          >
             <Search />
           </button>
         </form>
@@ -117,7 +118,10 @@ const Courses: React.FC = () => {
                   <GraduationCap className="size-[60px]" />
                 </div>
                 <div className="space-y-[15px] p-5">
-                  <h2 className="font-semibold">{course.title}</h2>
+                  <div className="">
+                    <h2 className="font-semibold">{course.title}</h2>
+                    <p className="text-xs font-semibold"> ~ {course?.category?.name}</p>
+                  </div>
                   <a
                     href={course.course_url}
                     target="_blank"

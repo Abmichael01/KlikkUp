@@ -18,8 +18,8 @@ import { useAnnouncementStore } from "@/stores/announcementStore";
 
 const Navbar: React.FC = () => {
   const { logout, user } = useAuthStore.getState();
-  const navigate = useNavigate()
-  const { setIsOpen } = useAnnouncementStore()
+  const navigate = useNavigate();
+  const { setIsOpen } = useAnnouncementStore();
   const queryClient = useQueryClient();
   const { mutate } = useLogout();
   return (
@@ -31,12 +31,22 @@ const Navbar: React.FC = () => {
       <div className="flex items-center gap-5">
         <Link
           to="/courses"
-          className="relative overflow-hidden px-5 py-2 rounded-full bg-secondary shadow-md shadow-secondary flex items-center gap-2 text-sm text-foreground/80 font-bold border-[3px] border-orange-400 hover:scale-[1.05] transition-all duration-500"
+          className="relative overflow-hidden px-4 py-1.5 rounded-full bg-secondary shadow-md shadow-secondary flex items-center gap-2 text-xs text-secondary-foreground font-bold border-[2px] border-orange-400 hover:scale-[1.05] transition-all duration-500"
         >
           <span className="relative z-[1]">Free Courses</span>
           <span className="absolute inset-0 bg-gradient-to-r from-orange-300 via-orange-700 to-orange-300 blur-md"></span>
         </Link>
-        <div onClick={() => setIsOpen(true)} className="relative items-center justify-center rounded-full border-muted shadow-sm hover:bg-accent transition cursor-pointer">
+        <Link
+          to="/giveaway"
+          className="relative overflow-hidden px-4 py-1.5 rounded-full bg-primary shadow-md shadow-primary flex items-center gap-2 text-xs text-white font-bold border-[2px] border-blue-800 hover:scale-[1.05] transition-all duration-500"
+        >
+          <span className="relative z-[1]">Giveaway</span>
+          <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-900 to-blue-600 blur-md"></span>
+        </Link>
+        <div
+          onClick={() => setIsOpen(true)}
+          className="relative items-center justify-center rounded-full border-muted shadow-sm hover:bg-accent transition cursor-pointer"
+        >
           <LucideBell className=" text-muted-foreground" />
           <span className="absolute top-[2px] right-[3px] h-2 w-2 rounded-full bg-amber-500 ring-2 ring-white" />
         </div>

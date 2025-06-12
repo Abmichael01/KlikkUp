@@ -15,8 +15,8 @@ import GradientCard from "@/components/ui/GradientCard";
 
 const tabs = [
   {
-    label: "Available",
-    slug: "available-tasks",
+    label: "New",
+    slug: "new-tasks",
   },
   {
     label: "Completed",
@@ -29,7 +29,7 @@ const tabs = [
 ];
 
 const Tasks: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState("available-tasks");
+  const [currentTab, setCurrentTab] = useState("new-tasks");
 
   const { data, isLoading } = useTasksData();
 
@@ -37,7 +37,7 @@ const Tasks: React.FC = () => {
 
   // Determine which tasks to display based on the current tab
   const displayedTasks =
-    currentTab === "available-tasks"
+    currentTab === "new-tasks"
       ? data?.available_tasks
       : currentTab === "missed-tasks"
       ? data?.missed_tasks

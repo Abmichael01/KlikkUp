@@ -74,7 +74,7 @@ const Story: React.FC = () => {
   };
 
   // Check if both conditions are met: scrolled to bottom and minimum time elapsed
-  const canComplete = isInView && elapsedTime >= MIN_READING_TIME;
+  const canComplete = !(elapsedTime < MIN_READING_TIME)
 
   const handleComplete = () => {
     mutate(story as StoryType, {
@@ -145,7 +145,7 @@ const Story: React.FC = () => {
           />
         </CardContent>
 
-        {!story?.story_read && (
+       
           <CardFooter
             ref={buttonRef}
             className="flex justify-between items-center border-t border-blue-800 p-4"
@@ -157,7 +157,7 @@ const Story: React.FC = () => {
                   {story?.reward}
                 </span>
                 <span className="text-blue-300 ml-1">
-                  points upon completion
+                  { story?.story_read ? "points earned" : "points upon completion"}
                 </span>
               </div>
             </div>
@@ -165,7 +165,7 @@ const Story: React.FC = () => {
             {!story?.story_read && (
               <Button
                 onClick={handleComplete}
-                disabled={!canComplete || isCompleted}
+                disabled={(elapsedTime < MIN_READING_TIME)}
                 className={
                   isCompleted
                     ? "bg-green-600 hover:bg-green-700"
@@ -183,7 +183,7 @@ const Story: React.FC = () => {
               </Button>
             )}
           </CardFooter>
-        )}
+        
       </Card>
 
       {!story?.story_read && !canComplete && (

@@ -30,6 +30,7 @@ import { getSubdomain } from './lib/utils';
 import CoursesManagement from './pages/Admin/Courses';
 import Settings from './pages/Dashboard/Settings';
 import BecomePartner from './pages/BecomePartner';
+import Giveaway from './pages/Dashboard/Giveaway';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -92,6 +93,7 @@ const App: React.FC = () => {
                 <Route path="roadmap" element={<Roadmap />} />
                 <Route path="courses" element={<Courses />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="giveaway" element={<Giveaway />} />
               </Route>
             </Route>
           </>
