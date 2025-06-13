@@ -13,7 +13,7 @@ import { LogOut, LucideBell, Settings } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLogout } from "@/api/mutations";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useAnnouncementStore } from "@/stores/announcementStore";
 
 const Navbar: React.FC = () => {
@@ -29,26 +29,38 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-5">
-        <Link
-          to="/courses"
-          className="relative overflow-hidden px-4 py-1.5 rounded-full bg-secondary shadow-md shadow-secondary flex items-center gap-2 text-xs text-secondary-foreground font-bold border-[2px] border-orange-400 hover:scale-[1.05] transition-all duration-500"
-        >
-          <span className="relative z-[1]">Free Courses</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-orange-300 via-orange-700 to-orange-300 blur-md"></span>
-        </Link>
-        <Link
-          to="/giveaway"
-          className="relative overflow-hidden px-4 py-1.5 rounded-full bg-primary shadow-md shadow-primary flex items-center gap-2 text-xs text-white font-bold border-[2px] border-blue-800 hover:scale-[1.05] transition-all duration-500"
-        >
-          <span className="relative z-[1]">Giveaway</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-900 to-blue-600 blur-md"></span>
-        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="cursor-pointer" asChild>
+            <div className="relative w-full text-center overflow-hidden px-4 py-1.5 rounded-full bg-green-700 shadow-md shadow-green-700 flex items-center gap-2 text-xs text-white font-bold border-[2px] border-green-900 hover:scale-[1.05] transition-all duration-500">
+              <span className="relative z-[1]">Specials</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-green-600 via-green-900 to-green-600 blur-md"></span>
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => navigate("/courses")}>
+              <div className="relative w-full text-center overflow-hidden px-4 py-1.5 rounded-full bg-secondary shadow-md shadow-secondary flex items-center gap-2 text-xs text-secondary-foreground font-bold border-[2px] border-orange-400 hover:scale-[1.05] transition-all duration-500">
+                <span className="relative z-[1]">Free Courses</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-orange-300 via-orange-700 to-orange-300 blur-md"></span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => navigate("/giveaway")}>
+              <div className="relative w-full text-center overflow-hidden px-4 py-1.5 rounded-full bg-primary shadow-md shadow-primary flex items-center gap-2 text-xs text-white font-bold border-[2px] border-blue-800 hover:scale-[1.05] transition-all duration-500">
+                <span className="relative z-[1]">Giveaway</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-900 to-blue-600 blur-md"></span>
+              </div>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <div
           onClick={() => setIsOpen(true)}
-          className="relative items-center justify-center rounded-full border-muted shadow-sm hover:bg-accent transition cursor-pointer"
+          className="relative p-2 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 cursor-pointer group"
         >
-          <LucideBell className=" text-muted-foreground" />
-          <span className="absolute top-[2px] right-[3px] h-2 w-2 rounded-full bg-amber-500 ring-2 ring-white" />
+          <LucideBell className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors" />
+          <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 ring-2 ring-white animate-pulse">
+            <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75"></span>
+          </span>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger className="cursor-pointer" asChild>

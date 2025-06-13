@@ -33,10 +33,10 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-    {isOpen && <div onClick={toggle} className=" lg:hidden fixed bg-black/50 inset-0 z-[99]"></div>}
+    {isOpen && <div onClick={toggle} className=" lg:hidden fixed bg-black/50 inset-0 z-[9]"></div>}
       <div
         className={cn(
-          "lg:border-r h-[100vh] flex-col py-5 bg-white items-center gap-10 px-3 lg:sticky fixed flex-shrink-0 top-0 right-[-300px] lg:left-0 transition-all duration-500 flex z-[999] border-l",
+          "lg:border-r h-[100vh] flex-col py-5 bg-white items-center gap-10 px-3 lg:sticky fixed flex-shrink-0 top-0 right-[-300px] lg:left-0 transition-all duration-500 flex z-[10] border-l",
           isOpen ? "w-[200px] right-0" : "w-[70px] right-[-300px]"
         )}
       >
