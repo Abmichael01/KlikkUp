@@ -116,6 +116,15 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
                       placeholder={field.placeholder}
                       {...formField}
                       className="w-full border-0 py-3 bg-transparent outline-none text-foreground/80"
+                      value={
+                        typeof formField.value === "boolean"
+                          ? formField.value
+                            ? "true"
+                            : "false"
+                          : formField.value instanceof Date
+                          ? formField.value.toISOString().slice(0, 10) // for input[type="date"]
+                          : formField.value ?? ""
+                      }
                     />
                   </div>
                 </FormControl>
@@ -141,7 +150,8 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
                   Activate Giveaway
                 </label>
                 <p className="text-sm text-muted-foreground">
-                  When checked, this giveaway will be visible to users and only one can be active at a time
+                  When checked, this giveaway will be visible to users and only
+                  one can be active at a time
                 </p>
               </div>
             </FormItem>
