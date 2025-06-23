@@ -27,7 +27,7 @@ const GiveawaysManagement: React.FC = () => {
               New Giveaway
             </GlidingButton>
           </DialogTrigger>
-          <DialogContent aria-describedby="addGiveaway">
+          <DialogContent >
             <DialogHeader>
               <DialogTitle>Add a New Giveaway</DialogTitle>
             </DialogHeader>

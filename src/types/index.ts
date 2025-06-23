@@ -273,11 +273,14 @@ export type Giveaway = {
   id: number;
   title: string;
   prize: string;
-  date: string;
+  is_active: boolean;
+  date: Date;
   created_at: string;
   participants_count: number;
   winners: Array<{
     username: string;
     id: number;
   }>;
+  participated: boolean;
+  none?: boolean;
 }

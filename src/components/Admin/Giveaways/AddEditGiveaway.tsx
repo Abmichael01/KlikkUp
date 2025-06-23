@@ -11,18 +11,25 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useAddGiveaway, useUpdateGiveaway } from "@/api/mutations";
-import { ClipboardList, Gift, Calendar } from "lucide-react";
+import { ClipboardList, Gift, Calendar, CheckCircle } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import { toast } from "sonner";
 import { Giveaway } from "@/types";
 import errorMessage from "@/api/errorMessage";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
   title: z.string().min(5).max(255),
   prize: z.string().min(5).max(255),
-  date: z.string(),
+  date: z
+    .string()
+    .refine((val) => !isNaN(Date.parse(val)), {
+      message: "Invalid date format",
+    })
+    .transform((val) => new Date(val)), // Convert to Date object
+  is_active: z.boolean(),
 });
 
 interface AddEditGiveawayProps {
@@ -36,7 +43,8 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
     defaultValues: {
       title: update ? data?.title : "",
       prize: update ? data?.prize : "",
-      date: update ? new Date(data?.date as string).toISOString().slice(0, 16) : "",
+      date: update ? data?.date : new Date(),
+      is_active: update ? data?.is_active ?? true : false,
     },
   });
 
@@ -55,7 +63,9 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
       { ...values, id: data?.id as number },
       {
         onSuccess: () => {
-          toast.success(`Giveaway ${update ? "updated" : "added"} successfully`);
+          toast.success(
+            `Giveaway ${update ? "updated" : "added"} successfully`
+          );
           queryClient.invalidateQueries({ queryKey: ["giveaways"] });
           if (data) setUpdateDialog(false);
           else setAddDialog(false);
@@ -82,7 +92,7 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
       name: "date",
       placeholder: "Giveaway Date",
       icon: <Calendar />,
-      type: "datetime",
+      type: "date",
     },
   ];
 
@@ -114,8 +124,37 @@ const AddEditGiveaway: React.FC<AddEditGiveawayProps> = ({ data, update }) => {
             )}
           />
         ))}
+        <FormField
+          control={form.control}
+          name="is_active"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <label className="text-sm font-medium flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" />
+                  Activate Giveaway
+                </label>
+                <p className="text-sm text-muted-foreground">
+                  When checked, this giveaway will be visible to users and only one can be active at a time
+                </p>
+              </div>
+            </FormItem>
+          )}
+        />
         <Button type="submit" disabled={adding || updating || !isDirty}>
-          {adding || updating ? <LoadingAnimation size="small" /> : update ? "Update Giveaway" : "Add Giveaway"}
+          {adding || updating ? (
+            <LoadingAnimation size="small" />
+          ) : update ? (
+            "Update Giveaway"
+          ) : (
+            "Add Giveaway"
+          )}
         </Button>
       </form>
     </Form>

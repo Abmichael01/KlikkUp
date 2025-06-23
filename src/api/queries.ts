@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import {accountOverview, analyticsData, getAllCourses, getAnnouncements, getCoupons, getCoursesCategories, getCoursesData, getGiveaways, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
+import {accountOverview, analyticsData, getActiveGiveaway, getAllCourses, getAnnouncements, getCoupons, getCoursesCategories, getCoursesData, getGiveaways, getReferralsData, getStories, getStoriesData, getStory, getTasks, getTasksData, getUser, getUsers, getWalletData, roadmapData} from "@/api/apiEndpoints";
 import { CoursesData } from "@/types";
 
 // Fetch Current User
@@ -143,6 +143,15 @@ export const useGetGiveaways = () => {
     queryFn: getGiveaways,
   });
 };
+
+export const useGetActiveGiveaways = () => {
+  return useQuery({
+    queryKey: ["active-giveaway"],
+    queryFn: getActiveGiveaway,
+  });
+};
+
+
 
 
 

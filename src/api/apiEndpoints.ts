@@ -497,6 +497,15 @@ export const deleteAnnouncement = async (id: number): Promise<void> => {
   }
 };
 
+export const getActiveGiveaway = async (): Promise<Giveaway> => {
+  try {
+    const response = await apiClient.get('/giveaways/active/');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching giveaway", error);
+    throw error;
+  }
+};
 export const getGiveaways = async (): Promise<Giveaway[]> => {
   try {
     const response = await apiClient.get('/giveaways/');
@@ -513,6 +522,16 @@ export const addGiveaway = async (data: Partial<Giveaway>) => {
     return response.data;
   } catch (error) {
     console.error("Error Adding giveaway", error);
+    throw error;
+  }
+};
+
+export const joinGiveaway = async () => {
+  try {
+    const response = await apiClient.post("/giveaways/participate/");
+    return response.data;
+  } catch (error) {
+    console.error("Error joining giveaway", error);
     throw error;
   }
 };

@@ -3,6 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { Giveaway } from "@/types";
 import Actions from "./Actions";
+import { Badge } from "@/components/ui/badge";
 
 
 export const columns: ColumnDef<Giveaway>[] = [
@@ -37,9 +38,21 @@ export const columns: ColumnDef<Giveaway>[] = [
     accessorKey: "date",
     header: "Date",
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
-      return date.toLocaleString();
+      const date = row.getValue("date");
+      return date ? new Date(date as string).toLocaleDateString() : "";
     },
+  },
+  {
+    accessorKey: "is_active",
+    header: "Status",
+    cell: ({ row }) => {
+      const isActive = row.getValue("is_active");
+      return (
+        <Badge variant={isActive ? "default" : "secondary"}>
+          {isActive ? "Active" : "Inactive"}
+        </Badge>
+      );
+    }
   },
   {
     accessorKey: "created_at",

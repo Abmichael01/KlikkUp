@@ -19,6 +19,7 @@ import {
   deleteTask,
   deleteUser,
   generateCoupon,
+  joinGiveaway,
   login,
   logout,
   register,
@@ -251,6 +252,12 @@ export const useUpdateGiveaway = () => {
 export const useDeleteGiveaway = () => {
   return useMutation({
     mutationFn: (id: number) => deleteGiveaway(id),
+  });
+};
+
+export const useJoinGiveaway = () => {
+  return useMutation({
+    mutationFn: joinGiveaway,
   });
 };
  
