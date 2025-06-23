@@ -19,7 +19,7 @@ const tabs = [
     slug: "new-tasks",
   },
   {
-    label: "Completed",
+    label: "Done",
     slug: "completed-tasks",
   },
   {
