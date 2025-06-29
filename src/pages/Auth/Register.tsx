@@ -23,9 +23,9 @@ import {
 } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useRegister } from "@/api/mutations";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { AxiosError } from "axios";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import errorMessage from "@/api/errorMessage";
+import { toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -126,8 +126,6 @@ const Register: React.FC = () => {
     password: false,
     confirmPassword: false,
   });
-  const [errorMessages, setErrorMessages] =
-    React.useState<Record<string, string[]>>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -140,8 +138,8 @@ const Register: React.FC = () => {
     },
   });
 
-  const { mutate, isPending } = useRegister();
-  const toastMessage = useMessageToaster();
+  const { mutate, isPending, error } = useRegister();
+
   const navigate = useNavigate();
 
   // 2. Define a submit handler.
@@ -149,36 +147,23 @@ const Register: React.FC = () => {
     console.log(values);
     mutate(values, {
       onSuccess: () => {
-        toastMessage({
-          message: "Your accont was successfully created, Login to continue",
-          type: "success",
-        });
+        toast.success("Registration successful! Redirecting to login...");
         navigate("/auth/login");
       },
-      onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<
-          string,
-          string[]
-        >;
-        setErrorMessages(errorMessages);
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error",
-          });
-        }
+      onError: (error: Error) => {
+        toast.error(errorMessage(error));
       },
     });
   }
 
-  const fieldLabels: Record<string, string> = {
-    username: "Username",
-    password: "Password",
-    email: "Email",
-    ref_code: "Referral Code",
-    coupon: "Coupon Code",
-    non_field_errors: "Error",
-  };
+  // const fieldLabels: Record<string, string> = {
+  //   username: "Username",
+  //   password: "Password",
+  //   email: "Email",
+  //   ref_code: "Referral Code",
+  //   coupon: "Coupon Code",
+  //   non_field_errors: "Error",
+  // };
 
   const toggleVisibility = (fieldName: string) => {
     setPasswordVisibility((prev) => ({
@@ -206,20 +191,9 @@ const Register: React.FC = () => {
         </Link>
 
         <div className="space-y-5">
-          {errorMessages &&
-            Object.keys(errorMessages).length > 0 &&
-            Object.entries(errorMessages).map(([field, messages]) =>
-              messages.map((message: string, index: number) => (
-                <Alert
-                  key={`${field}-${index}`}
-                  className=" bg-red-300/80 text-red-600 font-semibold border-0 border-destructive"
-                >
-                  <AlertDescription>
-                    {`${fieldLabels[field] || field}: ${message}`}
-                  </AlertDescription>
-                </Alert>
-              ))
-            )}
+          {error && <Alert className=" bg-red-300/80 text-red-600 font-semibold border-0 border-destructive">
+            <AlertDescription>{errorMessage(error as Error)}</AlertDescription>
+          </Alert>}
         </div>
 
         {formFields.map((formField, index) => (

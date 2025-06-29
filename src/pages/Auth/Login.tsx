@@ -14,9 +14,9 @@ import { Eye, EyeClosed, LockIcon, User } from "lucide-react";
 import GlidingButton from "@/components/ui/GlidingButton";
 import { useLogin } from "@/api/mutations";
 import { LoginData } from "@/types";
-import { useMessageToaster } from "@/hooks/useMessageToaster";
-import { AxiosError } from "axios";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { toast } from "sonner";
+import errorMessage from "@/api/errorMessage";
 
 const formSchema = z.object({
   username: z.string().optional(),
@@ -63,7 +63,6 @@ const Login: React.FC = () => {
   const { setUser } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const toastMessage = useMessageToaster();
   const from = location.state?.from?.pathname || "/dashboard";
 
   // 2. Define a submit handler.
@@ -75,18 +74,9 @@ const Login: React.FC = () => {
         navigate(from);
         console.log(data);
       },
-      onError: (error) => {
-        const errorMessages = (error as AxiosError)?.response?.data as Record<
-          string,
-          string[]
-        >;
-        for (const key in errorMessages) {
-          toastMessage({
-            message: errorMessages[key].join(", "),
-            type: "error",
-          });
-        }
-      },
+      onError: (error: Error) => {
+        toast.error(errorMessage(error))
+      }
     });
   }
 
