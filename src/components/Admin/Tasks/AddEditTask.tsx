@@ -13,13 +13,21 @@ import {
 } from "@/components/ui/form";
 import { useAddTask, useUpdateTask } from "@/api/mutations";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { ClipboardList, Gift, Link, ThumbsUp, Timer } from "lucide-react";
+import {
+  CheckCircle,
+  ClipboardList,
+  Gift,
+  Link,
+  ThumbsUp,
+  Timer,
+} from "lucide-react";
 import { Task } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDialog } from "@/hooks/useDialog";
 import ImagePicker from "../ImagePicker";
 import { toast } from "sonner";
 import errorMessage from "@/api/errorMessage";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
   title: z
@@ -31,6 +39,7 @@ const formSchema = z.object({
   confirmation_code: z.string().optional(),
   estimated_time: z.coerce.number(),
   banner: z.string().optional(),
+  expired: z.boolean(),
 });
 
 interface AddEditTaskProps {
@@ -49,6 +58,7 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       reward: update ? data?.reward : 500,
       estimated_time: update ? data?.estimated_time : 1,
       banner: imgUrl,
+      expired: update ? data?.expired : false,
     },
   });
 
@@ -169,6 +179,29 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
             )}
           />
         ))}
+        <FormField
+          control={form.control}
+          name="expired"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <label className="text-sm font-medium flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" />
+                  Mark As Expired
+                </label>
+                <p className="text-sm text-muted-foreground">
+                  When checked, this task will not be visible to users
+                </p>
+              </div>
+            </FormItem>
+          )}
+        />
         <Button type="submit" disabled={adding || updating || !isDirty}>
           {adding || updating ? (
             <LoadingAnimation size="small" />
