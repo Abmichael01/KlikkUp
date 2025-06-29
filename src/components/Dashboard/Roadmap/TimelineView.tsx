@@ -34,7 +34,7 @@ const TimelineView: React.FC<{ roadmapItems: RoadmapItem[] }> = ({ roadmapItems 
                 <div
                   className={cn(
                     "z-10 flex h-11 w-11 items-center justify-center rounded-full border-2",
-                    index === 0 ? "bg-secondary border-secondary" : "bg-blue-900 border-blue-800"
+                    roadmapItems[index].completed ? "bg-secondary border-secondary" : "bg-blue-900 border-blue-800"
                   )}
                 >
                   <span className="text-sm font-bold">{index + 1}</span>

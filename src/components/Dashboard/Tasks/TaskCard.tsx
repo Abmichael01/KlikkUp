@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Youtube, Clock, Star, TrendingUp } from "lucide-react";
+import { Clock, Star, TrendingUp, ClipboardList } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import TaskConfirmationForm from "@/components/Dashboard/Tasks/TaskConfirmationForm";
@@ -23,10 +23,10 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       {task.banner ? (
         <img src={task.banner} alt="" className="object-cover h-[200px] w-full" />
       ) : (
-        <div className="flex items-center justify-center py-12 border-b bg-gradient-to-b from-blue-950 via-blue-900 to-blue-950 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.2)_0,transparent_70%)]"></div>
-          <Youtube className="w-16 h-16 text-secondary relative z-10" />
-        </div>
+        <div className="flex items-center justify-center border border-blue-900 rounded-lg py-12 bg-blue-500 bg-gradient-to- from-blue-950 via-gray-900 to-blue-950 text-white relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.2)_0,transparent_70%)]"></div>
+                  <ClipboardList className="w-16 h-16 text-blue-900 relative z-10" />
+                </div>
       )}
       <CardContent className="p-5 flex flex-col gap-3">
         <div>
