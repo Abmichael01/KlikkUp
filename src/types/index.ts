@@ -107,6 +107,7 @@ export type Task = {
   estimated_time?: number;
   completed?: boolean;
   banner?: string;
+  expired?: boolean;
 }
 
 export type TasksData = {
@@ -124,6 +125,7 @@ export type Story = {
   estimated_time?: number;
   story_read?: boolean;
   banner?: string;
+  expired?: boolean;
 }
 
 export type StoriesData = {

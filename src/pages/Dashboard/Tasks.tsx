@@ -32,6 +32,7 @@ const Tasks: React.FC = () => {
   const [currentTab, setCurrentTab] = useState("new-tasks");
 
   const { data, isLoading } = useTasksData();
+  console.log(data)
 
   if (isLoading) return <PageIsLoading />;
 
