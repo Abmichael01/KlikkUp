@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, AlertCircle, Loader2, Play, ClipboardList } from "lucide-react";
+import { CheckCircle, AlertCircle, Loader2, ClipboardList } from "lucide-react";
 import { Task } from "@/types";
 import { useConfirmTask } from "@/api/mutations";
 import { toast } from "@/hooks/use-toast";
@@ -60,7 +60,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [task, onClose]); // Remove mutation from dependencies
+  }, [task, onClose, mutation]); // Remove mutation from dependencies
 
   // Timer logic
   const startTask = () => {
@@ -111,7 +111,6 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
               onClick={startTask}
               className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-full py-3 text-lg"
             >
-              <Play className="mr-2 h-5 w-5" />
               Start Task
             </Button>
           </div>

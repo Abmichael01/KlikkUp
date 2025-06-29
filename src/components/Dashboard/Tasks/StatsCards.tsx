@@ -22,9 +22,6 @@ const StatsCards: React.FC<Props> = ({ data }) => {
               <BookOpen className="h-6 w-6 text-secondary" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">4 new</span> tasks this week
-          </div>
         </CardContent>
       </GradientCard>
 
@@ -39,9 +36,7 @@ const StatsCards: React.FC<Props> = ({ data }) => {
               <CheckCircle className="h-6 w-6 text-secondary" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">+3</span> from last month
-          </div>
+        
         </CardContent>
       </GradientCard>
 
@@ -55,9 +50,6 @@ const StatsCards: React.FC<Props> = ({ data }) => {
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-900/50">
               <TrendingUp className="h-6 w-6 text-secondary" />
             </div>
-          </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">↑ 8%</span> from last month
           </div>
         </CardContent>
       </GradientCard>

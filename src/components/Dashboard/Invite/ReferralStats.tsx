@@ -22,9 +22,7 @@ const ReferralStats: React.FC<Props> = ({ data }) => {
               <UserPlus className="h-6 w-6 text-secondary" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">↑ 5</span> from last month
-          </div>
+          
         </CardContent>
       </GradientCard>
 
@@ -39,9 +37,7 @@ const ReferralStats: React.FC<Props> = ({ data }) => {
               <Trophy className="h-6 w-6 text-secondary" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">500 points</span> per referral
-          </div>
+          
         </CardContent>
       </GradientCard>
 

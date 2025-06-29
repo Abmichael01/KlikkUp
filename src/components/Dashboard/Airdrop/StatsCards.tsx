@@ -18,7 +18,7 @@ const StatsCards: React.FC = () => {
             </div>
           </div>
           <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">Eligible</span> for next airdrop
+            <span className="text-green-400">Eligible</span> for next giveaway
           </div>
         </CardContent>
       </GradientCard>
@@ -34,9 +34,7 @@ const StatsCards: React.FC = () => {
               <Users className="h-6 w-6 text-secondary" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-blue-300">
-            <span className="text-green-400">+1,245</span> this month
-          </div>
+          
         </CardContent>
       </GradientCard>
 
