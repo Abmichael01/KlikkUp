@@ -42,7 +42,7 @@ export const columns: ColumnDef<Task>[] = [
 
       return (
         <Link to={link} className="hover:underline">
-          link
+          Go to link
         </Link>
       );
     },

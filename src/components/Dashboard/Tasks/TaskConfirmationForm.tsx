@@ -64,6 +64,9 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Timer logic
   const startTask = () => {
+    if (task.link) {
+      window.open(task.link, "_blank", "noopener,noreferrer");
+    }
     setTimerStatus("running");
     if (timerRef.current) clearInterval(timerRef.current); // Clear any existing timer
     timerRef.current = setInterval(() => {

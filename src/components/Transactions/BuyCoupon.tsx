@@ -21,6 +21,7 @@ import Logo from "../Logo/Logo";
 import { useBuyCoupon } from "@/api/mutations";
 import PaystackPop from "@paystack/inline-js";
 import { Link } from "react-router";
+import { toast } from "sonner";
 
 const BuyCoupon: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -37,6 +38,7 @@ const BuyCoupon: React.FC = () => {
       onSuccess: (response) => {
         const popup = new PaystackPop();
         popup.resumeTransaction(response.data?.access_code);
+        toast.info("The coupon code will sent to your mail if the payment was successful")
       },
       onError: (error) => {
         console.log(error);
