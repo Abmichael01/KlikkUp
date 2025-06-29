@@ -29,7 +29,7 @@ const formSchema = z.object({
   link: z.string().min(1, { message: "Link is required" }),
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   confirmation_code: z.string().optional(),
-  estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
+  estimated_time: z.coerce.number(),
   banner: z.string().optional(),
 });
 

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, AlertCircle, Loader2, Play, Video } from "lucide-react";
+import { CheckCircle, AlertCircle, Loader2, Play, ClipboardList } from "lucide-react";
 import { Task } from "@/types";
 import { useConfirmTask } from "@/api/mutations";
 import { toast } from "@/hooks/use-toast";
@@ -94,7 +94,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         </DrawerTitle>
         <DrawerDescription className="text-center text-sm text-white/80">
           {timerStatus === "idle"
-            ? "Watch the video and click 'Start Task'"
+            ? "Click 'Start Task' to begin task"
             : timerStatus === "running"
             ? `Please wait for the countdown before confirming "${task.title}"`
             : `Enter the confirmation code to complete "${task.title}"`}
@@ -105,7 +105,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         {timerStatus === "idle" && (
           <div className="flex flex-col items-center gap-6">
             <div className="h-24 w-24 rounded-full bg-blue-900/40 flex items-center justify-center shadow-inner">
-              <Video className="h-12 w-12 text-blue-300" />
+              <ClipboardList className="h-12 w-12 text-blue-300" />
             </div>
             <Button
               onClick={startTask}
