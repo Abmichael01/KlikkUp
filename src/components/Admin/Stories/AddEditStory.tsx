@@ -109,16 +109,18 @@ const AddEditStory: React.FC<AddEditStoryProps> = ({ data, update }) => {
   ];
 
   function onSubmit(values: Story) {
-    values.body = body;
-    if (data && data.id) {
-      values.id = data.id;
-    }
+    
     const mutate = data ? updateStory : addStory;
+    const payload = {
+      ...values,
+      id: data?.id,
+      banner: imgUrl && imgUrl.trim() !== "" ? imgUrl : undefined,
+    };
     mutate(
-      { ...values, id: data?.id },
+      payload,
       {
         onSuccess: () => {
-          toast.success("Story updated successfully");
+          toast.success(`Story ${data ? "updated" : "created"} successfully`);
           queryClient.invalidateQueries({ queryKey: ["stories"] });
           if (data) {
             setUpdateDialog(false);

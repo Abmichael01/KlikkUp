@@ -30,7 +30,7 @@ const formSchema = z.object({
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   confirmation_code: z.string().optional(),
   estimated_time: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
-  banner: z.string().optional()
+  banner: z.string().optional(),
 });
 
 interface AddEditTaskProps {
@@ -39,7 +39,7 @@ interface AddEditTaskProps {
 }
 
 const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
-  const [imgUrl, setImgUrl] = useState<string>()
+  const [imgUrl, setImgUrl] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,28 +47,27 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       link: update ? data?.link : "",
       confirmation_code: update ? data?.confirmation_code : "",
       reward: update ? data?.reward : 500,
-      estimated_time: update ? data?.estimated_time :  1,
+      estimated_time: update ? data?.estimated_time : 1,
       banner: imgUrl,
     },
   });
 
   useEffect(() => {
-    if (imgUrl !== form.getValues('banner')) {
-      form.setValue('banner', imgUrl || '', { shouldDirty: true });
+    if (imgUrl !== form.getValues("banner")) {
+      form.setValue("banner", imgUrl || "", { shouldDirty: true });
     }
   }, [imgUrl, form]);
-  
+
   const { isDirty } = form.formState;
   const { mutate: addTask, isPending: adding } = useAddTask();
   const { mutate: updateTask, isPending: updating } = useUpdateTask();
-  const queryClient = useQueryClient()
-  const { setOpen: setUpdateDialog } = useDialog("updateTask")
-  const { setOpen: setAddDialog } = useDialog("addTask")
-  console.log(data)
+  const queryClient = useQueryClient();
+  const { setOpen: setUpdateDialog } = useDialog("updateTask");
+  const { setOpen: setAddDialog } = useDialog("addTask");
 
   useEffect(() => {
-    setImgUrl(data?.banner)
-  }, [setImgUrl, data])
+    setImgUrl(data?.banner);
+  }, [setImgUrl, data]);
 
   type FormField = {
     name: "title" | "link" | "reward" | "confirmation_code" | "estimated_time";
@@ -112,15 +111,15 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const mutate = data ? updateTask : addTask;
-    console.log({...values, 
-      banner: imgUrl,
-      id: data?.id
-    })
-    mutate({...values, 
-      id: data?.id
-    }, {
+    const payload = {
+      ...values,
+      id: data?.id,
+      banner: imgUrl && imgUrl.trim() !== "" ? imgUrl : undefined,
+    };
+
+    mutate(payload, {
       onSuccess: () => {
-        toast.success("Task update was successfull")
+        toast.success(`Task ${data ? "updated" : "created"} successfully`);
         queryClient.invalidateQueries({ queryKey: ["tasks"] });
         if (data) {
           setUpdateDialog(false);
@@ -134,11 +133,17 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
     });
   }
 
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className=" max-h-[70vh] overflow-y-auto space-y-8">
-        <ImagePicker imgUrl={imgUrl} setImgUrl={setImgUrl} title="Upload Banner" />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className=" max-h-[70vh] overflow-y-auto space-y-8"
+      >
+        <ImagePicker
+          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
+          title="Upload Banner"
+        />
         {formFields.map((formField, index) => (
           <FormField
             key={index}
@@ -148,7 +153,9 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
               <FormItem>
                 <FormControl>
                   <div className="bg-white px-4 rounded-lg flex items-center gap-2 border">
-                    <div className="text-primary [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-sm">{formField.icon}</div>
+                    <div className="text-primary [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-sm">
+                      {formField.icon}
+                    </div>
                     <input
                       placeholder={formField.placeholder}
                       type={formField.type}
@@ -163,7 +170,13 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
           />
         ))}
         <Button type="submit" disabled={adding || updating || !isDirty}>
-          {adding || updating ? <LoadingAnimation size="small" /> : data ? "Update Task" : "Add Task"}
+          {adding || updating ? (
+            <LoadingAnimation size="small" />
+          ) : data ? (
+            "Update Task"
+          ) : (
+            "Add Task"
+          )}
         </Button>
       </form>
     </Form>
