@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   DrawerClose,
   DrawerDescription,
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, AlertCircle, Loader2, ClipboardList } from "lucide-react";
+import { CheckCircle, AlertCircle, Loader2, Play } from "lucide-react";
 import { Task } from "@/types";
 import { useConfirmTask } from "@/api/mutations";
 import { toast } from "@/hooks/use-toast";
@@ -27,48 +27,42 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
   onClose,
 }) => {
   const [confirmationCode, setConfirmationCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState((task.estimated_time ?? 0) * 60); // 5 minutes default
-  const [timerStatus, setTimerStatus] = useState<
-    "idle" | "running" | "completed"
-  >("idle");
+  const [timeRemaining, setTimeRemaining] = useState(0);
+  const [timerStatus, setTimerStatus] = useState<"idle" | "running" | "completed">("idle");
+  
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const mutation = useConfirmTask();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  // Mutation handling confirmation logic
-  const confirmTask = () => {
-    const data = { ...task, confirmation_code: confirmationCode };
-    mutation.mutate(data, {
-      onSuccess: () => {
-        toast({
-          description: `Task confirmed! ${task.reward}points has been added to you balance`,
-        });
-        queryClient.invalidateQueries({ queryKey: ["users"] })
-        queryClient.invalidateQueries({ queryKey: ["tasks-data"] })
-        onClose();
-      },
-    });
-  };
+  // Initialize timer duration
+  const timerDuration = Number(task.estimated_time ?? 0) * 60;
 
-  // Reset and cleanup on mount
-  useEffect(() => {
+  // Cleanup timer
+  const clearTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  // Reset component state
+  const resetState = useCallback(() => {
     setTimerStatus("idle");
     setConfirmationCode("");
-    mutation.reset();
+    setTimeRemaining(timerDuration);
+    clearTimer();
+  }, [timerDuration, clearTimer]);
 
-    if (timerRef.current) clearInterval(timerRef.current);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [task, onClose, mutation]); // Remove mutation from dependencies
-
-  // Timer logic
-  const startTask = () => {
+  // Start task timer
+  const startTask = useCallback(() => {
     if (task.link) {
       window.open(task.link, "_blank", "noopener,noreferrer");
     }
+    
     setTimerStatus("running");
-    if (timerRef.current) clearInterval(timerRef.current); // Clear any existing timer
+    setTimeRemaining(timerDuration);
+    clearTimer();
+    
     timerRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
@@ -79,82 +73,135 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         return prev - 1;
       });
     }, 1000);
+  }, [task.link, timerDuration, clearTimer]);
+
+  // Confirm task
+  const confirmTask = useCallback(() => {
+    if (!confirmationCode.trim()) return;
+    
+    mutation.mutate(
+      { ...task, confirmation_code: confirmationCode },
+      {
+        onSuccess: () => {
+          toast({
+            description: `Task confirmed! ${task.reward} points added to your balance`,
+          });
+          queryClient.invalidateQueries({ queryKey: ["users"] });
+          queryClient.invalidateQueries({ queryKey: ["tasks-data"] });
+          onClose();
+        },
+      }
+    );
+  }, [confirmationCode, mutation, task, queryClient, onClose]);
+
+  // Handle Enter key press
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && timerStatus === "completed" && confirmationCode.trim()) {
+      confirmTask();
+    }
+  }, [timerStatus, confirmationCode, confirmTask]);
+
+  // Format time display
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
-  const formatTime = (seconds: number) =>
-    `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(
-      seconds % 60
-    ).padStart(2, "0")}`;
+  // Initialize on mount and task change
+  useEffect(() => {
+    resetState();
+    return clearTimer;
+  }, [task.id, resetState, clearTimer]);
+
+  // Get status message
+  const getStatusMessage = () => {
+    switch (timerStatus) {
+      case "idle":
+        return "Ready to start task";
+      case "running":
+        return "Complete the task and wait for timer";
+      case "completed":
+        return "Enter your confirmation code";
+      default:
+        return "";
+    }
+  };
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <DrawerHeader>
-        <DrawerTitle className="text-center text-lg font-bold">
-          Task Confirmation
+    <div className="mx-auto w-full max-w-md">
+      <DrawerHeader className="text-center">
+        <DrawerTitle className="text-lg font-semibold">
+          {task.title}
         </DrawerTitle>
-        <DrawerDescription className="text-center text-sm text-white/80">
-          {timerStatus === "idle"
-            ? "Click 'Start Task' to begin task"
-            : timerStatus === "running"
-            ? `Please wait for the countdown before confirming "${task.title}"`
-            : `Enter the confirmation code to complete "${task.title}"`}
+        <DrawerDescription className="text-sm text-muted-foreground">
+          {getStatusMessage()}
         </DrawerDescription>
       </DrawerHeader>
 
-      <div className="p-4 space-y-6">
+      <div className="px-6 py-4 space-y-6">
+        {/* Idle State */}
         {timerStatus === "idle" && (
-          <div className="flex flex-col items-center gap-6">
-            <div className="h-24 w-24 rounded-full bg-blue-900/40 flex items-center justify-center shadow-inner">
-              <ClipboardList className="h-12 w-12 text-blue-300" />
+          <div className="flex flex-col items-center space-y-6">
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+              <Play className="w-8 h-8 text-primary" />
             </div>
             <Button
               onClick={startTask}
-              className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-full py-3 text-lg"
+              size="lg"
+              className="w-full"
             >
               Start Task
             </Button>
           </div>
         )}
 
+        {/* Timer States */}
         {(timerStatus === "running" || timerStatus === "completed") && (
           <div className="space-y-6">
-            <div>
-              <h1 className="text-blue-100 text-3xl text-center">
+            {/* Timer Display */}
+            <div className="text-center space-y-2">
+              <div className="text-4xl font-mono font-bold text-primary">
                 {formatTime(timeRemaining)}
-              </h1>
-              <p className="mt-2 text-center text-xs text-white/80">
-                {timerStatus === "running" && "Timer in progress..."}
-                {timerStatus === "completed" &&
-                  "You can now enter the confirmation code."}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {timerStatus === "running" ? "Timer running..." : "Timer completed!"}
               </p>
             </div>
 
+            {/* Confirmation Code Input */}
             {timerStatus === "completed" && (
-              <Input
-                placeholder="Enter 6-digit code"
-                value={confirmationCode}
-                onChange={(e) => setConfirmationCode(e.target.value)}
-                className="text-center text-lg font-mono tracking-widest bg-transparent border rounded-xl placeholder:text-white/70"
-                maxLength={6}
-                disabled={mutation.isPending || mutation.isSuccess}
-              />
-            )}
-
-            {mutation.isError && (
-              <div className="flex items-center gap-2 text-sm text-red-500 bg-red-100 p-2 rounded-lg">
-                <AlertCircle className="h-5 w-5" />
-                {mutation.error instanceof AxiosError &&
-                  mutation.error.response?.data?.error && (
-                    <span className="text-red-600 font-medium">
-                      {mutation.error.response.data.error}
+              <div className="space-y-4">
+                <Input
+                  placeholder="Enter confirmation code"
+                  value={confirmationCode}
+                  onChange={(e) => setConfirmationCode(e.target.value.trim())}
+                  onKeyPress={handleKeyPress}
+                  className="text-center text-lg font-mono tracking-wider text-black"
+                  maxLength={10}
+                  disabled={mutation.isPending}
+                  autoFocus
+                />
+                
+                {/* Error Display */}
+                {mutation.isError && (
+                  <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 rounded-lg">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>
+                      {mutation.error instanceof AxiosError && mutation.error.response?.data?.error
+                        ? mutation.error.response.data.error
+                        : "Failed to confirm task. Please try again."}
                     </span>
-                  )}
-              </div>
-            )}
-            {mutation.isSuccess && (
-              <div className="flex items-center gap-2 text-sm text-green-600 bg-green-100 p-2 rounded-lg">
-                <CheckCircle className="h-5 w-5" />
-                Task confirmed! {task.reward} Klikks awarded.
+                  </div>
+                )}
+
+                {/* Success Display */}
+                {mutation.isSuccess && (
+                  <div className="flex items-center gap-2 p-3 text-sm text-green-700 bg-green-50 rounded-lg">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>Task confirmed! {task.reward} points awarded.</span>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -162,15 +209,17 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       </div>
 
       <DrawerFooter className="space-y-2">
+        {/* Confirm Button */}
         {timerStatus === "completed" && !mutation.isSuccess && (
           <Button
             onClick={confirmTask}
-            disabled={!confirmationCode || mutation.isPending}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full"
+            disabled={!confirmationCode.trim() || mutation.isPending}
+            className="w-full"
+            size="lg"
           >
             {mutation.isPending ? (
               <>
-                <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 Confirming...
               </>
             ) : (
@@ -178,12 +227,11 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
             )}
           </Button>
         )}
+        
+        {/* Cancel Button */}
         <DrawerClose asChild>
-          <Button
-            variant="outline"
-            className="w-full rounded-full py-3 border-gray-700"
-          >
-            Cancel
+          <Button variant="outline" className="w-full" size="lg">
+            {mutation.isSuccess ? "Close" : "Cancel"}
           </Button>
         </DrawerClose>
       </DrawerFooter>
