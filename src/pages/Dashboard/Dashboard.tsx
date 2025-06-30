@@ -50,9 +50,9 @@ const Dashboard: React.FC = () => {
                   <TrendingUp className="h-6 w-6 text-secondary" />
                 </div>
               </div>
-              <div className="mt-4 text-xs text-blue-300">
-                <span className="text-green-400">↑ 12%</span> from last month
-              </div>
+              <button className="bg-secondary text-orange-900 rounded-full text-sm px-5 py-2 mt-3">
+                Convert Points to Naira
+              </button>
             </CardContent>
           </Card>
 
