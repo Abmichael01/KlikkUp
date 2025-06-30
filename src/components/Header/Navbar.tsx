@@ -75,6 +75,16 @@ const Navbar: React.FC = () => {
     }, 200); // Use a minimal delay to ensure the navigation to the home page completes
   };
 
+  const whatsappNumber = "+2348120770749";
+
+  const message =
+    "Hi! I would like to buy klikkup coupon code.";
+
+  // Create WhatsApp link
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
   return (
     <>
       <div className="px-5 lg:px-10 py-5 flex items-center justify-between sticky top-0 z-[999] bg-gray-200 backdrop-blur-lg bg-opacity-60">
@@ -90,7 +100,7 @@ const Navbar: React.FC = () => {
             </p>
           ))}
           <Link
-            to={"/become-partner"}
+            to={whatsappLink}
             className=" font-medium hover:text-primary transition-colors cursor-pointer"
           >
             Become a Partner
