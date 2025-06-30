@@ -172,6 +172,16 @@ const Register: React.FC = () => {
     }));
   };
 
+  const whatsappNumber = "+2348120770749";
+
+  const message =
+    "Hi! I would like to sign up as a KlikkUp partner. I meet the social media requirements and I'm interested in earning 50% commission on referrals. Please help me get started with the registration process.";
+
+  // Create WhatsApp link
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
   return (
     <Form {...form}>
       <form
@@ -211,7 +221,7 @@ const Register: React.FC = () => {
                           Don't have coupon code?{" "}
                         </h2>
                         <Link
-                          to="/buy-coupon"
+                          to={whatsappLink}
                           className="bg-secondary text-orange-950 px-3 py-1 text-xs rounded-full font-medium"
                         >
                           Buy Coupon
