@@ -13,7 +13,7 @@ import Tasks from './pages/Dashboard/Tasks';
 import Stories from './pages/Dashboard/Stories/Stories';
 import Roadmap from './pages/Dashboard/Roadmap';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import BuyCoupon from './components/Transactions/BuyCoupon';
+// import BuyCoupon from './components/Transactions/BuyCoupon';
 import Story from './pages/Dashboard/Stories/Story';
 import Wallet from './pages/Dashboard/Wallet';
 import Courses from './pages/Dashboard/Courses';
@@ -81,7 +81,7 @@ const App: React.FC = () => {
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
             </Route>
 
-            <Route path="/buy-coupon" element={<BuyCoupon />} />
+            {/* <Route path="/buy-coupon" element={<BuyCoupon />} /> */}
             <Route path="/become-partner" element={<BecomePartner />} />
 
             {/* Auth Routes */}
