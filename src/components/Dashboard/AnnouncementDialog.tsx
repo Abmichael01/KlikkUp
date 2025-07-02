@@ -65,7 +65,7 @@ const AnnouncementDialog: React.FC = () => {
 
         <ScrollArea className="max-h-[50vh] pr-4">
           <div className="space-y-4 mt-5">
-            {data.map((announcement) => (
+            {data?.map((announcement) => (
               <GradientCard
                 key={announcement.id}
                 className="text-white rounded-xl"
