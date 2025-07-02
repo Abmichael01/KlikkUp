@@ -29,9 +29,14 @@ import { toast } from "sonner";
 
 const formSchema = z
   .object({
-    username: z.string().min(3, {
-      message: "Username must be at least 3 characters.",
-    }),
+    username: z
+      .string()
+      .min(3, {
+        message: "Username must be at least 3 characters.",
+      })
+      .regex(/^[a-zA-Z0-9]+$/, {
+        message: "Username can only contain letters and numbers.",
+      }),
     email: z.string().min(2, { message: "Email is required" }),
     coupon: z
       .string()
