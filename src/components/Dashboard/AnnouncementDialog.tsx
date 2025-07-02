@@ -16,8 +16,6 @@ const AnnouncementDialog: React.FC = () => {
   const [dontShow, setDontShow] = useState(false);
   const { data } = useAnnouncementData();
 
-  alert(data?.length);
-
   // Check if announcement was dismissed today
   useEffect(() => {
     try {
