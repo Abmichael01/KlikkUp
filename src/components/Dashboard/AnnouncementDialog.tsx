@@ -15,7 +15,7 @@ import { useAnnouncementData } from "@/api/queries";
 const AnnouncementDialog: React.FC = () => {
   const { isOpen, setIsOpen } = useAnnouncementStore();
   const [dontShow, setDontShow] = useState(false);
-  const { data } = useAnnouncementData()
+  const { data } = useAnnouncementData();
 
   useEffect(() => {
     const lastDismissed = localStorage.getItem("announcement-dismissed");
