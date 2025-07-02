@@ -47,7 +47,7 @@ const AnnouncementDialog: React.FC = () => {
   };
 
   // If no announcements, don't show dialog
-  if (!data || data.length === 0) return null;
+  // if (!data || data.length === 0) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
