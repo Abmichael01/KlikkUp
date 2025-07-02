@@ -11,46 +11,64 @@ import GradientCard from "../ui/GradientCard";
 import { CardContent, CardHeader } from "../ui/card";
 import { useAnnouncementData } from "@/api/queries";
 
-
 const AnnouncementDialog: React.FC = () => {
   const { isOpen, setIsOpen } = useAnnouncementStore();
   const [dontShow, setDontShow] = useState(false);
   const { data } = useAnnouncementData();
 
+  // Check if announcement was dismissed today
   useEffect(() => {
-    const lastDismissed = localStorage.getItem("announcement-dismissed");
-    const today = new Date().toDateString();
-    if (lastDismissed === today) {
-      setIsOpen(false);
+    try {
+      const lastDismissed = localStorage.getItem("announcement-dismissed");
+      const today = new Date().toDateString();
+      if (lastDismissed === today) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    } catch (error) {
+      console.warn("LocalStorage error:", error);
+      setIsOpen(true); // fail open
     }
   }, [setIsOpen]);
 
-  // Handle dialog close with "don't show again" option
   const handleOpenChange = (open: boolean) => {
     if (!open && dontShow) {
-      localStorage.setItem("announcement-dismissed", new Date().toDateString());
+      try {
+        localStorage.setItem(
+          "announcement-dismissed",
+          new Date().toDateString()
+        );
+      } catch (error) {
+        console.warn("Error writing to localStorage:", error);
+      }
     }
     setIsOpen(open);
   };
 
+  // If no announcements, don't show dialog
+  if (!data || data.length === 0) return null;
+
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-full max-w-[95vw] sm:max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader className="flex flex-row items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 flex items-center justify-center bg-blue-950 text-secondary rounded-full">
               <Bell size={18} />
             </div>
-            <h2 className="text-lg font-medium text-gray-900">Announcements</h2>
+            <h2 className="text-lg font-medium text-gray-900">
+              Announcements
+            </h2>
           </div>
         </DialogHeader>
 
         <ScrollArea className="max-h-[50vh] pr-4">
           <div className="space-y-4 mt-5">
-            {data?.map((announcement) => (
+            {data.map((announcement) => (
               <GradientCard
                 key={announcement.id}
-                className=" text-white rounded-xl "
+                className="text-white rounded-xl"
               >
                 <CardHeader>
                   <h3 className="font-medium text-lg">{announcement.title}</h3>
@@ -62,7 +80,9 @@ const AnnouncementDialog: React.FC = () => {
                   {announcement.link && (
                     <a
                       href={announcement.link}
-                      className="text-secondary text-sm mt-2 hover:underline self-end"
+                      className="text-secondary text-sm mt-2 hover:underline block"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Learn more →
                     </a>
