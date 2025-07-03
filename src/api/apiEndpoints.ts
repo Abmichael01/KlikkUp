@@ -555,3 +555,13 @@ export const deleteGiveaway = async (id: number) => {
     throw error;
   }
 };
+
+export const convertPoints = async (amount: number): Promise<{ naira_equivalent: number }> => {
+  try {
+    const response = await apiClient.post("/users/convert-points/", { amount });
+    return response.data;
+  } catch (error) {
+    console.error("Error converting points", error);
+    throw error;
+  }
+};

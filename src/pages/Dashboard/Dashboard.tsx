@@ -18,11 +18,22 @@ import { AccountOverviewData, RecentActivity } from "@/types";
 import CopyButton from "@/components/ui/CopyButton";
 import StreakCard from "@/components/Dashboard/Dashboard/StreakCard";
 import PageIsLoading from "@/components/Dashboard/PageIsLoading";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import ConvertPoints from "@/components/Dashboard/Dashboard/ConvertPoints";
+import { useDialog } from "@/hooks/useDialog";
 
 const Dashboard: React.FC = () => {
   const { data, isLoading } = useAccountOverviewData();
+  const { open, setOpen } = useDialog("convert-points-dialog");
 
-  if (isLoading) return <PageIsLoading />
+  if (isLoading) return <PageIsLoading />;
 
   return (
     <div className="w-full">
@@ -50,9 +61,22 @@ const Dashboard: React.FC = () => {
                   <TrendingUp className="h-6 w-6 text-secondary" />
                 </div>
               </div>
-              <button className="bg-secondary text-orange-900 rounded-full text-sm px-5 py-2 mt-3">
-                Convert Points to Naira
-              </button>
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <button className="bg-secondary text-orange-900 rounded-full text-sm px-5 py-2 mt-3">
+                    Convert Points to Naira
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="rounded-lg">
+                  <DialogHeader>
+                    <DialogTitle>Convert Points to Naira</DialogTitle>
+                    <DialogDescription>
+                      Enter the amount of points you want to convert.
+                    </DialogDescription>
+                  </DialogHeader>
+                 <ConvertPoints totalPoints={data?.point_balance || 0} />
+                </DialogContent>
+              </Dialog>
             </CardContent>
           </Card>
 

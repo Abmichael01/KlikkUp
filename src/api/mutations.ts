@@ -11,6 +11,7 @@ import {
   checkin,
   confirmStory,
   confirmTask,
+  convertPoints,
   deleteAnnouncement,
   deleteCourse,
   deleteCourseCategory,
@@ -260,5 +261,10 @@ export const useJoinGiveaway = () => {
     mutationFn: joinGiveaway,
   });
 };
- 
+
+export const useConvertPoints = () => {
+  return useMutation({
+    mutationFn: (amount: number) => convertPoints(amount),
+  });
+};
 
