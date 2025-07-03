@@ -49,10 +49,18 @@ export const columns: ColumnDef<User>[] = [
   },
 
   {
-    accessorKey: "role",
-    header: "Role",
-  },
+    accessorKey: "points",
+    header: "Points",
+    cell: ({ row }) => {
+      const points = row.original?.point_balance;
 
+      return (
+        <span>
+          {points}
+        </span>
+      );
+    },
+  },  
   {
     accessorKey: "status",
     header: "Status",
