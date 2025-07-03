@@ -7,18 +7,27 @@ import { Label } from '@/components/ui/label';
 import { Coupon } from '@/types';
 
 const Table: React.FC = () => {
-  const { data } = useGetCoupons();
-  console.log(data)
+  const { data = [] } = useGetCoupons();
   const [showSold, setShowSold] = useState(false);
   const [showUsed, setShowUsed] = useState(false);
 
   const filteredData: Coupon[] = useMemo(() => {
-    return (data ?? []).filter((coupon) => {
-      if (showSold && !coupon.sold) return false;
-      if (showUsed && !coupon.used) return false;
-      return true;
+    return data.filter((coupon) => {
+      if (showSold && showUsed) {
+        // Filter by both sold and used
+        return coupon.sold && coupon.used;
+      }
+      if (showSold) {
+        // Sold but not necessarily used
+        return coupon.sold && !coupon.used;
+      }
+      if (showUsed) {
+        // Used but not sold
+        return coupon.used && !coupon.sold;
+      }
+      return true; // No filters checked
     });
-  }, [data, showSold, showUsed])
+  }, [data, showSold, showUsed]);
 
   return (
     <div className="space-y-4 w-full">
@@ -30,7 +39,7 @@ const Table: React.FC = () => {
             checked={showSold}
             onCheckedChange={(checked) => setShowSold(Boolean(checked))}
           />
-          <Label htmlFor="sold">Show only sold</Label>
+          <Label htmlFor="sold">Sold</Label>
         </div>
 
         <div className="flex items-center space-x-2">
@@ -39,12 +48,12 @@ const Table: React.FC = () => {
             checked={showUsed}
             onCheckedChange={(checked) => setShowUsed(Boolean(checked))}
           />
-          <Label htmlFor="used">Show only used</Label>
+          <Label htmlFor="used">Used</Label>
         </div>
       </div>
 
       {/* DataTable */}
-      <DataTable columns={columns} data={filteredData as Coupon[]} searchableColId="code" />
+      <DataTable columns={columns} data={filteredData} searchableColId="code" />
     </div>
   );
 };
