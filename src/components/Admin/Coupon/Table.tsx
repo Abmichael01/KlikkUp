@@ -10,29 +10,26 @@ const Table: React.FC = () => {
   const { data = [] } = useGetCoupons();
   const [showSold, setShowSold] = useState(false);
   const [showUsed, setShowUsed] = useState(false);
+  const [showNew, setShowNew] = useState(false); // ✅ NEW filter
 
   const filteredData: Coupon[] = useMemo(() => {
+    // No filters checked — show everything
+    if (!showSold && !showUsed && !showNew) return data;
+
     return data.filter((coupon) => {
-      if (showSold && showUsed) {
-        // Filter by both sold and used
-        return coupon.sold && coupon.used;
-      }
-      if (showSold) {
-        // Sold but not necessarily used
-        return coupon.sold && !coupon.used;
-      }
-      if (showUsed) {
-        // Used but not sold
-        return coupon.used && !coupon.sold;
-      }
-      return true; // No filters checked
+      const isSoldOnly = showSold && coupon.sold && !coupon.used;
+      const isUsedOnly = showUsed && coupon.used && !coupon.sold;
+      const isBoth = showSold && showUsed && coupon.sold && coupon.used;
+      const isNew = showNew && !coupon.sold && !coupon.used;
+
+      return isSoldOnly || isUsedOnly || isBoth || isNew;
     });
-  }, [data, showSold, showUsed]);
+  }, [data, showSold, showUsed, showNew]);
 
   return (
     <div className="space-y-4 w-full">
       {/* Filter Checkboxes */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <div className="flex items-center space-x-2">
           <Checkbox
             id="sold"
@@ -49,6 +46,15 @@ const Table: React.FC = () => {
             onCheckedChange={(checked) => setShowUsed(Boolean(checked))}
           />
           <Label htmlFor="used">Used</Label>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="new"
+            checked={showNew}
+            onCheckedChange={(checked) => setShowNew(Boolean(checked))}
+          />
+          <Label htmlFor="new">New</Label>
         </div>
       </div>
 
