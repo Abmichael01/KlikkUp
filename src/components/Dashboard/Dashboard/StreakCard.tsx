@@ -78,7 +78,7 @@ const StreakCard = ({ data }: StreakCardProps) => {
 
               {streak > 0 && (
                 <p className="text-xs text-blue-300 mt-1">
-                  Started {streak-1 > 0 && streak} {streak-1 === 0 ? "Today" : "days ago"}
+                  Started {streak-1 > 0 && streak-1} {streak-1 === 0 ? "Today" : "day(s) ago"}
                 </p>
               )}
             </div>
