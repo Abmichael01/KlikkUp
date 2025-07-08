@@ -50,7 +50,7 @@ const ReferralCode: React.FC<ReferralCodeProps> = ({ referralCode }) => {
               <p className="text-sm text-blue-300">Referral Link</p>
             </div>
             <CopyButton
-              textToCopy={`http://localhost:5173/auth/register?ref_code=${referralCode}`}
+              textToCopy={`https://klikkupp.com/auth/register?ref_code=${referralCode}`}
               className="bg-secondary hover:bg-secondary/90 text-white float-right"
             />
           </div>
