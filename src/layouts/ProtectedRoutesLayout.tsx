@@ -2,16 +2,15 @@ import type React from "react";
 import { useEffect } from "react";
 import { Navigate, useLocation, Outlet } from "react-router";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { useToast } from "@/hooks/use-toast";
 import PageLoading from "@/components/PageLoading";
 import { getUser } from "@/api/apiEndpoints";
+import { toast } from "sonner";
 
 interface ProtectedRouteProps {
   allowedRoles?: number[];
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles = [] }) => {
-  const { toast } = useToast();
   const location = useLocation();
   const { user, isAuthenticated, isLoading, logout, setUser } = useAuthStore();
 
@@ -29,10 +28,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles = [] }) =>
     if (!isLoading && !isAuthenticated) {
       
       logout();
-      toast({
-        title: "Session Expired",
-        description: "Login to continue",
-      });
+      toast.error("You are not authenticated. Please log in again.",)
     }
   }, [isLoading, isAuthenticated, logout, toast]);
   if (isLoading) {

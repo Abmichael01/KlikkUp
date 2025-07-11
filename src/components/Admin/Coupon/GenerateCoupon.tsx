@@ -1,78 +1,63 @@
-import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useGenerateCoupon } from "@/api/mutations";
-import { useToast } from "@/hooks/use-toast";
-import LoadingAnimation from "@/components/LoadingAnimation";
 import { useQueryClient } from "@tanstack/react-query";
-
-const formSchema = z.object({
-    amount: z.coerce.number().min(1)
-});
+import { Input } from "@/components/ui/input";
+import { Loader2, RefreshCcw } from "lucide-react";
+import CopyButton from "@/components/ui/CopyButton";
 
 const GenerateCoupon: React.FC = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      amount: 1,
-    },
-  });
   const { mutate, isPending } = useGenerateCoupon();
-  const { toast } = useToast();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
+  const [couponCode, setCouponCode] = useState<string>("");
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    mutate(values.amount, {
-      onSuccess: () => {
-        toast({
-          title: "Coupon Generation Successful",
-          description: `Generated ${values.amount} coupons`,
-        })
-        queryClient.invalidateQueries({ queryKey: ["coupons"] }) // Invalidate coupons query after successful coupon generation
+  const handleGenerateCoupon = () => {
+    mutate(1, {
+      onSuccess: (data) => {
+        const code = data?.data?.code;
+        if (code) {
+          setCouponCode(code);
+          toast.success("Coupon generated successfully");
+          queryClient.invalidateQueries({ queryKey: ["coupons"] });
+        }
       },
       onError: (error) => {
-        console.error("Error generating coupons:", error);
-        toast({
-          title: "Coupon Generation Failed",
-          description: "An error occurred while generating coupons",
-        });
+        console.error("Error generating coupon:", error);
+        toast.error("An error occurred while generating the coupon");
       },
     });
-  }
+  };
+
+  // Generate coupon on mount
+  useEffect(() => {
+    handleGenerateCoupon();
+  }, []);
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="amount"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Amount of Coupons to Generate</FormLabel>
-              <FormControl>
-                <Input placeholder="Amount of Coupons to generate" type="number" min={1} {...field} />
-              </FormControl>
-              <FormMessage className="text-sm" />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">
-          {isPending ? <LoadingAnimation size="small" /> : "Generate Coupons"}
-        </Button>
-      </form>
-    </Form>
+    <div className="space-y-4">
+      {isPending ? (
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2 className="w-4 h-4 animate-spin" />
+          <span>Generating coupon...</span>
+        </div>
+      ) : couponCode ? (
+        <div className="flex items-center gap-2">
+          <Input value={couponCode} readOnly className="w-full" />
+          <CopyButton textToCopy={couponCode} />
+        </div>
+      ) : null}
+
+      <Button
+        onClick={handleGenerateCoupon}
+        disabled={isPending}
+        className="gap-2 rounded-full"
+      >
+        <RefreshCcw className="w-4 h-4" />
+        Generate New Coupon
+      </Button>
+    </div>
   );
 };
 
