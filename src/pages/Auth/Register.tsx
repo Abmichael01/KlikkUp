@@ -177,15 +177,13 @@ const Register: React.FC = () => {
     }));
   };
 
-  const whatsappNumber = "+2348120770749";
+  // const whatsappNumber = "+2348120770749";
 
-  const message =
-    "Hi! I would like to buy klikkup coupon code.";
+  // const message =
+  //   "Hi! I would like to buy klikkup coupon code.";
 
   // Create WhatsApp link
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    message
-  )}`;
+  const whatsappLink = `https://t.me/+ZaYBP1Y7oK5hN2M0`;
 
   return (
     <Form {...form}>
