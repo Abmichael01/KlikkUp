@@ -196,12 +196,12 @@ const Register: React.FC = () => {
           <p>Create your account</p>
         </div>
 
-        <Link to="/become-partner" className="flex justify-center">
+        {/* <Link to="/become-partner" className="flex justify-center">
           <GlidingButton className="bg-secondary text-orange-950 font-medium">
             Become a Partner at Klikkup
             <Handshake />
           </GlidingButton>
-        </Link>
+        </Link> */}
 
         <div className="space-y-5">
           {error && <Alert className=" bg-red-300/80 text-red-600 font-semibold border-0 border-destructive">
