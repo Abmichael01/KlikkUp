@@ -14,7 +14,6 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import {
   Eye,
   EyeClosed,
-  Handshake,
   LockIcon,
   Mail,
   TicketIcon,
