@@ -37,7 +37,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <div className="flex items-center gap-1">
             <Clock className="h-3.5 w-3.5 text-blue-300" />
             <span className="text-xs text-blue-300">
-              {task.estimated_time}mins
+              {task.no_wait_confirm ? "No time limit" : `${task.estimated_time}mins`}
             </span>
           </div>
           <div className="flex items-center gap-1">

@@ -34,8 +34,8 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
   const mutation = useConfirmTask();
   const queryClient = useQueryClient();
 
-  // Initialize timer duration
-  const timerDuration = Number(task.estimated_time ?? 0) * 60;
+  // Initialize timer duration (only for tasks that require waiting)
+  const timerDuration = task.no_wait_confirm ? 0 : Number(task.estimated_time ?? 0) * 60;
 
   // Cleanup timer
   const clearTimer = useCallback(() => {
@@ -59,6 +59,13 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
       window.open(task.link, "_blank", "noopener,noreferrer");
     }
     
+    // For tasks that don't require waiting, skip timer and go directly to completion
+    if (task.no_wait_confirm) {
+      setTimerStatus("completed");
+      setTimeRemaining(0);
+      return;
+    }
+    
     setTimerStatus("running");
     setTimeRemaining(timerDuration);
     clearTimer();
@@ -73,10 +80,29 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         return prev - 1;
       });
     }, 1000);
-  }, [task.link, timerDuration, clearTimer]);
+  }, [task.link, task.no_wait_confirm, timerDuration, clearTimer]);
 
   // Confirm task
   const confirmTask = useCallback(() => {
+    // For tasks that don't require confirmation code
+    if (task.no_code_required) {
+      mutation.mutate(
+        { ...task, confirmation_code: "" },
+        {
+          onSuccess: () => {
+            toast({
+              description: `Task confirmed! ${task.reward} points added to your balance`,
+            });
+            queryClient.invalidateQueries({ queryKey: ["users"] });
+            queryClient.invalidateQueries({ queryKey: ["tasks-data"] });
+            onClose();
+          },
+        }
+      );
+      return;
+    }
+    
+    // For tasks that require confirmation code
     if (!confirmationCode.trim()) return;
     
     mutation.mutate(
@@ -96,10 +122,13 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Handle Enter key press
   const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && timerStatus === "completed" && confirmationCode.trim()) {
-      confirmTask();
+    if (e.key === "Enter" && timerStatus === "completed") {
+      // For tasks that don't require confirmation code, or if confirmation code is provided
+      if (task.no_code_required || confirmationCode.trim()) {
+        confirmTask();
+      }
     }
-  }, [timerStatus, confirmationCode, confirmTask]);
+  }, [timerStatus, confirmationCode, confirmTask, task.no_code_required]);
 
   // Format time display
   const formatTime = (seconds: number) => {
@@ -116,6 +145,17 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Get status message
   const getStatusMessage = () => {
+    if (task.no_wait_confirm) {
+      switch (timerStatus) {
+        case "idle":
+          return "Ready to start task";
+        case "completed":
+          return task.no_code_required ? "Ready to confirm task" : "Enter your confirmation code";
+        default:
+          return "";
+      }
+    }
+    
     switch (timerStatus) {
       case "idle":
         return "Ready to start task";
@@ -159,18 +199,32 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         {/* Timer States */}
         {(timerStatus === "running" || timerStatus === "completed") && (
           <div className="space-y-6">
-            {/* Timer Display */}
-            <div className="text-center space-y-2">
-              <div className="text-4xl font-mono font-bold text-primary">
-                {formatTime(timeRemaining)}
+            {/* Timer Display - Only show for tasks that require waiting */}
+            {!task.no_wait_confirm && (
+              <div className="text-center space-y-2">
+                <div className="text-4xl font-mono font-bold text-primary">
+                  {formatTime(timeRemaining)}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {timerStatus === "running" ? "Timer running..." : "Timer completed!"}
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground">
-                {timerStatus === "running" ? "Timer running..." : "Timer completed!"}
-              </p>
-            </div>
+            )}
 
-            {/* Confirmation Code Input */}
-            {timerStatus === "completed" && (
+            {/* No Wait Task Display */}
+            {task.no_wait_confirm && timerStatus === "completed" && (
+              <div className="text-center space-y-2">
+                <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {task.no_code_required ? "Ready to confirm task" : "Enter your confirmation code"}
+                </p>
+              </div>
+            )}
+
+            {/* Confirmation Code Input - Only for tasks that require confirmation code */}
+            {timerStatus === "completed" && !task.no_code_required && (
               <div className="space-y-4">
                 <Input
                   placeholder="Enter confirmation code"
@@ -213,7 +267,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
         {timerStatus === "completed" && !mutation.isSuccess && (
           <Button
             onClick={confirmTask}
-            disabled={!confirmationCode.trim() || mutation.isPending}
+            disabled={(!task.no_code_required && !confirmationCode.trim()) || mutation.isPending}
             className="w-full"
             size="lg"
           >

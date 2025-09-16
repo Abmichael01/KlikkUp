@@ -105,6 +105,8 @@ export type Task = {
   reward: number;
   confirmation_code?: string;
   estimated_time?: number;
+  no_wait_confirm?: boolean;
+  no_code_required?: boolean;
   completed?: boolean;
   banner?: string;
   expired?: boolean;
