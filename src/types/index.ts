@@ -107,6 +107,7 @@ export type Task = {
   estimated_time?: number;
   no_wait_confirm?: boolean;
   no_code_required?: boolean;
+  is_riddle?: boolean;
   completed?: boolean;
   banner?: string;
   expired?: boolean;

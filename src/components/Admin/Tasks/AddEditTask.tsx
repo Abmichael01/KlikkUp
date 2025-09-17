@@ -34,14 +34,24 @@ const formSchema = z.object({
     .string()
     .min(5, { message: "Title cannot be less than 5 chars" })
     .max(225, { message: "Title cannot exceed 225 chars" }),
-  link: z.string().min(1, { message: "Link is required" }),
+  link: z.string().optional(),
   reward: z.coerce.number().min(1, "Reward cannot be lesser than 1"),
   confirmation_code: z.string().optional(),
   estimated_time: z.coerce.number(),
   no_wait_confirm: z.boolean(),
   no_code_required: z.boolean(),
+  is_riddle: z.boolean(),
   banner: z.string().optional(),
   expired: z.boolean(),
+}).refine((data) => {
+  // Link is required only if it's not a riddle
+  if (!data.is_riddle && (!data.link || data.link.trim() === "")) {
+    return false;
+  }
+  return true;
+}, {
+  message: "Link is required for non-riddle tasks",
+  path: ["link"],
 });
 
 interface AddEditTaskProps {
@@ -61,6 +71,7 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       estimated_time: update ? data?.estimated_time : 1,
       no_wait_confirm: update ? data?.no_wait_confirm : false,
       no_code_required: update ? data?.no_code_required : false,
+      is_riddle: update ? data?.is_riddle : false,
       banner: imgUrl,
       expired: update ? data?.expired : false,
     },
@@ -94,11 +105,22 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
         estimated_time: data.estimated_time || 1,
         no_wait_confirm: data.no_wait_confirm || false,
         no_code_required: data.no_code_required || false,
+        is_riddle: data.is_riddle || false,
         banner: data.banner || "",
         expired: data.expired || false,
       });
     }
   }, [data, update, form]);
+
+  // Auto-set fields when is_riddle is toggled
+  useEffect(() => {
+    const isRiddle = form.watch("is_riddle");
+    if (isRiddle) {
+      // When riddle is checked, automatically set no_wait_confirm to true (no timer)
+      // but keep no_code_required as false (confirmation code is the riddle answer)
+      form.setValue("no_wait_confirm", true);
+    }
+  }, [form.watch("is_riddle"), form]);
 
   type FormField = {
     name: "title" | "link" | "reward" | "confirmation_code" | "estimated_time";
@@ -146,6 +168,7 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
       ...values,
       id: data?.id,
       banner: imgUrl && imgUrl.trim() !== "" ? imgUrl : undefined,
+      link: values.link || "", // Ensure link is always a string, empty if not provided
     };
 
     mutate(payload, {
@@ -183,6 +206,11 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
           
           // Hide estimated_time field if no_wait_confirm is checked
           if (formField.name === "estimated_time" && form.watch("no_wait_confirm")) {
+            return null;
+          }
+          
+          // Hide link field if is_riddle is checked
+          if (formField.name === "link" && form.watch("is_riddle")) {
             return null;
           }
           
@@ -229,6 +257,14 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
             </p>
           </div>
         )}
+        
+        {form.watch("is_riddle") && (
+          <div className="p-3 bg-purple-50 border border-purple-200 rounded-lg">
+            <p className="text-sm text-purple-700">
+              ℹ️ Link field is hidden because "Is Riddle Task" is checked. Riddles don't need external links.
+            </p>
+          </div>
+        )}
         <FormField
           control={form.control}
           name="no_wait_confirm"
@@ -270,6 +306,29 @@ const AddEditTask: React.FC<AddEditTaskProps> = ({ data, update }) => {
                 </label>
                 <p className="text-sm text-muted-foreground">
                   When checked, users don't need to enter a confirmation code to complete this task. The "Confirmation Code" field will be hidden.
+                </p>
+              </div>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_riddle"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <label className="text-sm font-medium flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" />
+                  Is Riddle Task
+                </label>
+                <p className="text-sm text-muted-foreground">
+                  When checked, this becomes a riddle task. Automatically sets "No Wait for Confirmation" to true (no timer). Confirmation code is required as the riddle answer. Users won't see a clickable link on the task card.
                 </p>
               </div>
             </FormItem>

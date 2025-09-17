@@ -55,7 +55,8 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Start task timer
   const startTask = useCallback(() => {
-    if (task.link) {
+    // For riddles, don't open any link
+    if (!task.is_riddle && task.link) {
       window.open(task.link, "_blank", "noopener,noreferrer");
     }
     
@@ -145,6 +146,17 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
 
   // Get status message
   const getStatusMessage = () => {
+    if (task.is_riddle) {
+      switch (timerStatus) {
+        case "idle":
+          return "Ready to solve riddle";
+        case "completed":
+          return "Enter your riddle answer";
+        default:
+          return "";
+      }
+    }
+    
     if (task.no_wait_confirm) {
       switch (timerStatus) {
         case "idle":
@@ -191,7 +203,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
               size="lg"
               className="w-full"
             >
-              Start Task
+              {task.is_riddle ? "Start Riddle" : "Start Task"}
             </Button>
           </div>
         )}
@@ -218,7 +230,11 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
                   <CheckCircle className="w-8 h-8 text-green-500" />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {task.no_code_required ? "Ready to confirm task" : "Enter your confirmation code"}
+                  {task.is_riddle 
+                    ? "Enter your riddle answer" 
+                    : task.no_code_required 
+                      ? "Ready to confirm task" 
+                      : "Enter your confirmation code"}
                 </p>
               </div>
             )}
@@ -227,7 +243,7 @@ const TaskConfirmationForm: React.FC<TaskConfirmationFormProps> = ({
             {timerStatus === "completed" && !task.no_code_required && (
               <div className="space-y-4">
                 <Input
-                  placeholder="Enter confirmation code"
+                  placeholder={task.is_riddle ? "Enter your riddle answer" : "Enter confirmation code"}
                   value={confirmationCode}
                   onChange={(e) => setConfirmationCode(e.target.value.trim())}
                   onKeyPress={handleKeyPress}
